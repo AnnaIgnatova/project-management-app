@@ -1,22 +1,25 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Auth } from './pages/Auth';
+import { Login } from './pages/Login';
 import { Board } from './pages/Board';
 import { Main } from './pages/Main';
 import { NotFound } from './pages/NotFound';
 import { User } from './pages/User';
 import { Welcome } from './pages/Welcome';
+import { Registration } from './pages/Registration';
+import { RoutesPath } from './types/routes';
 
 const App = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/main" element={<Main />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/user" element={<User />} />
-        <Route path="/board" element={<Board />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path={RoutesPath.welcome} element={<Welcome />} />
+        <Route path={RoutesPath.main} element={<Main />} />
+        <Route path={RoutesPath.login} element={<Login />} />
+        <Route path={RoutesPath.registration} element={<Registration />} />
+        <Route path={RoutesPath.user} element={<User />} />
+        <Route path={RoutesPath.board} element={<Board />} />
+        <Route path={RoutesPath.notFound} element={<NotFound />} />
       </Routes>
     </div>
   );
