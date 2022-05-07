@@ -11,17 +11,15 @@ import { RoutesPath } from './types/routes';
 
 const App = () => {
   return (
-    <div className="App">
-      <Routes>
-        <Route path={RoutesPath.welcome} element={<Welcome />} />
-        <Route path={RoutesPath.main} element={<Main />} />
-        <Route path={RoutesPath.login} element={<Login />} />
-        <Route path={RoutesPath.registration} element={<Registration />} />
-        <Route path={RoutesPath.user} element={<User />} />
-        <Route path={RoutesPath.board} element={<Board />} />
-        <Route path={RoutesPath.notFound} element={<NotFound />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path={RoutesPath.welcome} element={<Welcome />} />
+      <Route path={RoutesPath.main} element={<Main />} />
+      <Route path={RoutesPath.login} element={<Login />} />
+      <Route path={RoutesPath.registration} element={<Registration />} />
+      <Route path={RoutesPath.user} element={<User />} />
+      <Route path={RoutesPath.board} element={<Board />} />
+      <Route path={RoutesPath.notFound} element={<NotFound />} />
+    </Routes>
   );
 };
 
