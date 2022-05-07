@@ -9,7 +9,7 @@ import { Welcome } from './pages/Welcome';
 import { Registration } from './pages/Registration';
 import { RoutesPath } from './types/routes';
 
-const App = () => {
+const AppRouter = () => {
   return (
     <Routes>
       <Route path={RoutesPath.welcome} element={<Welcome />} />
@@ -23,4 +23,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default AppRouter;
