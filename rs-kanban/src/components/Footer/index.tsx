@@ -1,11 +1,7 @@
 import './style.scss';
 import rssImg from '../../assets/image/rs_school_js.svg';
 
-const Github = [
-  'https://github.com/manol1',
-  'https://github.com/annaignatova',
-  'https://github.com/lost-fox',
-];
+const Github = ['manol1', 'annaignatova', 'lost-fox'];
 
 export const Footer: React.FC = () => {
   return (
@@ -20,12 +16,12 @@ export const Footer: React.FC = () => {
           return (
             <a
               className="github-account"
-              href={account}
+              href={`https://github.com/${account}`}
               target="_blank"
               rel="noreferrer"
               key={account}
             >
-              {account.slice(account.lastIndexOf('/') + 1)}
+              {account}
             </a>
           );
         })}
