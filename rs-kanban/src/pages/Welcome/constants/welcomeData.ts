@@ -31,3 +31,5 @@ export const welcomeBoardProjectData = {
 };
 
 export const welcomeTitle = ['Simple', 'kanban', 'board'];
+
+export const welcomeBoards = [welcomeBoardCourseData, welcomeBoardProjectData];

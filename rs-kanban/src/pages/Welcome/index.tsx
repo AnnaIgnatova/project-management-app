@@ -1,11 +1,7 @@
 import { Board } from '../../components/board';
 import { Navigate } from 'react-router-dom';
 import './style.scss';
-import {
-  welcomeBoardCourseData,
-  welcomeBoardProjectData,
-  welcomeTitle,
-} from './constants/welcomeData';
+import { welcomeBoards, welcomeTitle } from './constants/welcomeData';
 
 export const Welcome: React.FC = () => {
   const isActiveToken = false;
@@ -21,8 +17,9 @@ export const Welcome: React.FC = () => {
           ))}
         </div>
         <div className="welcome-info">
-          <Board data={welcomeBoardCourseData} />
-          <Board data={welcomeBoardProjectData} />
+          {welcomeBoards.map((board) => (
+            <Board data={board} key={board.title} />
+          ))}
         </div>
       </div>
     );
