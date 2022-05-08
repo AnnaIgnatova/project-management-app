@@ -1,6 +1,12 @@
 import './style.scss';
 import rssImg from '../../assets/image/rs_school_js.svg';
 
+const Github = [
+  'https://github.com/manol1',
+  'https://github.com/annaignatova',
+  'https://github.com/lost-fox',
+];
+
 export const Footer: React.FC = () => {
   return (
     <div className="container-footer">
@@ -10,30 +16,19 @@ export const Footer: React.FC = () => {
         </a>
       </div>
       <div className="github">
-        <a
-          className="github-account"
-          href="https://github.com/manol1"
-          target="_blank"
-          rel="noreferrer"
-        >
-          manol1
-        </a>
-        <a
-          className="github-account"
-          href="https://github.com/annaignatova"
-          target="_blank"
-          rel="noreferrer"
-        >
-          AnnaIgnatova
-        </a>
-        <a
-          className="github-account"
-          href="https://github.com/lost-fox"
-          target="_blank"
-          rel="noreferrer"
-        >
-          lost-fox
-        </a>
+        {Github.map((account) => {
+          return (
+            <a
+              className="github-account"
+              href={account}
+              target="_blank"
+              rel="noreferrer"
+              key={account}
+            >
+              {account.slice(account.lastIndexOf('/') + 1)}
+            </a>
+          );
+        })}
       </div>
       <div className="year">2022</div>
     </div>
