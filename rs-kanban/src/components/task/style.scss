@@ -1,0 +1,60 @@
+.task {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  &-priority {
+    display: inline-block;
+    padding: 4px 6px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #68b266;
+    background: rgba(131, 194, 157, 0.2);
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  &-title {
+    display: block;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #0d062d;
+    margin-bottom: 6px;
+  }
+  &-description {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #787486;
+    margin-bottom: 28px;
+  }
+  &-img {
+    width: 300px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  &-files {
+    &-icon {
+      background-image: url(./../../assets/file-icon.png);
+      width: 16px;
+      height: 16px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-right: 5px;
+    }
+    &-count {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #787486;
+    }
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+    }
+  }
+}
