@@ -20,7 +20,7 @@ export const welcomeBoardProjectData = {
     {
       title: 'Project',
       description: 'Project Management System',
-      img: './assets/tasks-example.PNG',
+      img: './assets/images/tasks-example.PNG',
     },
     {
       title: 'Technologies:',

@@ -11,6 +11,7 @@ export const Task: React.FC<TaskProps> = (props: TaskProps) => {
       <span className="task-description">{description}</span>
       {img && (
         <div className="task-files-wrapper">
+          <img src="./assets/images/file-icon.png" alt="file icon" />
           <div className="task-files-icon"></div>
           <div className="task-files-count">
             <span className="task-files-count">1</span> files

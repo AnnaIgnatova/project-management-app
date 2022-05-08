@@ -38,11 +38,7 @@
   }
   &-files {
     &-icon {
-      background-image: url(./../../assets/file-icon.png);
-      width: 16px;
-      height: 16px;
-      background-size: contain;
-      background-repeat: no-repeat;
+      object-fit: contain;
       margin-right: 5px;
     }
     &-count {
