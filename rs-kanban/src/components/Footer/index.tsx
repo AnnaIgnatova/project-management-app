@@ -1,7 +1,7 @@
 import './style.scss';
 import rssImg from '../../assets/image/rs_school_js.svg';
 
-const Github = ['manol1', 'annaignatova', 'lost-fox'];
+const AccountsDevelopers = ['manol1', 'annaignatova', 'lost-fox'];
 
 export const Footer: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
         </a>
       </div>
       <div className="github">
-        {Github.map((account) => {
+        {AccountsDevelopers.map((account) => {
           return (
             <a
               className="github-account"
