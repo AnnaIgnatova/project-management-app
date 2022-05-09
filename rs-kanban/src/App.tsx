@@ -7,7 +7,7 @@ import { NotFound } from './pages/NotFound';
 import { User } from './pages/User';
 import { Welcome } from './pages/Welcome';
 import { Registration } from './pages/Registration';
-import { Routes } from './types/routes';
+import { Routes } from './models/routes';
 
 const AppRouter = () => {
   return (
