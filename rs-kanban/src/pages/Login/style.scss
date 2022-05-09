@@ -1,0 +1,25 @@
+.container-login{
+   .login__title{
+      margin: 15vh auto 30px;
+      font-size: 30px;
+      font-weight: 700;
+      text-align: center;
+   }
+   .login__form{
+      &-input{
+         margin-top: 20px;
+         text-align: center;
+      }
+      &-btn{
+         width: 223px;
+         display: block;
+         margin: 40px auto;
+         background-color: #E1E2FF;
+         color: #33286D;
+         &:hover{
+            background-color: #33286D;
+            color:#E1E2FF;
+         }
+      }
+   }
+ }
