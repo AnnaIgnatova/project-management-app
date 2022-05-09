@@ -1,0 +1,55 @@
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translate(-50%, -50%);
+  background-color: whitesmoke;
+  text-align: center;
+  & p {
+    margin: 0;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+}
+
+.form {
+  & label input {
+    margin: 10px 0 20px;
+    height: 1.2rem;
+    width: 250px;
+    border: 1px solid;
+    text-align: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  column-gap: 55px;
+  & button {
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+    }
+    &:last-child {
+      background-color: firebrick;
+      color: #fff;
+    }
+  }
+}
