@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & button {
+    width: 150px;
+    height: 30px;
+    cursor: pointer;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  max-width: 600px;
+  padding: 40px;
+  margin: 40px 0;
+  border: 2px solid;
+}
+
+.deleteAccount {
+  margin-bottom: 40px;
+  background-color: firebrick;
+}

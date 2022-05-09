@@ -9,6 +9,7 @@ import { Welcome } from './pages/Welcome';
 import { Registration } from './pages/Registration';
 import { Routes } from './types/routes';
 import { Layout } from './components/Layoyt';
+import { EditProfile } from './pages/EditProfile';
 
 const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
           <Route path={Routes.registration} element={<Registration />} />
           <Route path={Routes.user} element={<User />} />
           <Route path={Routes.board} element={<Board />} />
+          <Route path={Routes.editProfile} element={<EditProfile />} />
           <Route path={Routes.notFound} element={<NotFound />} />
         </Route>
       </RoutesWrapper>
