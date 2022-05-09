@@ -20,7 +20,7 @@ const AppRouter = () => {
           <Route path={Routes.login} element={<Login />} />
           <Route path={Routes.registration} element={<Registration />} />
           <Route path={Routes.user} element={<User />} />
-          <Route path={Routes.board} element={<Board />} />
+          <Route path={Routes.board} element={<BoardPage />} />
           <Route path={Routes.notFound} element={<NotFound />} />
         </Route>
       </RoutesWrapper>

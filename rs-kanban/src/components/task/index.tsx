@@ -1,7 +1,7 @@
 import { TaskProps } from './interfaces/taskProps';
 import './style.scss';
 
-export const Task: React.FC<TaskProps> = (props: TaskProps) => {
+export const Task: React.FC<TaskProps> = (props) => {
   const { title, description, img } = props.taskData;
   return (
     <div className="task">

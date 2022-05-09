@@ -2,7 +2,7 @@ import { Task } from '../task';
 import { BoardProps } from './interfaces/boardProps';
 import './style.scss';
 
-export const Board: React.FC<BoardProps> = (props: BoardProps) => {
+export const Board: React.FC<BoardProps> = (props) => {
   const { title, tasks } = props.data;
   return (
     <div className="board">
