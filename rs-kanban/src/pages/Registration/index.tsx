@@ -38,7 +38,6 @@ export const Registration: React.FC = () => {
   };
 
   const setButton = () => {
-    console.log(validName, validLogin, validPassword);
     if (!validName && !validLogin && !validPassword) {
       setValidButton(false);
     } else {
