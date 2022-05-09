@@ -1,5 +1,7 @@
 import './style.scss';
+import { useTranslation } from 'react-i18next';
 
 export const Registration = () => {
-  return <div className="registration">registration</div>;
+  const { t } = useTranslation();
+  return <div className="registration">{t('pages.registration')}</div>;
 };
