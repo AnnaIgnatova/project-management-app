@@ -1,7 +1,7 @@
 import { Route, Routes as RoutesWrapper } from 'react-router-dom';
 import './App.css';
 import { Login } from './pages/Login';
-import { Board } from './pages/Board';
+import { BoardPage } from './pages/BoardPage';
 import { Main } from './pages/Main';
 import { NotFound } from './pages/NotFound';
 import { User } from './pages/User';
@@ -20,7 +20,7 @@ const AppRouter = () => {
           <Route path={Routes.login} element={<Login />} />
           <Route path={Routes.registration} element={<Registration />} />
           <Route path={Routes.user} element={<User />} />
-          <Route path={Routes.board} element={<Board />} />
+          <Route path={Routes.board} element={<BoardPage />} />
           <Route path={Routes.notFound} element={<NotFound />} />
         </Route>
       </RoutesWrapper>
