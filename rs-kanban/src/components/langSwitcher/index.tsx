@@ -1,10 +1,8 @@
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { AntSwitch } from './AntSwitch';
 import { Lang } from './types/lang';
 import { Switch } from '@mui/material';
+import './style.scss';
 
 export const LangSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
@@ -17,11 +15,10 @@ export const LangSwitcher: React.FC = () => {
   };
 
   return (
-    <Switch defaultChecked />
-    // <Stack direction="row" spacing={1} alignItems="center">
-    //   <Typography>ru</Typography>
-    //   <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} onClick={changeLang} />
-    //   <Typography>en</Typography>
-    // </Stack>
+    <div className="switcher-wrapper">
+      <span className="lang-label">{Lang.ru}</span>
+      <Switch defaultChecked onChange={changeLang} />
+      <span className="lang-label">{Lang.en}</span>
+    </div>
   );
 };

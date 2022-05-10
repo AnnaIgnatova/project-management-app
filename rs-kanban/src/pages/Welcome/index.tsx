@@ -25,6 +25,6 @@ export const Welcome: React.FC = () => {
         </div>
       </div>
     );
-    
+
   return <Navigate to="/main" />;
 };

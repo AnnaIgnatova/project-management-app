@@ -11,10 +11,10 @@ i18n.use(initReactI18next).init({
   },
   resources: {
     en: {
-      translation: enLang
+      translation: enLang,
     },
     ru: {
-      translation: ruLang
+      translation: ruLang,
     },
   },
 });
