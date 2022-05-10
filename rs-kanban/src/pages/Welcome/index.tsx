@@ -1,10 +1,12 @@
 import { Board } from '../../components/board';
 import { Navigate } from 'react-router-dom';
 import './style.scss';
+import { useTranslation } from 'react-i18next';
 import { welcomeBoards, welcomeTitle } from './constants/welcomeData';
 
 export const Welcome: React.FC = () => {
   const isActiveToken = false;
+  const { t } = useTranslation();
   if (!isActiveToken)
     return (
       <div className="welcome">
@@ -23,5 +25,6 @@ export const Welcome: React.FC = () => {
         </div>
       </div>
     );
+
   return <Navigate to="/main" />;
 };
