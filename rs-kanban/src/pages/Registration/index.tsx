@@ -5,10 +5,10 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 
 export const Registration: React.FC = () => {
-  const [validName, setValidName] = useState(true);
-  const [validLogin, setValidLogin] = useState(true);
-  const [validPassword, setValidPassword] = useState(true);
-  const [validButton, setValidButton] = useState(true);
+  const [validName, setValidName] = useState<boolean>(true);
+  const [validLogin, setValidLogin] = useState<boolean>(true);
+  const [validPassword, setValidPassword] = useState<boolean>(true);
+  const [validButton, setValidButton] = useState<boolean>(true);
 
   const setName = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 2) {
@@ -16,7 +16,7 @@ export const Registration: React.FC = () => {
     } else {
       setValidName(false);
     }
-    setButton();
+    disabledButton();
   };
 
   const setLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,19 +25,19 @@ export const Registration: React.FC = () => {
     } else {
       setValidLogin(false);
     }
-    setButton();
+    disabledButton();
   };
 
   const setPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length < 5) {
+    if (e.target.value.length < 6) {
       setValidPassword(true);
     } else {
       setValidPassword(false);
     }
-    setButton();
+    disabledButton();
   };
 
-  const setButton = () => {
+  const disabledButton = () => {
     if (!validName && !validLogin && !validPassword) {
       setValidButton(false);
     } else {
