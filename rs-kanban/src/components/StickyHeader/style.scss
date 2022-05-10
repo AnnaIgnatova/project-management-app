@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: right;
   padding: 15px 40px;
-  height: 40px;
+  height: 50px;
   background-color: #e1e2ff;
   transition: 0.3s;
 }
@@ -20,9 +20,9 @@
   button {
     height: 30px;
     width: 100px;
-    cursor: pointer;
   }
-  select {
-    cursor: pointer;
-  }
+}
+
+.textDecorationNone {
+  text-decoration: none;
 }
