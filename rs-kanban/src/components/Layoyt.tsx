@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import { Footer } from './Footer';
-import { Header } from './Header';
+import { StickyHeader } from './StickyHeader';
 
 const token = true;
 
 export const Layout = () => {
   return (
     <>
-      {token && <Header />}
+      {token && <StickyHeader />}
       <Outlet />
       <Footer />
     </>
