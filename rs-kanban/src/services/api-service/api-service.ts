@@ -32,31 +32,6 @@ export class APIService {
     }).then((response: AxiosResponse<Response>) => response.data);
   }
 
-  public static postSign<Response, Body = void, Request = void>(
-    url: string,
-    body?: Body,
-    request?: Request
-  ): Promise<Response> {
-    return axios({
-      method: HttpMethod.POST,
-      url,
-      params: request,
-      data: body,
-    }).then((response: AxiosResponse<Response>) => response.data);
-  }
-
-  public static postFile<Body = void>(url: string, body?: Body) {
-    return axios({
-      method: HttpMethod.POST,
-      url,
-      data: body,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-  }
-
   public static delete(url: string) {
     return instanceAxios({
       method: HttpMethod.DELETE,

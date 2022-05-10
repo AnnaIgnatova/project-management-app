@@ -3,5 +3,5 @@ import { SignIn, Token } from './../../models';
 
 export const createToken = (body: SignIn) => {
   const url = '/signin';
-  return APIService.postSign<Token, SignIn>(url, body);
+  return APIService.post<Token, SignIn>(url, body);
 };

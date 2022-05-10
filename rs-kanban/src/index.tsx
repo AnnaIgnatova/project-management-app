@@ -3,30 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import AppRouter from './App';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { instanceAxios } from './services';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 instanceAxios.interceptors.response.use(
-  (response) => {
-    toast.success(response.statusText);
-    return response;
-  },
+  (response) => response,
   (error: AxiosError) => {
     toast.error(error.message);
-    return Promise.reject(error);
-  }
-);
-
-axios.interceptors.response.use(
-  (response) => {
-    toast.success(response.statusText);
-    return response;
-  },
-  (error: AxiosError) => {
-    toast.error(error.message);
-    return Promise.reject(error);
   }
 );
 
