@@ -1,0 +1,31 @@
+.container-footer{
+   display: flex;
+   justify-content: space-between;
+   padding: 15px 40px;
+   height: 40px;
+   background-color: #E1E2FF;
+
+   .rss{
+      &-img{
+         width: 70px;
+         height: 40px;
+      }
+   }
+
+   .github{
+      width: 50%;
+      display: flex;
+      justify-content:space-evenly;
+      font-size: 30px;
+      &-account{
+         font-weight: 600;
+         color:#33286D;
+         text-decoration: none;
+      }
+   }
+
+   .year{
+      font-size: 30px;
+      line-height: 40px;
+   }
+}
