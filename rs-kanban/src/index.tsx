@@ -5,6 +5,7 @@ import './index.css';
 import AppRouter from './App';
 import { AxiosError } from 'axios';
 import { instanceAxios } from './services';
+import './i18n';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
