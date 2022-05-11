@@ -18,8 +18,10 @@ export const StickyHeader: React.FC = () => {
     };
   });
 
+  const className = `container ${isSticky ? 'stickyHeader' : ''}`;
+
   return (
-    <div className={`container ${isSticky ? 'stickyHeader' : ''}`}>
+    <div className={className}>
       <div className="btnsContainer">
         <NavLink to={Routes.editProfile} className="textDecorationNone">
           <Button variant="contained">profile</Button>
