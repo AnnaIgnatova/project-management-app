@@ -1,36 +1,56 @@
-import styles from './style.module.scss';
-import { Modal } from './Modal';
+import './style.scss';
 import { useState } from 'react';
+import { Modal, Box, TextField, Button, ButtonGroup } from '@mui/material';
 
 export const EditProfile: React.FC = () => {
-  const [isModalWindowOpen, setIsModalWindowOpen] = useState(false);
-  const closeModalWindow = () => {
-    setIsModalWindowOpen(false);
-  };
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <>
-      <div className={styles.container}>
-        <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-          <label>
-            Name:
-            <input name="name" />
-          </label>
-          <label>
-            Login:
-            <input name="login" />
-          </label>
-          <label>
-            Password:
-            <input name="password" />
-          </label>
-          <button type="submit">Save Changes</button>
-        </form>
-        <button className={styles.deleteAccount} onClick={() => setIsModalWindowOpen(true)}>
+      <div className="edit-profile-container">
+        <Box
+          component="form"
+          className="edit-profile-form"
+          onSubmit={(e: React.SyntheticEvent) => e.preventDefault()}
+        >
+          <TextField placeholder="Enter your name" required />
+          <TextField placeholder="Enter your login" required />
+          <TextField type="password" placeholder="Enter your password" required />
+          <Button variant="contained">Save Changes</Button>
+        </Box>
+        <Button
+          variant="contained"
+          color="error"
+          style={{ width: '200px', marginBottom: '40px' }}
+          onClick={() => setOpen(true)}
+        >
           Delete account
-        </button>
+        </Button>
       </div>
-      <Modal isModalWindowOpen={isModalWindowOpen} closeModalWindow={closeModalWindow} />
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className="delete-user-modal-window">
+          <p>Are you sure you want to delete your account?</p>
+          <Box component="form" onSubmit={(e: React.SyntheticEvent) => e.preventDefault()}>
+            <div className="delete-condition">
+              Enter the word <b>delete</b> in the input
+            </div>
+            <TextField placeholder="delete" />
+            <ButtonGroup className="cancel-delete-btns">
+              <Button variant="contained" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button variant="contained" color="error">
+                Delete
+              </Button>
+            </ButtonGroup>
+          </Box>
+        </div>
+      </Modal>
     </>
   );
 };

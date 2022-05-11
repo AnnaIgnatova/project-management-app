@@ -1,5 +1,5 @@
 import './style.scss';
 
-export const Board = () => {
+export const BoardPage = () => {
   return <div className="board">board</div>;
 };

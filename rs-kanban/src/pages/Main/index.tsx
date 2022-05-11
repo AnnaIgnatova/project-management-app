@@ -1,5 +1,7 @@
 import './style.scss';
+import { useTranslation } from 'react-i18next';
 
 export const Main = () => {
-  return <div className="main">main</div>;
+  const { t } = useTranslation();
+  return <div className="main">{t('pages.main')}</div>;
 };
