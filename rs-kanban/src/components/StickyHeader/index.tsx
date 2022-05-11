@@ -1,6 +1,6 @@
 import './style.scss';
 import { NavLink } from 'react-router-dom';
-import { Routes } from '../../types/routes';
+import { Routes } from '../../models/routes';
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 

@@ -1,7 +1,7 @@
 import { Modal, Box, TextField, Button } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Routes } from '../../types/routes';
+import { Routes } from '../../models/routes';
 import './style.scss';
 
 export const Header: React.FC = () => {

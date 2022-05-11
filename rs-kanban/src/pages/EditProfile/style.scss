@@ -13,3 +13,32 @@
   margin: 40px 0;
   border: 2px solid;
 }
+
+.delete-user-modal-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translate(-50%, -50%);
+  background-color: whitesmoke;
+  text-align: center;
+  & p {
+    margin: 0;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+}
+
+.cancel-delete-btns {
+  margin-top: 20px;
+  display: flex;
+  column-gap: 50px;
+}
+
+.delete-condition {
+  margin-bottom: 20px;
+}
