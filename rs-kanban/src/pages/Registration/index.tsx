@@ -58,10 +58,8 @@ export const Registration: React.FC = () => {
     }
   };
 
-  const reqisterHandler = async () => {
-    try {
-      createAccount(forms);
-    } catch (error: any) {}
+  const reqisterHandler = () => {
+    createAccount(forms);
   };
 
   return (
