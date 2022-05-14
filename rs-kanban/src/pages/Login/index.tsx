@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import './style.scss';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -7,6 +6,8 @@ import { useState } from 'react';
 import { createToken } from '../../api/authorization/create-token.api';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../models/routes';
+import { ONE_DAY } from './constant';
+import { LoginFormEvent } from './interface/LoginForm';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -15,12 +16,12 @@ export const Login: React.FC = () => {
     password: '',
   });
 
-  const changeHandler = (event: { target: { name: string; value: string } }) => {
+  const changeHandler = (event: LoginFormEvent) => {
     setForm({ ...forms, [event.target.name]: event.target.value });
   };
 
   const reqisterHandler = () => {
-    const date = new Date(Date.now() + 86400e3).toUTCString();
+    const date = new Date(Date.now() + ONE_DAY).toUTCString();
     const answer = createToken(forms);
     answer.then((resolve) => {
       document.cookie = `Token=${resolve.token}; expires=${date}`;

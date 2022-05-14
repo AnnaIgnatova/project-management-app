@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import './style.scss';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createAccount } from '../../api/authorization/create-account.api';
 import { Link } from 'react-router-dom';
 import { Routes } from '../../models/routes';
@@ -20,42 +19,45 @@ export const Registration: React.FC = () => {
   });
 
   useEffect(() => {
-    if (!validName && !validLogin && !validPassword) {
-      setValidButton(false);
-    } else {
-      setValidButton(true);
-    }
+    const isValid = !validName && !validLogin && !validPassword;
+    setValidButton(!isValid);
   }, [validName, validLogin, validPassword]);
 
-  const changeHandler = (event: { target: { name: string; value: string } }) => {
-    setForm({ ...forms, [event.target.name]: event.target.value });
+  const changeHandler = (event: React.ChangeEvent) => {
+    const name = (event.target as HTMLInputElement).name;
+    const value = (event.target as HTMLInputElement).value;
+    setForm({ ...forms, [name]: value });
+    switch (name) {
+      case 'name':
+        setName(event);
+        break;
+      case 'login':
+        setLogin(event);
+        break;
+      case 'password':
+        setPassword(event);
+        break;
+      default:
+        break;
+    }
   };
 
   const setName = (e: React.ChangeEvent) => {
     const value = (e.target as HTMLInputElement).value;
-    if (value.length < 2) {
-      setValidName(true);
-    } else {
-      setValidName(false);
-    }
+    const isValidName = value.length < 2;
+    setValidName(isValidName);
   };
 
   const setLogin = (e: React.ChangeEvent) => {
     const value = (e.target as HTMLInputElement).value;
-    if (value.length < 3) {
-      setValidLogin(true);
-    } else {
-      setValidLogin(false);
-    }
+    const isValidLogin = value.length < 3;
+    setValidLogin(isValidLogin);
   };
 
   const setPassword = (e: React.ChangeEvent) => {
     const value = (e.target as HTMLInputElement).value;
-    if (value.length <= 6) {
-      setValidPassword(true);
-    } else {
-      setValidPassword(false);
-    }
+    const isValidPassword = value.length <= 6;
+    setValidPassword(isValidPassword);
   };
 
   const reqisterHandler = () => {
@@ -74,10 +76,7 @@ export const Registration: React.FC = () => {
             label="Name"
             placeholder="Enter your name"
             error={validName}
-            onChange={(event) => {
-              setName(event);
-              changeHandler(event);
-            }}
+            onChange={changeHandler}
             helperText="Enter min 2 symbols"
           />
         </div>
@@ -89,10 +88,7 @@ export const Registration: React.FC = () => {
             label="Login"
             placeholder="Enter your login"
             error={validLogin}
-            onChange={(event) => {
-              setLogin(event);
-              changeHandler(event);
-            }}
+            onChange={changeHandler}
             helperText="Enter min 3 symbols"
           />
         </div>
@@ -105,14 +101,11 @@ export const Registration: React.FC = () => {
             placeholder="Enter your password"
             type="password"
             error={validPassword}
-            onChange={(event) => {
-              setPassword(event);
-              changeHandler(event);
-            }}
+            onChange={changeHandler}
             helperText="Enter more than 6 characters"
           />
         </div>
-        <Link to={Routes.login}>
+        <Link to={Routes.login} className="registration__form-link">
           <Button
             className="registration__form-btn"
             variant="contained"
