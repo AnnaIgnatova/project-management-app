@@ -8,6 +8,8 @@ import { instanceAxios } from './services';
 import './i18n';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 instanceAxios.interceptors.response.use(
   (response) => response,
@@ -19,16 +21,18 @@ instanceAxios.interceptors.response.use(
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <AppRouter />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        transition={Flip}
-        hideProgressBar
-        draggable
-        pauseOnHover
-      />
-    </BrowserRouter>
+    <Provider store={store()}>
+      <BrowserRouter>
+        <AppRouter />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          transition={Flip}
+          hideProgressBar
+          draggable
+          pauseOnHover
+        />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
