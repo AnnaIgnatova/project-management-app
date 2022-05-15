@@ -1,20 +1,17 @@
 import './style.scss';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Modal, Box, TextField, Button, ButtonGroup, Typography, IconButton } from '@mui/material';
+import { Modal, Box, TextField, Button, Typography, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { getUserById, updateUser, deleteUser } from '../../api/users';
+import { getUserById, updateUser } from '../../api/users';
 import { SignUp } from '../../models/signup.type';
-import { Routes } from '../../models/routes';
+import { DeleteWindow } from './DeleteWindow';
 
-const userID = '7a11f633-1800-4d65-a218-b1b1099128ef';
+const userID = '';
 
 export const EditProfile: React.FC = () => {
-  const navigate = useNavigate();
   const [isOpenDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [isDisabledInputs, setDisabledInputs] = useState<boolean>(true);
   const [userInfo, setUserInfo] = useState<SignUp>({ name: '', login: '', password: '' });
-  const [deleteMessage, setDeleteMessage] = useState<string>('');
 
   const [validName, setValidName] = useState<boolean>(false);
   const [validLogin, setValidLogin] = useState<boolean>(false);
@@ -75,6 +72,18 @@ export const EditProfile: React.FC = () => {
     setValidPassword(true);
   };
 
+  const goBackFromEdit = () => {
+    setDisabledInputs(true);
+    getUserById(userID).then(({ name, login }) =>
+      setUserInfo({ name: name, login: login, password: '' })
+    );
+  };
+
+  const changeBtnFn = () => {
+    setDisabledInputs(!isDisabledInputs);
+    !isDisabledInputs && updateHandler();
+  };
+
   return (
     <>
       <div className="edit-profile-container">
@@ -85,16 +94,7 @@ export const EditProfile: React.FC = () => {
         >
           <Typography variant="h5" component="p">
             {!isDisabledInputs && (
-              <IconButton
-                sx={{ mr: '20px' }}
-                color="inherit"
-                onClick={() => {
-                  setDisabledInputs(true);
-                  getUserById(userID).then(({ name, login }) =>
-                    setUserInfo({ name: name, login: login, password: '' })
-                  );
-                }}
-              >
+              <IconButton sx={{ mr: '20px' }} color="inherit" onClick={goBackFromEdit}>
                 <ArrowBackIcon />
               </IconButton>
             )}
@@ -136,10 +136,7 @@ export const EditProfile: React.FC = () => {
             variant="contained"
             disabled={!isDisabledInputs && validButton}
             sx={{ width: '175px' }}
-            onClick={() => {
-              setDisabledInputs(!isDisabledInputs);
-              !isDisabledInputs && updateHandler();
-            }}
+            onClick={changeBtnFn}
           >
             {isDisabledInputs ? 'Change' : 'Save Changes'}
           </Button>
@@ -160,42 +157,7 @@ export const EditProfile: React.FC = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div className="delete-user-modal-window">
-          <Typography sx={{ fontWeight: 'bold' }}>
-            Are you sure you want to delete your account?
-          </Typography>
-          <Box component="form" onSubmit={(e: React.SyntheticEvent) => e.preventDefault()}>
-            <Typography sx={{ mb: '20px', mt: '10px', fontWeight: 'normal' }}>
-              Enter the word{' '}
-              <Typography sx={{ fontWeight: 'bold' }} component="span">
-                delete
-              </Typography>{' '}
-              in the input
-            </Typography>
-            <TextField
-              placeholder="delete"
-              label="Enter delete"
-              required
-              onChange={(e) => setDeleteMessage(e.target.value)}
-            />
-            <ButtonGroup className="cancel-delete-btns">
-              <Button variant="contained" onClick={() => setOpenDeleteModal(false)}>
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                color="error"
-                disabled={deleteMessage !== 'delete'}
-                onClick={() => {
-                  deleteUser(userID);
-                  navigate(Routes.welcome);
-                }}
-              >
-                Delete
-              </Button>
-            </ButtonGroup>
-          </Box>
-        </div>
+        <DeleteWindow setOpenDeleteModal={setOpenDeleteModal} />
       </Modal>
     </>
   );
