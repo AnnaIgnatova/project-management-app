@@ -1,4 +1,4 @@
-.delete-user-modal-window {
+.confirmation-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -12,7 +12,7 @@
   text-align: center;
 }
 
-.cancel-delete-btns {
+.confirmation-modal__btns {
   margin-top: 20px;
   display: flex;
   column-gap: 50px;

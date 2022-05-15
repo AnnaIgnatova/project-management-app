@@ -1,16 +1,19 @@
 import './style.scss';
 import { useEffect, useState } from 'react';
-import { Modal, Box, TextField, Button, Typography, IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Box, TextField, Button, Typography, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { updateUserAPI } from '../../api/users';
+import { updateUserAPI, deleteUserAPI } from '../../api/users';
 import { SignUp } from '../../models/signup.type';
-import { DeleteWindow } from './DeleteWindow';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { updateUser } from '../../features/user/userSlice';
+import { updateUser, deleteUser } from '../../features/user/userSlice';
+import { Routes } from '../../models/routes';
+import { ConfirmationModal } from '../../components/ConfirmationModal';
 
 export const EditProfile: React.FC = () => {
   const dispatch = useAppDispatch();
   const { id, name, login } = useAppSelector((state) => state.userReducer.user);
+  const navigate = useNavigate();
 
   const [isOpenDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [isDisabledInputs, setDisabledInputs] = useState<boolean>(true);
@@ -85,6 +88,12 @@ export const EditProfile: React.FC = () => {
     !isDisabledInputs && updateHandler();
   };
 
+  const deleteUserFn = () => {
+    deleteUserAPI(id);
+    dispatch(deleteUser());
+    navigate(Routes.welcome);
+  };
+
   return (
     <>
       <div className="edit-profile-container">
@@ -151,14 +160,12 @@ export const EditProfile: React.FC = () => {
           </Button>
         </Box>
       </div>
-      <Modal
+      <ConfirmationModal
         open={isOpenDeleteModal}
-        onClose={() => setOpenDeleteModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <DeleteWindow setOpenDeleteModal={setOpenDeleteModal} />
-      </Modal>
+        setOpenModal={setOpenDeleteModal}
+        deleteFn={deleteUserFn}
+        thingToBeRemoved="account"
+      />
     </>
   );
 };
