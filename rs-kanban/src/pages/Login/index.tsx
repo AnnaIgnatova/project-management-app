@@ -1,7 +1,5 @@
 import './style.scss';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { Button, TextField, Box } from '@mui/material';
 import { useState } from 'react';
 import { createToken } from '../../api/authorization/create-token.api';
 import { useNavigate } from 'react-router-dom';
@@ -26,6 +24,7 @@ export const Login: React.FC = () => {
     answer.then((resolve) => {
       document.cookie = `Token=${resolve.token}; expires=${date}`;
       navigate(Routes.main);
+      location.reload();
     });
   };
 

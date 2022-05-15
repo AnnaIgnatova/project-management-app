@@ -2,16 +2,15 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import { Routes } from '../../models/routes';
 import { Button } from '@mui/material';
+import { useAppSelector } from '../../store';
+import { GetValueToken } from '../../utils/getValueToken';
 
 export const StickyHeader: React.FC = () => {
-  const getCookie = () => {
-    const name = 'Token';
-    const matched = document.cookie.includes(name);
-    return matched;
-  };
+  const token = useAppSelector((state) => state.tokenReduser.isToken);
+  GetValueToken();
 
   const getBtnHeader = () => {
-    if (getCookie()) {
+    if (token) {
       return (
         <Link to={Routes.main}>
           <Button className="main-btn" variant="contained">
@@ -36,8 +35,6 @@ export const StickyHeader: React.FC = () => {
       </>
     );
   };
-
-  console.log(getCookie());
 
   return (
     <div className="container-header">
