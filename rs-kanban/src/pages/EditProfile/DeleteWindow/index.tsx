@@ -2,18 +2,22 @@ import { Box, TextField, Button, ButtonGroup, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../../models/routes';
-import { deleteUser } from '../../../api/users';
+import { deleteUserAPI } from '../../../api/users';
 import { DeleteWindowProps } from './interface/DeleteWindow';
 import './style.scss';
-
-const userID = '';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { deleteUser } from '../../../features/user/userSlice';
 
 export const DeleteWindow: React.FC<DeleteWindowProps> = ({ setOpenDeleteModal }) => {
-  const [deleteMsgText, setDeleteMsgText] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const { id } = useAppSelector((state) => state.userReducer.user);
+
   const navigate = useNavigate();
+  const [deleteMsgText, setDeleteMsgText] = useState<string>('');
 
   const deleteUserFn = () => {
-    deleteUser(userID);
+    deleteUserAPI(id);
+    dispatch(deleteUser());
     navigate(Routes.welcome);
   };
 

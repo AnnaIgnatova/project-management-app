@@ -2,13 +2,16 @@ import './style.scss';
 import { useEffect, useState } from 'react';
 import { Modal, Box, TextField, Button, Typography, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { getUserById, updateUser } from '../../api/users';
+import { updateUserAPI } from '../../api/users';
 import { SignUp } from '../../models/signup.type';
 import { DeleteWindow } from './DeleteWindow';
-
-const userID = '';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { updateUser } from '../../features/user/userSlice';
 
 export const EditProfile: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { id, name, login } = useAppSelector((state) => state.userReducer.user);
+
   const [isOpenDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [isDisabledInputs, setDisabledInputs] = useState<boolean>(true);
   const [userInfo, setUserInfo] = useState<SignUp>({ name: '', login: '', password: '' });
@@ -19,9 +22,7 @@ export const EditProfile: React.FC = () => {
   const [validButton, setValidButton] = useState<boolean>(true);
 
   useEffect(() => {
-    getUserById(userID).then(({ name, login }) =>
-      setUserInfo({ name: name, login: login, password: '' })
-    );
+    setUserInfo({ name: name, login: login, password: '' });
   }, []);
 
   useEffect(() => {
@@ -67,16 +68,16 @@ export const EditProfile: React.FC = () => {
   };
 
   const updateHandler = () => {
-    updateUser(userID, userInfo);
+    updateUserAPI(id, userInfo);
+    dispatch(updateUser(userInfo));
     setUserInfo({ ...userInfo, password: '' });
     setValidPassword(true);
   };
 
   const goBackFromEdit = () => {
+    setUserInfo({ name: name, login: login, password: '' });
     setDisabledInputs(true);
-    getUserById(userID).then(({ name, login }) =>
-      setUserInfo({ name: name, login: login, password: '' })
-    );
+    setValidPassword(true);
   };
 
   const changeBtnFn = () => {
@@ -140,7 +141,6 @@ export const EditProfile: React.FC = () => {
           >
             {isDisabledInputs ? 'Change' : 'Save Changes'}
           </Button>
-
           <Button
             variant="contained"
             color="error"
