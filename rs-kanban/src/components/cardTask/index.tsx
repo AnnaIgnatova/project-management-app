@@ -1,17 +1,36 @@
-import { Box, Button, Card, CardActionArea, CardContent, Modal, Typography } from '@mui/material';
-import { useState } from 'react';
+import { getTaskById } from '../../api/tasks';
+import { Card, CardActionArea, CardContent, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store';
 import { CardTaskProps } from './interface/cardTaskProps';
 import './style.scss';
+import { getTask } from '../../features/task/taskSlice';
+import { ModalWindow } from './ModalWindow';
 
 export const CardTask: React.FC<CardTaskProps> = (props) => {
+  const dispatch = useAppDispatch();
+  const task = useAppSelector((state) => state.taskReduser.task);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { description, files, title, userId } = props.value;
+  const { id, title, userId } = props.value;
+
+  const getValueTask = (event: React.MouseEvent) => {
+    const idTask = event.currentTarget.id;
+    handleOpen();
+    getTaskById(
+      '1dc5b998-b1d2-4334-a74f-320e60d798b9', //idBoard
+      'e06de5e3-017a-402a-9698-19dc6b16106e', //idColumn
+      idTask
+    ).then((data) => {
+      dispatch(getTask(data));
+    });
+  };
+
   return (
-    <>
-      <Card sx={{ maxWidth: 245, marginBottom: 2 }} onClick={handleOpen}>
+    <div>
+      <Card sx={{ maxWidth: 245, marginBottom: 2 }} id={id} onClick={getValueTask}>
         <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -23,30 +42,7 @@ export const CardTask: React.FC<CardTaskProps> = (props) => {
           </CardContent>
         </CardActionArea>
       </Card>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="modal-card-task">
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            <div className="modal-card-task__file">Files: {files.length}</div>
-
-            <div className="modal-card-task__file">
-              {files.map((file, index) => {
-                return <Button key={index}>{file.file}</Button>;
-              })}
-            </div>
-          </Typography>
-        </Box>
-      </Modal>
-    </>
+      <ModalWindow open={open} onClose={handleClose} value={task} />
+    </div>
   );
 };
