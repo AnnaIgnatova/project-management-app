@@ -11,10 +11,12 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 }) => {
   const [deleteMsgText, setDeleteMsgText] = useState<string>('');
 
+  const handleClose = () => setOpenModal(false);
+
   return (
     <Modal
       open={open}
-      onClose={() => setOpenModal(false)}
+      onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -37,7 +39,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             onChange={(e) => setDeleteMsgText(e.target.value)}
           />
           <ButtonGroup className="confirmation-modal__btns">
-            <Button variant="contained" onClick={() => setOpenModal(false)}>
+            <Button variant="contained" onClick={handleClose}>
               Cancel
             </Button>
             <Button

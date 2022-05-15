@@ -17,16 +17,12 @@ export const EditProfile: React.FC = () => {
 
   const [isOpenDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const [isDisabledInputs, setDisabledInputs] = useState<boolean>(true);
-  const [userInfo, setUserInfo] = useState<SignUp>({ name: '', login: '', password: '' });
+  const [userInfo, setUserInfo] = useState<SignUp>({ name: name, login: login, password: '' });
 
   const [validName, setValidName] = useState<boolean>(false);
   const [validLogin, setValidLogin] = useState<boolean>(false);
   const [validPassword, setValidPassword] = useState<boolean>(true);
   const [validButton, setValidButton] = useState<boolean>(true);
-
-  useEffect(() => {
-    setUserInfo({ name: name, login: login, password: '' });
-  }, []);
 
   useEffect(() => {
     const isValid = !validName && !validLogin && !validPassword;
@@ -72,7 +68,7 @@ export const EditProfile: React.FC = () => {
 
   const updateHandler = () => {
     updateUserAPI(id, userInfo);
-    dispatch(updateUser(userInfo));
+    dispatch(updateUser({ name: userInfo.name, login: userInfo.login }));
     setUserInfo({ ...userInfo, password: '' });
     setValidPassword(true);
   };
@@ -93,6 +89,8 @@ export const EditProfile: React.FC = () => {
     dispatch(deleteUser());
     navigate(Routes.welcome);
   };
+
+  const handleOpen = () => setOpenDeleteModal(true);
 
   return (
     <>
@@ -154,7 +152,7 @@ export const EditProfile: React.FC = () => {
             variant="contained"
             color="error"
             sx={{ width: '125px', fontSize: '0.5rem' }}
-            onClick={() => setOpenDeleteModal(true)}
+            onClick={handleOpen}
           >
             Delete account
           </Button>
