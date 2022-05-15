@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 import userReducer from '../features/user/userSlice';
+import boardsReducer from '../features/boards/boardsSlice';
 
-const rootReducer = combineReducers({ userReducer });
+const rootReducer = combineReducers({ userReducer, boardsReducer });
 
 export const store = () => {
   return configureStore({

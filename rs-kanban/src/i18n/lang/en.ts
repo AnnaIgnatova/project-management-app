@@ -1,7 +1,11 @@
 export const enLang = {
   pages: {
     welcome: 'welcome',
-    main: 'main',
+    main: {
+      cardBtn: 'open board',
+      taskNum: 'tasks number',
+      colNum: 'column number',
+    },
     login: 'login',
     registration: 'registration',
     user: 'user',
