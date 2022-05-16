@@ -1,0 +1,11 @@
+.modal-card-task {
+   position: absolute;
+   top: 30vh;
+   left: 45vw;
+   width: 300px;
+   padding: 30px;
+   background-color: #fff;
+   &__file{
+      float: right;
+   }
+}

@@ -5,8 +5,9 @@ import { useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 import userReducer from '../features/user/userSlice';
 import tokenReduser from '../features/token/tokenSlice';
+import taskReduser from '../features/task/taskSlice';
 
-const rootReducer = combineReducers({ userReducer, tokenReduser });
+const rootReducer = combineReducers({ userReducer, taskReduser, tokenReduser });
 
 export const store = () => {
   return configureStore({
