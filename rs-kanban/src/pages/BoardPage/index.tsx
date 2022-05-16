@@ -34,8 +34,6 @@ import { addCols } from '../../features/boards/boardsSlice';
       );
     }; */
 
-import { CardTask } from '../../components/cardTask';
-
 export const BoardPage: React.FC = () => {
   const { boardId } = useAppSelector((state) => state.boardsReducer);
   const [boardByIdInfo, setBoardByIdInfo] = useState<BoardById>({ id: '', title: '', columns: [] });
@@ -46,7 +44,6 @@ export const BoardPage: React.FC = () => {
     getBoardById(boardId).then((response) => {
       setBoardByIdInfo(response);
       dispatch(addCols(response.columns));
-      console.log(response);
     });
   }, []);
 
