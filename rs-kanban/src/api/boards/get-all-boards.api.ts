@@ -3,5 +3,5 @@ import { Board } from '../../models';
 
 export const getAllBoards = () => {
   const url = '/boards';
-  return APIService.get<Board>(url);
+  return APIService.get<Board[]>(url);
 };

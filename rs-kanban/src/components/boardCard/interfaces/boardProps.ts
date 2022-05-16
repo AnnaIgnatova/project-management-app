@@ -1,6 +1,6 @@
 export interface BoardCardProps {
-  id: string;
-  title: string;
-  colNum: number;
-  tasksNum: number;
+  boardData: {
+    id: string;
+    title: string;
+  };
 }
