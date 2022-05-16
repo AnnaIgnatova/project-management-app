@@ -1,7 +1,15 @@
 .main {
   padding: 50px 100px;
   background-color: rgb(252, 252, 252);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  &-title {
+    font-weight: bold;
+    font-size: 42px;
+    margin-bottom: 20px;
+  }
+  &-boards {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }

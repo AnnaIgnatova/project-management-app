@@ -15,11 +15,14 @@ export const GetValueToken = () => {
   const name = 'Token';
   const matched = document.cookie.includes(name);
   const token = document.cookie.replace(/Token=/g, '');
-  const decode: decodeToken = jwtDecode(token);
-  const userData = {
-    id: decode.userId,
-    login: decode.login,
-  };
+  if (token) {
+    const decode: decodeToken = jwtDecode(token);
+    const userData = {
+      id: decode.userId,
+      login: decode.login,
+    };
+    dispatch(createUser(userData));
+  }
+
   dispatch(getToken(matched));
-  dispatch(createUser(userData));
 };
