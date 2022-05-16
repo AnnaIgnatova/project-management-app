@@ -28,7 +28,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
         </Typography>
         <div className="column-tasks">
           {tasks.map((task: CardData) => (
-            <CardTask key={task.title} value={task} />
+            <CardTask key={task.id} value={task} />
           ))}
         </div>
       </CardContent>
