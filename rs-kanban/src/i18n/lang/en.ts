@@ -37,4 +37,9 @@ export const enLang = {
     board: 'board',
     notFound: 'not found',
   },
+  task: {
+    responsible: 'Responsible',
+    files: 'Files',
+    btnDelete: 'Delete task',
+  },
 };

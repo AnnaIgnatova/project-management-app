@@ -37,4 +37,9 @@ export const ruLang = {
     board: 'доска',
     notFound: 'не найдено',
   },
+  task: {
+    responsible: 'Ответственный',
+    files: 'Файлы',
+    btnDelete: 'Удалить задачу',
+  },
 };
