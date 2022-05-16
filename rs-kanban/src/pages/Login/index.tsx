@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../models/routes';
 import { ONE_DAY } from './constant';
 import { LoginFormEvent } from './interface/LoginForm';
+import { useTranslation } from 'react-i18next';
 
 export const Login: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [forms, setForm] = useState({
     login: '',
@@ -30,15 +32,15 @@ export const Login: React.FC = () => {
 
   return (
     <div className="container-login">
-      <div className="login__title">Login</div>
+      <div className="login__title">{t('pages.login.title')}</div>
       <Box component="form" className="login__form">
         <div className="login__form-input">
           <TextField
             required
             name="login"
             id="outlined-required"
-            label="Login"
-            placeholder="Enter your login"
+            label={t('pages.login.loginLabel')}
+            placeholder={t('pages.login.loginPlaceholder')}
             onChange={changeHandler}
           />
         </div>
@@ -47,8 +49,8 @@ export const Login: React.FC = () => {
             required
             name="password"
             id="outlined-required"
-            label="Password"
-            placeholder="Enter your password"
+            label={t('pages.login.passwordLabel')}
+            placeholder={t('pages.login.passwordPlaceholder')}
             type="password"
             onChange={changeHandler}
           />

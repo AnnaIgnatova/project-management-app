@@ -1,13 +1,13 @@
 import './style.scss';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { Box, TextField, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { createAccount } from '../../api/authorization/create-account.api';
 import { Link } from 'react-router-dom';
 import { Routes } from '../../models/routes';
+import { useTranslation } from 'react-i18next';
 
 export const Registration: React.FC = () => {
+  const { t } = useTranslation();
   const [validName, setValidName] = useState<boolean>(true);
   const [validLogin, setValidLogin] = useState<boolean>(true);
   const [validPassword, setValidPassword] = useState<boolean>(true);
@@ -66,18 +66,18 @@ export const Registration: React.FC = () => {
 
   return (
     <div className="container-registration">
-      <div className="registration__title">Registration</div>
+      <div className="registration__title">{t('pages.registration.title')}</div>
       <Box component="form" className="registration__form">
         <div className="registration__form-input">
           <TextField
             required
             name="name"
             id="outlined-required"
-            label="Name"
-            placeholder="Enter your name"
+            label={t('pages.registration.name.label')}
+            placeholder={t('pages.registration.name.placeholder')}
             error={validName}
             onChange={changeHandler}
-            helperText="Enter min 2 symbols"
+            helperText={t('pages.registration.name.helperText')}
           />
         </div>
         <div className="registration__form-input">
@@ -85,11 +85,11 @@ export const Registration: React.FC = () => {
             required
             name="login"
             id="outlined-required"
-            label="Login"
-            placeholder="Enter your login"
+            label={t('pages.registration.login.label')}
+            placeholder={t('pages.registration.login.placeholder')}
             error={validLogin}
             onChange={changeHandler}
-            helperText="Enter min 3 symbols"
+            helperText={t('pages.registration.login.helperText')}
           />
         </div>
         <div className="registration__form-input">
@@ -97,12 +97,12 @@ export const Registration: React.FC = () => {
             required
             name="password"
             id="outlined-required"
-            label="Password"
-            placeholder="Enter your password"
+            label={t('pages.registration.password.label')}
+            placeholder={t('pages.registration.password.placeholder')}
             type="password"
             error={validPassword}
             onChange={changeHandler}
-            helperText="Enter more than 6 characters"
+            helperText={t('pages.registration.password.helperText')}
           />
         </div>
         <Link to={Routes.login} className="registration__form-link">
@@ -112,7 +112,7 @@ export const Registration: React.FC = () => {
             disabled={validButton}
             onClick={reqisterHandler}
           >
-            Click
+            {t('pages.registration.button')}
           </Button>
         </Link>
       </Box>

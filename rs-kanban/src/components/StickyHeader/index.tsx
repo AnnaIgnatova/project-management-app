@@ -4,8 +4,10 @@ import { Routes } from '../../models/routes';
 import { Button } from '@mui/material';
 import { useAppSelector } from '../../store';
 import { GetValueToken } from '../../utils/getValueToken';
+import { useTranslation } from 'react-i18next';
 
 export const StickyHeader: React.FC = () => {
+  const { t } = useTranslation();
   const token = useAppSelector((state) => state.tokenReduser.isToken);
   GetValueToken();
 
@@ -14,7 +16,7 @@ export const StickyHeader: React.FC = () => {
       return (
         <Link to={Routes.main}>
           <Button className="main-btn" variant="contained">
-            Go to Main Page
+            {t('header.btnMain')}
           </Button>
         </Link>
       );
@@ -24,12 +26,12 @@ export const StickyHeader: React.FC = () => {
       <>
         <Link to={Routes.login}>
           <Button className="login-btn" variant="contained">
-            Login
+            {t('header.btnLogin')}
           </Button>
         </Link>
         <Link to={Routes.registration}>
           <Button className="singup-btn" variant="contained">
-            Sign up
+            {t('header.btnSignUp')}
           </Button>
         </Link>
       </>
