@@ -30,8 +30,8 @@ export const CardTask: React.FC<CardTaskProps> = (props) => {
     }); */
 
     /*     getTaskById(
-      '3eccd158-8443-4466-8fe5-571cda0cbe74', //idBoard
-      '959ebf5b-2cd5-442e-b440-4272778bf91d', //idColumn
+      '7ab70df7-6b5e-4dc0-a23b-1c8405e3dc9f', //idBoard
+      'b77e3c37-6bcd-4579-9e70-8cd981963528', //idColumn
       idTask
     ).then((data) => {
       dispatch(getTask(data));
