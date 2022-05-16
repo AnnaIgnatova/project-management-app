@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 import userReducer from '../features/user/userSlice';
+import tokenReduser from '../features/token/tokenSlice';
 
-const rootReducer = combineReducers({ userReducer });
+const rootReducer = combineReducers({ userReducer, tokenReduser });
 
 export const store = () => {
   return configureStore({
