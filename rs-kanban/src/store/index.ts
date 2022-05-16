@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 import userReducer from '../features/user/userSlice';
+import boardsReducer from '../features/boards/boardsSlice';
 import tokenReduser from '../features/token/tokenSlice';
 import taskReduser from '../features/task/taskSlice';
 
-const rootReducer = combineReducers({ userReducer, taskReduser, tokenReduser });
+const rootReducer = combineReducers({ userReducer, taskReduser, tokenReduser, boardsReducer });
 
 export const store = () => {
   return configureStore({
