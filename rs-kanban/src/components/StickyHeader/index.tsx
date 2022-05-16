@@ -1,33 +1,47 @@
 import './style.scss';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Routes } from '../../models/routes';
-import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
+import { useAppSelector } from '../../store';
+import { GetValueToken } from '../../utils/getValueToken';
+import { useTranslation } from 'react-i18next';
 
 export const StickyHeader: React.FC = () => {
-  const [isSticky, setIsSticky] = useState<boolean>(false);
+  const { t } = useTranslation();
+  const token = useAppSelector((state) => state.tokenReduser.isToken);
+  GetValueToken();
 
-  const isStickyFn = () => {
-    window.scrollY > 0 ? setIsSticky(true) : setIsSticky(false);
+  const getBtnHeader = () => {
+    if (token) {
+      return (
+        <Link to={Routes.main}>
+          <Button className="main-btn" variant="contained">
+            {t('header.btnMain')}
+          </Button>
+        </Link>
+      );
+    }
+
+    return (
+      <>
+        <Link to={Routes.login}>
+          <Button className="login-btn" variant="contained">
+            {t('header.btnLogin')}
+          </Button>
+        </Link>
+        <Link to={Routes.registration}>
+          <Button className="singup-btn" variant="contained">
+            {t('header.btnSignUp')}
+          </Button>
+        </Link>
+      </>
+    );
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', isStickyFn);
-    return () => {
-      window.removeEventListener('scroll', isStickyFn);
-    };
-  });
-
-  const className = `container ${isSticky ? 'stickyHeader' : ''}`;
-
   return (
-    <div className={className}>
-      <div className="btnsContainer">
-        <NavLink to={Routes.editProfile} className="textDecorationNone">
-          <Button variant="contained">profile</Button>
-        </NavLink>
-        <Button variant="contained">logout</Button>
-        <Button variant="contained">+ board</Button>
+    <div className="container-header">
+      <div className="sticky-header">
+        <div className="container-btn">{getBtnHeader()}</div>
       </div>
     </div>
   );
