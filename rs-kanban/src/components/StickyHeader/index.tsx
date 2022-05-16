@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 export const StickyHeader: React.FC = () => {
   const { t } = useTranslation();
   const token = useAppSelector((state) => state.tokenReduser.isToken);
-  GetValueToken();
+  // GetValueToken();
 
   const getBtnHeader = () => {
     if (token) {
