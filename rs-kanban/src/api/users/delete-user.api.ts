@@ -1,6 +1,6 @@
 import { APIService } from '../../services';
 
-export const deleteUser = (id: string) => {
+export const deleteUserAPI = (id: string) => {
   const url = `/users/${id}`;
   return APIService.delete(url);
 };

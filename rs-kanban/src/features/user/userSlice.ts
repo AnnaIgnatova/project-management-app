@@ -18,8 +18,11 @@ export const userSlice = createSlice({
     deleteUser: (state) => {
       state.user = { id: '', name: '', login: '' };
     },
+    updateUser: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+    },
   },
 });
 
-export const { createUser, deleteUser } = userSlice.actions;
+export const { createUser, deleteUser, updateUser } = userSlice.actions;
 export default userSlice.reducer;
