@@ -1,0 +1,9 @@
+.board-page {
+  padding: 50px 100px;
+  &-columns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+}
