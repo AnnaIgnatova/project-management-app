@@ -21,7 +21,7 @@ export const Main: React.FC = () => {
       <hr />
       <div className="main-boards">
         {boards.map((board) => (
-          <BoardCard boardData={board} key={board.title} />
+          <BoardCard boardData={board} key={board.id} />
         ))}
       </div>
     </div>

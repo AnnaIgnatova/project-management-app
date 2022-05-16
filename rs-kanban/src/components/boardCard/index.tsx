@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../store';
 import { addBoardId } from '../../features/boards/boardsSlice';
 import { BoardCardProps } from './interfaces/boardProps';
+import { getRandomNum } from '../../utils/getRandomNum';
 
 export const BoardCard: React.FC<BoardCardProps> = (props) => {
   const { id, title } = props.boardData;
@@ -21,10 +22,6 @@ export const BoardCard: React.FC<BoardCardProps> = (props) => {
     const green = getRandomNum();
     const blue = getRandomNum();
     return `rgba(${red}, ${green}, ${blue}, 0.2)`;
-  };
-
-  const getRandomNum = () => {
-    return Math.floor(Math.random() * Math.floor(255));
   };
 
   return (

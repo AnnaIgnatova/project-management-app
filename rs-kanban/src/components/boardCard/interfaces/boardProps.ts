@@ -1,6 +1,5 @@
+import { Board } from '../../../features/boards/boardsSlice';
+
 export interface BoardCardProps {
-  boardData: {
-    id: string;
-    title: string;
-  };
+  boardData: Board;
 }

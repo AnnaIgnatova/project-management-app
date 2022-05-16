@@ -15,26 +15,25 @@ export interface Board {
 
 export const getBoardsData = createAsyncThunk(
   'boards/getBoardsData',
-  async (payload, { dispatch }) => {
+  async (payload, { dispatch, rejectWithValue }) => {
     try {
       const response = await getAllBoards();
       dispatch(addBoards(response));
     } catch (err) {
-      dispatch(addBoards([]));
+      return rejectWithValue(err);
     }
   }
 );
 
 export const getColsData = createAsyncThunk(
   'boards/getColsData',
-  async (payload: string, { dispatch }) => {
-    console.log(payload);
+  async (payload: string, { dispatch, rejectWithValue }) => {
     try {
       const response = await getAllColumns(payload);
 
       dispatch(addCols(response));
     } catch (err) {
-      dispatch(addCols([]));
+      return rejectWithValue(err);
     }
   }
 );
@@ -52,14 +51,6 @@ export const boardsSlice = createSlice({
     addCols: (state, action) => {
       state.columns = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(getBoardsData.pending, (state, action) => {});
-    builder.addCase(getBoardsData.fulfilled, (state, action) => {});
-    builder.addCase(getBoardsData.rejected, (state, action) => {});
-    builder.addCase(getColsData.pending, (state, action) => {});
-    builder.addCase(getColsData.fulfilled, (state, action) => {});
-    builder.addCase(getColsData.rejected, (state, action) => {});
   },
 });
 
