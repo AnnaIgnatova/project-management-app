@@ -8,8 +8,7 @@ export const ruLang = {
     welcome: 'начальная',
     main: {
       cardBtn: 'перейти к доске',
-      taskNum: 'количество задач',
-      colNum: 'количество колонок',
+      title: 'Все доски',
     },
     login: {
       title: 'Войти',

@@ -8,8 +8,7 @@ export const enLang = {
     welcome: 'welcome',
     main: {
       cardBtn: 'open board',
-      taskNum: 'tasks number',
-      colNum: 'column number',
+      title: 'All boards',
     },
     login: {
       title: 'Login',
