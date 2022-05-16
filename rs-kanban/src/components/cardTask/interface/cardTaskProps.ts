@@ -1,5 +1,9 @@
-export interface CardTaskProps {
+/* export interface CardTaskProps {
   value: CardTask;
+} */
+import { TaskType } from './ModalWindowProps';
+export interface CardTaskProps {
+  value: TaskType;
 }
 
 interface FilesCardTask {

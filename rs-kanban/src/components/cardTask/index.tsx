@@ -8,6 +8,7 @@ import { getTask } from '../../features/task/taskSlice';
 import { ModalWindow } from './ModalWindow';
 import { useTranslation } from 'react-i18next';
 
+/* export const CardTask: React.FC<CardTaskProps> = (props) => { */
 export const CardTask: React.FC<CardTaskProps> = (props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -16,14 +17,30 @@ export const CardTask: React.FC<CardTaskProps> = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { id, title, userId } = props.value;
+  const { id, title, userId, boardId, columnId } = props.value;
 
   const getValueTask = (event: React.MouseEvent) => {
     const idTask = event.currentTarget.id;
     handleOpen();
-    getTaskById(
+    /*     getTaskById(
       '1dc5b998-b1d2-4334-a74f-320e60d798b9', //idBoard
       'e06de5e3-017a-402a-9698-19dc6b16106e', //idColumn
+      idTask
+    ).then((data) => {
+      dispatch(getTask(data));
+    }); */
+
+    /*     getTaskById(
+      '7ab70df7-6b5e-4dc0-a23b-1c8405e3dc9f', //idBoard
+      'b77e3c37-6bcd-4579-9e70-8cd981963528', //idColumn
+      idTask
+    ).then((data) => {
+      dispatch(getTask(data));
+    }); */
+
+    getTaskById(
+      boardId, //idBoard
+      columnId, //idColumn
       idTask
     ).then((data) => {
       dispatch(getTask(data));
