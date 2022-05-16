@@ -21,6 +21,26 @@ export const CardTask: React.FC<CardTaskProps> = (props) => {
   const getValueTask = (event: React.MouseEvent) => {
     const idTask = event.currentTarget.id;
     handleOpen();
+<<<<<<< HEAD
+    getTaskById(boardId, columnId, idTask).then((data) => {
+=======
+    /*     getTaskById(
+      '1dc5b998-b1d2-4334-a74f-320e60d798b9', //idBoard
+      'e06de5e3-017a-402a-9698-19dc6b16106e', //idColumn
+      idTask
+    ).then((data) => {
+>>>>>>> 7032d0c (feat: commit)
+      dispatch(getTask(data));
+    }); */
+
+    /*     getTaskById(
+      '3eccd158-8443-4466-8fe5-571cda0cbe74', //idBoard
+      '959ebf5b-2cd5-442e-b440-4272778bf91d', //idColumn
+      idTask
+    ).then((data) => {
+      dispatch(getTask(data));
+    }); */
+
     getTaskById(boardId, columnId, idTask).then((data) => {
       dispatch(getTask(data));
     });

@@ -3,6 +3,7 @@ import { getAllBoards } from './../../api/boards';
 import { getAllColumns } from './../../api/columns';
 
 const initialState = {
+  // boardId: '7ab70df7-6b5e-4dc0-a23b-1c8405e3dc9f',
   boardId: '',
   boards: [],
   columns: [],
@@ -55,4 +56,5 @@ export const boardsSlice = createSlice({
 });
 
 export const { addBoardId, addBoards, addCols } = boardsSlice.actions;
+
 export default boardsSlice.reducer;

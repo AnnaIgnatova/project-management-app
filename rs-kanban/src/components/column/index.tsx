@@ -24,7 +24,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
   }, []);
 
   return (
-    <Card sx={{ maxWidth: 475, backgroundColor: '#f5f5f5' }}>
+    <Card sx={{ maxWidth: 475, backgroundColor: '#f5f5f5', width: 355, overflowY: 'auto' }}>
       <CardContent>
         <Typography sx={{ fontSize: 18 }} variant="overline">
           {title}
