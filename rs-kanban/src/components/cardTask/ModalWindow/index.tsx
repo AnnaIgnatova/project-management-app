@@ -3,8 +3,10 @@ import { ConfirmationModal } from '../../../components/ConfirmationModal';
 import { useState } from 'react';
 import { ModalWindowProps } from '../interface/ModalWindowProps';
 import { deleteTask } from '../../../api/tasks';
+import { useTranslation } from 'react-i18next';
 
 export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
+  const { t } = useTranslation();
   const [openConfirmationModal, setConfirmationModal] = useState<boolean>(false);
   const { open, onClose, value } = props;
   const { id, description, title, userId, order, boardId, columnId, files } = value;
@@ -32,7 +34,9 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
             {description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            <div className="modal-card-task__file">Files: {files.length}</div>
+            <div className="modal-card-task__file">
+              {t('task.files')}: {files.length}
+            </div>
 
             <div className="modal-card-task__file">
               {files.map((file) => {
@@ -45,7 +49,7 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
             className="modal-card-task__delete"
             onClick={handleOpenConfirmationModal}
           >
-            Delete task
+            {t('task.btnDelete')}
           </Button>
         </Box>
       </Modal>

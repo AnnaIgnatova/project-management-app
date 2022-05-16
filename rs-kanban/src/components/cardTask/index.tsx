@@ -6,8 +6,10 @@ import { CardTaskProps } from './interface/cardTaskProps';
 import './style.scss';
 import { getTask } from '../../features/task/taskSlice';
 import { ModalWindow } from './ModalWindow';
+import { useTranslation } from 'react-i18next';
 
 export const CardTask: React.FC<CardTaskProps> = (props) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const task = useAppSelector((state) => state.taskReduser.task);
   const [open, setOpen] = useState(false);
@@ -37,7 +39,7 @@ export const CardTask: React.FC<CardTaskProps> = (props) => {
               {title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Responsible: {userId}
+              {t('task.responsible')}: {userId}
             </Typography>
           </CardContent>
         </CardActionArea>
