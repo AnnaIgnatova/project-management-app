@@ -1,9 +1,5 @@
 import './style.scss';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Card, CardActions, CardContent, Button, Typography } from '@mui/material';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { Link } from 'react-router-dom';
@@ -11,8 +7,9 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../store';
 import { addBoardId } from '../../features/boards/boardsSlice';
 import { BoardCardProps } from './interfaces/boardProps';
+import { getAllColumns } from '../../api/columns';
 
-export const BoardCard = (props: BoardCardProps) => {
+export const BoardCard: React.FC<BoardCardProps> = (props) => {
   const { id, title, colNum, tasksNum } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -22,7 +19,13 @@ export const BoardCard = (props: BoardCardProps) => {
   };
 
   return (
-    <Card variant="outlined" sx={{ width: 375, mb: 5 }}>
+    <Card
+      variant="outlined"
+      sx={{ width: 375, mb: 5 }}
+      onClick={async () => {
+        console.log(await getAllColumns(id));
+      }}
+    >
       <CardContent>
         <Typography variant="overline" component="div" fontSize={24}>
           {title}

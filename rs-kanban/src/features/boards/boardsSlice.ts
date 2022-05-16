@@ -1,7 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getAllColumns } from './../../api/columns/get-all-columns.api';
 
 const initialState = {
   boardId: '',
+  boards: [{}],
 };
 
 export const boardsSlice = createSlice({
@@ -10,6 +12,9 @@ export const boardsSlice = createSlice({
   reducers: {
     addBoardId: (state, action) => {
       state.boardId = action.payload;
+    },
+    addBoards: (state, action) => {
+      state.boards = [...action.payload];
     },
   },
 });
