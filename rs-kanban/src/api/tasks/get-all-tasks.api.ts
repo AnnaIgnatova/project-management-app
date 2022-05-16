@@ -1,7 +1,7 @@
 import { APIService } from '../../services';
-import { Task } from '../../models';
+import { CardTask } from '../../components/cardTask/interface/cardTaskProps';
 
 export const getAllTasks = (boardId: string, columnId: string) => {
   const url = `/boards/${boardId}/columns/${columnId}/tasks`;
-  return APIService.get<Task[]>(url);
+  return APIService.get<CardTask[]>(url);
 };

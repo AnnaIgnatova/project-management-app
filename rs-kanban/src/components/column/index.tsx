@@ -2,8 +2,8 @@ import { getAllTasks } from '../../api/tasks';
 import { Card, CardContent, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useAppSelector } from './../../store';
-import { Task } from '../../components/task';
-import { Task as TaskData } from '@models/task.type';
+import { CardTask } from '../../components/cardTask';
+import { CardTask as CardData } from '../../components/cardTask/interface/cardTaskProps';
 
 export interface ColumnProps {
   id: string;
@@ -14,10 +14,10 @@ export interface ColumnProps {
 export const Column: React.FC<ColumnProps> = (props) => {
   const { id, title } = props;
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
-  const [tasks, setTasks] = useState<TaskData[]>([]);
+  const [tasks, setTasks] = useState<CardData[]>([]);
 
   useEffect(() => {
-    getAllTasks(boardId, id).then((data: TaskData[]) => setTasks(data));
+    getAllTasks(boardId, id).then((data: CardData[]) => setTasks(data));
   }, []);
 
   return (
@@ -27,8 +27,8 @@ export const Column: React.FC<ColumnProps> = (props) => {
           {title}
         </Typography>
         <div className="column-tasks">
-          {tasks.map((task: TaskData) => (
-            <Task key={task.title} taskData={task} />
+          {tasks.map((task: CardData) => (
+            <CardTask key={task.title} value={task} />
           ))}
         </div>
       </CardContent>

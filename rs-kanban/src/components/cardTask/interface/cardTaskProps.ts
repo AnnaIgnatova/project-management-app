@@ -2,12 +2,12 @@ export interface CardTaskProps {
   value: CardTask;
 }
 
-interface FilesCardTask {
+export interface FilesCardTask {
   taskId: string;
   file: string;
 }
 
-interface CardTask {
+export interface CardTask {
   description: string;
   files: FilesCardTask[];
   id: string;

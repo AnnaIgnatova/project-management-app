@@ -1,4 +1,4 @@
-import { File } from '../models';
+import { FilesCardTask } from '../components/cardTask/interface/cardTaskProps';
 
 export interface TaskRequest {
   title: string;
@@ -14,7 +14,7 @@ export interface TaskRequestForUpdate extends TaskRequest {
 
 export interface TasksInColumn extends TaskRequest {
   id: string;
-  files: File[];
+  files: FilesCardTask[];
 }
 
 export interface Task extends TaskRequestForUpdate {
@@ -22,5 +22,5 @@ export interface Task extends TaskRequestForUpdate {
 }
 
 export interface TaskById extends Task {
-  files: File[];
+  files: FilesCardTask[];
 }
