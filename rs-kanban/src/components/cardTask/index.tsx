@@ -16,7 +16,7 @@ export const CardTask: React.FC<CardTaskProps> = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { id, title, userId, boardId, columnId } = props.value;
+  const { id, title, userId, boardId, columnId, description } = props.value;
 
   const getValueTask = (event: React.MouseEvent) => {
     const idTask = event.currentTarget.id;
@@ -28,7 +28,7 @@ export const CardTask: React.FC<CardTaskProps> = (props) => {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 245, marginBottom: 2 }} id={id} onClick={getValueTask}>
+      <Card sx={{ maxWidth: 345, marginBottom: 2 }} id={id} onClick={getValueTask}>
         <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
