@@ -1,38 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { getColsData } from '../../features/boards/boardsSlice';
 import { useAppSelector, useAppDispatch } from '../../store';
-import { Column, ColumnProps } from '../../components/column';
-import './style.scss';
-import { Box, Button, Container, Card, CardHeader, CardContent, Typography } from '@mui/material';
-import { useEffect, useState, ReactElement } from 'react';
+import { Column } from '../../components/column';
+import { Box, Button, Container, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { getBoardById } from '../../api/boards';
 import { BoardById } from '../../models/board.type';
-import { ColumnById } from '../../models/column.type';
-import { TasksInColumn } from '../../models/task.type';
 import { addCols } from '../../features/boards/boardsSlice';
-
-/* export const BoardPage = () => {
-  const dispatch = useAppDispatch();
-  const boardId = useAppSelector((state) => state.boardsReducer.boardId);
-  const columns = useAppSelector((state) => state.boardsReducer.columns);
-  const { t } = useTranslation();
-
-  useEffect(() => {
-    dispatch(getColsData(boardId));
-  }, []);
-
-  return (
-    <div className="board-page">
-      <h2 className="main-title">Board Page</h2>
-      <hr />
-      <div className="board-page-columns">
-        {columns.map((col: ColumnProps) => (
-          <Column key={col.id} id={col.id} title={col.title} order={col.order} />
-        ))}
-      </div>
-    </div>
-      );
-    }; */
+import './style.scss';
 
 export const BoardPage: React.FC = () => {
   const { boardId } = useAppSelector((state) => state.boardsReducer);
