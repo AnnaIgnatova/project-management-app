@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getTask } from '../../../features/task/taskSlice';
+import { TaskRequestForUpdate } from '../../../models/task.type';
 
 export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
   const { t } = useTranslation();
@@ -47,19 +48,28 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
   const handleChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) =>
     setDescriptionValue(e.target.value);
 
-  const handleUpdate = () => {
-    const body = {
-      order,
-      userId,
-      boardId,
-      columnId,
-      description: descriptionValue,
-      title: titleValue,
-    };
-    handleCloseEditTitle();
-    handleCloseEditDescription();
+  const generalUpdate = (body: TaskRequestForUpdate) => {
     updateTask(boardId, columnId, id, body);
     dispatch(getTask({ ...props.value, title: titleValue, description: descriptionValue }));
+  };
+
+  const bodyForUpdate = {
+    order,
+    userId,
+    boardId,
+    columnId,
+    description,
+    title,
+  };
+
+  const handleUpdateTitle = () => {
+    generalUpdate({ ...bodyForUpdate, title: titleValue });
+    handleCloseEditTitle();
+  };
+
+  const handleUpdateDescription = () => {
+    generalUpdate({ ...bodyForUpdate, description: descriptionValue });
+    handleCloseEditDescription();
   };
 
   return (
@@ -80,7 +90,7 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
               <TextField label="Enter new Title" value={titleValue} onChange={handleChangeTitle} />
               <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
                 <Button onClick={handleCloseEditTitle}>{t('buttons.cancel')}</Button>
-                <Button onClick={handleUpdate}>{t('buttons.submit')}</Button>
+                <Button onClick={handleUpdateTitle}>{t('buttons.submit')}</Button>
               </Box>
             </>
           )}
@@ -98,7 +108,7 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
               />
               <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
                 <Button onClick={handleCloseEditDescription}>{t('buttons.cancel')}</Button>
-                <Button onClick={handleUpdate}>{t('buttons.submit')}</Button>
+                <Button onClick={handleUpdateDescription}>{t('buttons.submit')}</Button>
               </Box>
             </>
           )}

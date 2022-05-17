@@ -1,7 +1,7 @@
 import { CardTask } from '../components/cardTask/interface/cardTaskProps';
 export interface ColumnRequest {
   title: string;
-  order: string;
+  order: number;
 }
 
 export interface Column extends ColumnRequest {

@@ -52,8 +52,11 @@ export const BoardPage: React.FC = () => {
             columnGap: '20px',
           }}
         >
+          {/*           {columns.map((column, index) => (
+            <Column key={column.id} id={column.id} title={column.title} order={column.order} />
+          ))} */}
           {columns.map((column, index) => (
-            <Column key={index} id={column.id} title={column.title} order={column.order} />
+            <Column key={column.id} value={column} />
           ))}
         </Box>
       </Box>

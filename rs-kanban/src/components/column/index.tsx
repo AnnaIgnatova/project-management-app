@@ -4,15 +4,16 @@ import { useState, useEffect } from 'react';
 import { useAppSelector } from './../../store';
 import { CardTask } from '../../components/cardTask';
 import { Task } from '../../models/task.type';
+import { ColumnProps } from './interface/columnProps';
 
-export interface ColumnProps {
+/* export interface ColumnProps {
   id: string;
   title: string;
-  order: string;
-}
+  order: number;
+} */
 
 export const Column: React.FC<ColumnProps> = (props) => {
-  const { id, title } = props;
+  const { id, title } = props.value;
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
   const [tasks, setTasks] = useState<Task[]>([]);
 
