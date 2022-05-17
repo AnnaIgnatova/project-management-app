@@ -9,6 +9,8 @@ import { addCols } from '../../features/boards/boardsSlice';
 import './style.scss';
 
 export const BoardPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const { boardId } = useAppSelector((state) => state.boardsReducer);
   const [boardByIdInfo, setBoardByIdInfo] = useState<BoardById>({ id: '', title: '', columns: [] });
 
@@ -37,10 +39,10 @@ export const BoardPage: React.FC = () => {
         }}
       >
         <Button variant="contained" sx={{ height: '30px' }}>
-          Create column
+          {t('pages.boardPage.columnBtn')}
         </Button>
         <Button variant="contained" disabled={true} sx={{ height: '30px' }}>
-          Create task
+          {t('pages.boardPage.taskBtn')}
         </Button>
       </Box>
       <Box sx={{ display: 'flex', flex: '1', overflowX: 'auto', height: 'calc(100vh - 330px)' }}>

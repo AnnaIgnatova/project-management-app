@@ -79,8 +79,8 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
             <>
               <TextField label="Enter new Title" value={titleValue} onChange={handleChangeTitle} />
               <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-                <Button onClick={handleCloseEditTitle}>Cancel</Button>
-                <Button onClick={handleUpdate}>Submit</Button>
+                <Button onClick={handleCloseEditTitle}>{t('buttons.cancel')}</Button>
+                <Button onClick={handleUpdate}>{t('buttons.submit')}</Button>
               </Box>
             </>
           )}
@@ -97,8 +97,8 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
                 onChange={handleChangeDescription}
               />
               <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-                <Button onClick={handleCloseEditDescription}>Cancel</Button>
-                <Button onClick={handleUpdate}>Submit</Button>
+                <Button onClick={handleCloseEditDescription}>{t('buttons.cancel')}</Button>
+                <Button onClick={handleUpdate}>{t('buttons.submit')}</Button>
               </Box>
             </>
           )}
