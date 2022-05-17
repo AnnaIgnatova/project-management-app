@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAppSelector } from './../../store';
 import { CardTask } from '../../components/cardTask';
 import { CardTask as CardData } from '../../components/cardTask/interface/cardTaskProps';
+import { Task } from '../../models/task.type';
 
 export interface ColumnProps {
   id: string;
@@ -14,10 +15,12 @@ export interface ColumnProps {
 export const Column: React.FC<ColumnProps> = (props) => {
   const { id, title } = props;
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
-  const [tasks, setTasks] = useState<CardData[]>([]);
+  // const [tasks, setTasks] = useState<CardData[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    getAllTasks(boardId, id).then((data: CardData[]) => setTasks(data));
+    // getAllTasks(boardId, id).then((data: CardData[]) => setTasks(data));
+    getAllTasks(boardId, id).then((data: Task[]) => setTasks(data));
   }, []);
 
   return (
@@ -27,7 +30,10 @@ export const Column: React.FC<ColumnProps> = (props) => {
           {title}
         </Typography>
         <div className="column-tasks">
-          {tasks.map((task: CardData) => (
+          {/*           {tasks.map((task: CardData) => (
+            <CardTask key={task.id} value={task} />
+          ))} */}
+          {tasks.map((task: Task) => (
             <CardTask key={task.id} value={task} />
           ))}
         </div>
