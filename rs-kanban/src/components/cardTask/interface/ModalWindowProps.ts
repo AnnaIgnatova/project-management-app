@@ -4,7 +4,7 @@ export interface ModalWindowProps {
   value: TaskType;
 }
 
-interface TaskType {
+export interface TaskType {
   id: string;
   title: string;
   order: number;
