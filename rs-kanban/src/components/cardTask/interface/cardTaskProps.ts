@@ -1,6 +1,3 @@
-/* export interface CardTaskProps {
-  value: CardTask;
-} */
 import { Task } from '../../../models/task.type';
 export interface CardTaskProps {
   value: Task;
