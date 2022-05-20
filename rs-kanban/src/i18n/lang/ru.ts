@@ -37,7 +37,12 @@ export const ruLang = {
       button: 'Клик',
     },
     user: 'пользователь',
-    board: 'доска',
+    board: {
+      colBtns: {
+        cancel: 'отмена',
+        submit: 'сохранить',
+      },
+    },
     notFound: 'не найдено',
   },
   task: {

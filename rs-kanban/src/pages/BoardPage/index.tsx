@@ -2,8 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { getColsData } from '../../features/boards/boardsSlice';
 import { useAppSelector, useAppDispatch } from '../../store';
-import { Column, ColumnProps } from '../../components/column';
+import { Column } from '../../components/column';
 import './style.scss';
+import { ColumnProps } from './../../components/column/interfaces/columnProps';
 
 export const BoardPage = () => {
   const dispatch = useAppDispatch();
@@ -27,4 +28,3 @@ export const BoardPage = () => {
     </div>
   );
 };
-

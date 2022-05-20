@@ -37,7 +37,12 @@ export const enLang = {
       button: 'Click',
     },
     user: 'user',
-    board: 'board',
+    board: {
+      colBtns: {
+        cancel: 'cancel',
+        submit: 'submit',
+      },
+    },
     notFound: 'not found',
   },
   task: {
