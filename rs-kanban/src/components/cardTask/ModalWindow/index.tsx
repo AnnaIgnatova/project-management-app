@@ -1,21 +1,75 @@
-import { Modal, Box, Typography, Button } from '@mui/material';
+import { Modal, Box, Typography, Button, TextField, ButtonGroup } from '@mui/material';
 import { ConfirmationModal } from '../../../components/ConfirmationModal';
 import { useState } from 'react';
 import { ModalWindowProps } from '../interface/ModalWindowProps';
-import { deleteTask } from '../../../api/tasks';
+import { deleteTask, updateTask } from '../../../api/tasks';
 import { useTranslation } from 'react-i18next';
+
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { getTask } from '../../../features/task/taskSlice';
+import { TaskRequestForUpdate } from '../../../models/task.type';
 
 export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
   const { t } = useTranslation();
   const [openConfirmationModal, setConfirmationModal] = useState<boolean>(false);
   const { open, onClose, value } = props;
-  const { id, description, title, userId, order, boardId, columnId, files } = value;
+  const { id, userId, order, boardId, columnId, files } = value;
 
   const handleOpenConfirmationModal = () => setConfirmationModal(true);
 
   const deteleTask = () => {
     deleteTask(boardId, columnId, id);
     location.reload();
+  };
+
+  const dispatch = useAppDispatch();
+  const { title, description } = useAppSelector((state) => state.taskReduser.task);
+
+  const [isEditTitle, setEditTitle] = useState<boolean>(false);
+  const [titleValue, setTitleValue] = useState<string>(title);
+
+  const handleEditTitle = () => {
+    setEditTitle(true);
+    setTitleValue(title);
+  };
+  const handleCloseEditTitle = () => setEditTitle(false);
+
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTitleValue(e.target.value);
+
+  const [isEditDescription, setEditDescription] = useState<boolean>(false);
+  const [descriptionValue, setDescriptionValue] = useState<string>(description);
+
+  const handleEditDescription = () => {
+    setEditDescription(true);
+    setDescriptionValue(description);
+  };
+  const handleCloseEditDescription = () => setEditDescription(false);
+  const handleChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setDescriptionValue(e.target.value);
+
+  const generalUpdate = (body: TaskRequestForUpdate) => {
+    updateTask(boardId, columnId, id, body);
+    dispatch(getTask({ ...props.value, title: titleValue, description: descriptionValue }));
+  };
+
+  const bodyForUpdate = {
+    order,
+    userId,
+    boardId,
+    columnId,
+    description,
+    title,
+  };
+
+  const handleUpdateTitle = () => {
+    generalUpdate({ ...bodyForUpdate, title: titleValue });
+    handleCloseEditTitle();
+  };
+
+  const handleUpdateDescription = () => {
+    generalUpdate({ ...bodyForUpdate, description: descriptionValue });
+    handleCloseEditDescription();
   };
 
   return (
@@ -27,12 +81,37 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box className="modal-card-task">
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
+          {!isEditTitle ? (
+            <Typography gutterBottom variant="h5" component="div" onClick={handleEditTitle}>
+              {title}
+            </Typography>
+          ) : (
+            <>
+              <TextField label="Enter new Title" value={titleValue} onChange={handleChangeTitle} />
+              <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                <Button onClick={handleCloseEditTitle}>{t('buttons.cancel')}</Button>
+                <Button onClick={handleUpdateTitle}>{t('buttons.submit')}</Button>
+              </Box>
+            </>
+          )}
+
+          {!isEditDescription ? (
+            <Typography variant="body2" color="text.secondary" onClick={handleEditDescription}>
+              {description}
+            </Typography>
+          ) : (
+            <>
+              <TextField
+                label="Enter new Description"
+                value={descriptionValue}
+                onChange={handleChangeDescription}
+              />
+              <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                <Button onClick={handleCloseEditDescription}>{t('buttons.cancel')}</Button>
+                <Button onClick={handleUpdateDescription}>{t('buttons.submit')}</Button>
+              </Box>
+            </>
+          )}
           <Typography variant="body2" color="text.secondary">
             <div className="modal-card-task__file">
               {t('task.files')}: {files.length}

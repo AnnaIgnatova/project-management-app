@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { getToken } from '../features/token/tokenSlice';
+import { getToken, saveToken } from '../features/token/tokenSlice';
 
 import jwtDecode from 'jwt-decode';
 import { createUser } from '../features/user/userSlice';
@@ -22,6 +22,7 @@ export const GetValueToken = () => {
       login: decode.login,
     };
     dispatch(createUser(userData));
+    dispatch(saveToken(token));
   }
 
   dispatch(getToken(matched));

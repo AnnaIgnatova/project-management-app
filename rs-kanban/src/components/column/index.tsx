@@ -37,7 +37,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
   };
 
   return (
-    <Card sx={{ width: 400, backgroundColor: '#f5f5f5' }}>
+    <Card sx={{ backgroundColor: '#f5f5f5', width: 400, overflowY: 'auto' }}>
       <CardContent>
         {isEditTitle ? (
           <Stack spacing={2} direction="row" alignItems="center" marginBottom={5}>

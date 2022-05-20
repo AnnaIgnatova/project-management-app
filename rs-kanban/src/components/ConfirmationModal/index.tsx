@@ -1,6 +1,7 @@
 import { Modal, Box, TextField, Button, ButtonGroup, Typography } from '@mui/material';
 import { useState } from 'react';
 import { ConfirmationModalProps } from './interface/ConfirmationModal.type';
+import { useTranslation } from 'react-i18next';
 import './style.scss';
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -9,6 +10,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   deleteFn,
   thingToBeRemoved,
 }) => {
+  const { t } = useTranslation();
+
   const [deleteMsgText, setDeleteMsgText] = useState<string>('');
 
   const handleClose = () => setOpenModal(false);
@@ -40,7 +43,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
           />
           <ButtonGroup className="confirmation-modal__btns">
             <Button variant="contained" onClick={handleClose}>
-              Cancel
+              {t('buttons.cancel')}
             </Button>
             <Button
               variant="contained"
@@ -48,7 +51,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
               disabled={deleteMsgText !== 'delete'}
               onClick={deleteFn}
             >
-              Delete
+              {t('buttons.delete')}
             </Button>
           </ButtonGroup>
         </Box>

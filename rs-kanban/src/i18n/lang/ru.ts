@@ -10,6 +10,10 @@ export const ruLang = {
       cardBtn: 'перейти к доске',
       title: 'Все доски',
     },
+    boardPage: {
+      columnBtn: 'Добавить колонку',
+      taskBtn: 'Добавить задачу',
+    },
     login: {
       title: 'Войти',
       loginLabel: 'Логин',
@@ -36,12 +40,16 @@ export const ruLang = {
       },
       button: 'Клик',
     },
-    user: 'пользователь',
     board: {
       colBtns: {
         cancel: 'отмена',
         submit: 'сохранить',
       },
+    },
+    user: {
+      user: 'пользователь',
+      userProfile: 'Личный кабинет',
+      deleteBtn: 'Удалить аккаунт',
     },
     notFound: 'не найдено',
   },
@@ -49,5 +57,12 @@ export const ruLang = {
     responsible: 'Ответственный',
     files: 'Файлы',
     btnDelete: 'Удалить задачу',
+  },
+  buttons: {
+    cancel: 'Отмена',
+    submit: 'Отправить',
+    delete: 'Удалить',
+    change: 'Изменить',
+    saveChanges: 'Сохранить изменения',
   },
 };

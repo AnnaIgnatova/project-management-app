@@ -16,16 +16,12 @@ export const CardTask: React.FC<CardTaskProps> = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { id, title, userId, description } = props.value;
+  const { id, title, userId, boardId, columnId, description } = props.value;
 
   const getValueTask = (event: React.MouseEvent) => {
     const idTask = event.currentTarget.id;
     handleOpen();
-    getTaskById(
-      '1dc5b998-b1d2-4334-a74f-320e60d798b9', //idBoard
-      'e06de5e3-017a-402a-9698-19dc6b16106e', //idColumn
-      idTask
-    ).then((data) => {
+    getTaskById(boardId, columnId, idTask).then((data) => {
       dispatch(getTask(data));
     });
   };

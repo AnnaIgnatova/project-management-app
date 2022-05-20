@@ -10,6 +10,10 @@ export const enLang = {
       cardBtn: 'open board',
       title: 'All boards',
     },
+    boardPage: {
+      columnBtn: 'Create column',
+      taskBtn: 'Create task',
+    },
     login: {
       title: 'Login',
       loginLabel: 'Login',
@@ -36,12 +40,16 @@ export const enLang = {
       },
       button: 'Click',
     },
-    user: 'user',
     board: {
       colBtns: {
         cancel: 'cancel',
         submit: 'submit',
       },
+    },
+    user: {
+      user: 'user',
+      userProfile: 'User profile',
+      deleteBtn: 'Delete account',
     },
     notFound: 'not found',
   },
@@ -49,5 +57,12 @@ export const enLang = {
     responsible: 'Responsible',
     files: 'Files',
     btnDelete: 'Delete task',
+  },
+  buttons: {
+    cancel: 'Cancel',
+    submit: 'Submit',
+    delete: 'Delete',
+    change: 'Change',
+    saveChanges: 'Save Changes',
   },
 };

@@ -1,8 +1,14 @@
 import { HttpMethod } from './http-methods';
 import axios, { AxiosResponse } from 'axios';
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5NTg1ZDQxMi0wMTcxLTRkMjctYWIwNC0xOGM3MzI0ODY1ZDAiLCJsb2dpbiI6InVzZXIwMDMiLCJpYXQiOjE2NTIwMzgyMDR9.igZFBxuq-naJ_8xG74gtVvAD6LJIBfjBrVzt-pUiGdk';
+function getCookie(name: string) {
+  const matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+const token = getCookie('Token');
 
 export const instanceAxios = axios.create({
   headers: {

@@ -1,8 +1,8 @@
-import { TasksInColumn } from '../models';
+import { CardTask } from '../components/cardTask/interface/cardTaskProps';
 
 export interface ColumnRequest {
   title: string;
-  order: number;
+  order: string;
 }
 
 export interface Column extends ColumnRequest {
@@ -10,5 +10,5 @@ export interface Column extends ColumnRequest {
 }
 
 export interface ColumnById extends Column {
-  tasks: TasksInColumn[];
+  tasks: CardTask[];
 }

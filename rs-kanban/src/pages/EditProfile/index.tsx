@@ -9,8 +9,11 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { updateUser, deleteUser } from '../../features/user/userSlice';
 import { Routes } from '../../models/routes';
 import { ConfirmationModal } from '../../components/ConfirmationModal';
+import { useTranslation } from 'react-i18next';
 
 export const EditProfile: React.FC = () => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
   const { id, name, login } = useAppSelector((state) => state.userReducer.user);
   const navigate = useNavigate();
@@ -106,7 +109,7 @@ export const EditProfile: React.FC = () => {
                 <ArrowBackIcon />
               </IconButton>
             )}
-            User profile
+            {t('pages.user.userProfile')}
           </Typography>
           <TextField
             required
@@ -146,7 +149,10 @@ export const EditProfile: React.FC = () => {
             sx={{ width: '175px' }}
             onClick={changeBtnFn}
           >
-            {isDisabledInputs ? 'Change' : 'Save Changes'}
+            {isDisabledInputs
+              ? `
+            ${t('buttons.change')}`
+              : `${t('buttons.saveChanges')}`}
           </Button>
           <Button
             variant="contained"
@@ -154,7 +160,7 @@ export const EditProfile: React.FC = () => {
             sx={{ width: '125px', fontSize: '0.5rem' }}
             onClick={handleOpen}
           >
-            Delete account
+            {t('pages.user.deleteBtn')}
           </Button>
         </Box>
       </div>
