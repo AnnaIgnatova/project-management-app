@@ -9,6 +9,7 @@ export const ruLang = {
     main: {
       cardBtn: 'перейти к доске',
       title: 'Все доски',
+      createBoardBtn: 'создать доску',
     },
     boardPage: {
       columnBtn: 'Добавить колонку',

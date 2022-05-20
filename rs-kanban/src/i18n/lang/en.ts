@@ -9,6 +9,7 @@ export const enLang = {
     main: {
       cardBtn: 'open board',
       title: 'All boards',
+      createBoardBtn: 'create board',
     },
     boardPage: {
       columnBtn: 'Create column',

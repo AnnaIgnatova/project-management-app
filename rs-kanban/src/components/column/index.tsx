@@ -9,7 +9,6 @@ import { ColumnProps } from './interface/columnProps';
 export const Column: React.FC<ColumnProps> = (props) => {
   const { id, title } = props.value;
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
-
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
