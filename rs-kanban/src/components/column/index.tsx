@@ -8,18 +8,19 @@ import { ColumnProps } from './interfaces/columnProps';
 import './style.scss';
 import { updateColumnTitle } from './../../features/boards/boardsSlice';
 import { useTranslation } from 'react-i18next';
+import { Task } from './../../models/task.type';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const dispatch = useAppDispatch();
   const { id, title, order } = props;
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
-  const [tasks, setTasks] = useState<CardData[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [isEditTitle, setEditTitle] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>(title);
   const { t } = useTranslation();
 
   useEffect(() => {
-    getAllTasks(boardId, id).then((data: CardData[]) => setTasks(data));
+    getAllTasks(boardId, id).then((data: Task[]) => setTasks(data));
   }, []);
 
   const submitEditTitle = () => {
@@ -69,7 +70,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
         )}
 
         <div className="column-tasks">
-          {tasks.map((task: CardData) => (
+          {tasks.map((task: Task) => (
             <CardTask key={task.id} value={task} />
           ))}
         </div>
