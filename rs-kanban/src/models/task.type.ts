@@ -2,7 +2,7 @@ import { FilesCardTask } from '../components/cardTask/interface/cardTaskProps';
 
 export interface TaskRequest {
   title: string;
-  order: number;
+  order?: number;
   description: string;
   userId: string;
 }

@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { getBoardById } from '../../api/boards';
 import { BoardById } from '../../models/board.type';
 import { getColsData } from '../../features/boards/boardsSlice';
-import { ColumnData } from './../../components/column/interfaces/columnProps';
 import './style.scss';
 
 export const BoardPage: React.FC = () => {
@@ -38,18 +37,15 @@ export const BoardPage: React.FC = () => {
         <Button variant="contained" sx={{ height: '30px' }}>
           {t('pages.boardPage.columnBtn')}
         </Button>
-        <Button variant="contained" disabled={true} sx={{ height: '30px' }}>
-          {t('pages.boardPage.taskBtn')}
-        </Button>
       </Box>
-      <Box sx={{ display: 'flex', flex: '1', overflowX: 'auto', height: 'calc(100vh - 330px)' }}>
+      <Box sx={{ display: 'flex', flex: '1', overflowX: 'auto', height: 'calc(100vh - 262px)' }}>
         <Box
           sx={{
             display: 'flex',
             columnGap: '20px',
           }}
         >
-          {columns.map((column: ColumnData) => (
+          {columns.map((column) => (
             <Column key={column.id} value={column} />
           ))}
         </Box>

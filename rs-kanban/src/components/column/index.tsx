@@ -1,23 +1,34 @@
-import { getAllTasks } from '../../api/tasks';
-import { Card, CardContent, Typography, TextField, Button, Stack } from '@mui/material';
+import { getAllTasks, createTask } from '../../api/tasks';
+import { Box, Button, Card, CardContent, Modal, TextField, Typography, Stack } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './../../store';
 import { CardTask } from '../../components/cardTask';
-import { CardTask as CardData } from '../../components/cardTask/interface/cardTaskProps';
-import { ColumnProps } from './interfaces/columnProps';
+import { ColumnProps } from './interface/columnProps';
 import './style.scss';
-import { updateColumnTitle } from './../../features/boards/boardsSlice';
 import { useTranslation } from 'react-i18next';
-import { Task } from './../../models/task.type';
+import { Task, TaskRequest } from '../../models/task.type';
+import { FormEvent } from './interface/FormEvent';
+import { updateColumnTitle } from '../../features/boards/boardsSlice';
 
 export const Column: React.FC<ColumnProps> = (props) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { id, title, order } = props.value;
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const userId = useAppSelector((state) => state.userReducer.user.id);
   const [isEditTitle, setEditTitle] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>(title);
-  const { t } = useTranslation();
+
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [forms, setForm] = useState<TaskRequest>({
+    title: '',
+    description: '',
+    userId,
+  });
 
   useEffect(() => {
     getAllTasks(boardId, id).then((data: Task[]) => setTasks(data));
@@ -37,44 +48,98 @@ export const Column: React.FC<ColumnProps> = (props) => {
     setNewTitle(title);
   };
 
+  const changeHandler = (event: FormEvent) => {
+    setForm({ ...forms, [event.target.name]: event.target.value });
+  };
+
+  const createNewTask = () => {
+    handleOpen();
+    createTask(boardId, id, forms);
+    location.reload();
+  };
+
   return (
-    <Card sx={{ backgroundColor: '#f5f5f5', width: 400, overflowY: 'auto' }}>
-      <CardContent>
-        {isEditTitle ? (
-          <Stack spacing={2} direction="row" alignItems="center" marginBottom={5}>
+    <div>
+      <Card sx={{ backgroundColor: '#f5f5f5', width: 400, overflowY: 'auto' }}>
+        <CardContent>
+          {isEditTitle ? (
+            <Stack spacing={2} direction="row" alignItems="center" marginBottom={5}>
+              <TextField
+                id="outlined-basic"
+                label={title}
+                variant="outlined"
+                sx={{ fontSize: 18, display: 'block', height: 50, textTransform: 'uppercase' }}
+                onChange={handleChange}
+              />
+
+              <Button variant="contained" onClick={submitEditTitle}>
+                {t('pages.board.colBtns.submit')}
+              </Button>
+              <Button variant="outlined" onClick={cancelEditTitle}>
+                {t('pages.board.colBtns.cancel')}
+              </Button>
+            </Stack>
+          ) : (
+            <Typography
+              sx={{ fontSize: 18, display: 'block', height: 50, marginBottom: 5 }}
+              variant="overline"
+              onClick={() => {
+                setEditTitle(true);
+              }}
+            >
+              {title}
+            </Typography>
+          )}
+
+          <div className="column-tasks">
+            <Button
+              variant="contained"
+              sx={{ height: '30px', marginLeft: '90px', marginBottom: '10px' }}
+              onClick={createNewTask}
+            >
+              {t('pages.boardPage.taskBtn')}
+            </Button>
+            {tasks.map((task: Task) => (
+              <CardTask key={task.id} value={task} />
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="modal-ct">
+          <h2 className="modal-ct__text">{t('column.titleModal')}</h2>
+          <div className="modal-ct__input">
             <TextField
-              id="outlined-basic"
-              label={title}
-              variant="outlined"
-              sx={{ fontSize: 18, display: 'block', height: 50, textTransform: 'uppercase' }}
-              onChange={handleChange}
+              name="title"
+              id="standard-basic"
+              label={t('column.title.label')}
+              placeholder={t('column.title.placeholder')}
+              variant="standard"
+              required
+              onChange={changeHandler}
             />
-
-            <Button variant="contained" onClick={submitEditTitle}>
-              {t('pages.board.colBtns.submit')}
-            </Button>
-            <Button variant="outlined" onClick={cancelEditTitle}>
-              {t('pages.board.colBtns.cancel')}
-            </Button>
-          </Stack>
-        ) : (
-          <Typography
-            sx={{ fontSize: 18, display: 'block', height: 50, marginBottom: 5 }}
-            variant="overline"
-            onClick={() => {
-              setEditTitle(true);
-            }}
-          >
-            {title}
-          </Typography>
-        )}
-
-        <div className="column-tasks">
-          {tasks.map((task: Task) => (
-            <CardTask key={task.id} value={task} />
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+          </div>
+          <div className="modal-ct__input">
+            <TextField
+              name="description"
+              id="standard-basic"
+              label={t('column.description.label')}
+              placeholder={t('column.description.placeholder')}
+              variant="standard"
+              required
+              onChange={changeHandler}
+            />
+          </div>
+          <Button id="modal-ct__btn" variant="outlined">
+            {t('column.btn')}
+          </Button>
+        </Box>
+      </Modal>
+    </div>
   );
 };
