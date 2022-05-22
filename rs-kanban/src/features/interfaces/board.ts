@@ -1,11 +1,7 @@
-import { Column } from './../../models/column.type';
+import { Board } from './../../models';
+import { Column } from './../../models';
 
 export interface NewBoardPayload {
-  title: string;
-}
-
-export interface Board {
-  id: string;
   title: string;
 }
 

@@ -1,4 +1,4 @@
-import { Board } from '../../../features/interfaces/board';
+import { Board } from './../../../models/board.type';
 
 export interface BoardCardProps {
   boardData: Board;

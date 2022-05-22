@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&display=swap');
 
 .welcome {
-  height: calc(100vh - 170px);
+  height: calc(100vh - 60px);
   width: 100%;
   background: url('./../../assets/welcome-bg.png'), rgba(0, 0, 0, 0.5);
   background-blend-mode: multiply;
@@ -56,7 +56,7 @@
     display: flex;
     position: relative;
     left: 45%;
-    bottom: 90%;
+    bottom: 80%;
     height: 100vh;
     & > div {
       margin-right: 40px;

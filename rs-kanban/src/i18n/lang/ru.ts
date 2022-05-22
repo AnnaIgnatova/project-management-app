@@ -10,6 +10,7 @@ export const ruLang = {
       cardBtn: 'удалить доску',
       title: 'Все доски',
       board: 'доску',
+      createBoardBtn: 'создать доску',
     },
     boardPage: {
       columnBtn: 'Добавить колонку',
@@ -41,12 +42,17 @@ export const ruLang = {
       },
       button: 'Клик',
     },
+    board: {
+      colBtns: {
+        cancel: 'отмена',
+        submit: 'сохранить',
+      },
+    },
     user: {
       user: 'пользователь',
       userProfile: 'Личный кабинет',
       deleteBtn: 'Удалить аккаунт',
     },
-    board: 'доска',
     notFound: 'не найдено',
   },
   task: {

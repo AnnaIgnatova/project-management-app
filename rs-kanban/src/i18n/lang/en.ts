@@ -10,6 +10,7 @@ export const enLang = {
       cardBtn: 'delete board',
       title: 'All boards',
       board: 'board',
+      createBoardBtn: 'create board',
     },
     boardPage: {
       columnBtn: 'Create column',
@@ -41,12 +42,17 @@ export const enLang = {
       },
       button: 'Click',
     },
+    board: {
+      colBtns: {
+        cancel: 'cancel',
+        submit: 'submit',
+      },
+    },
     user: {
       user: 'user',
       userProfile: 'User profile',
       deleteBtn: 'Delete account',
     },
-    board: 'board',
     notFound: 'not found',
   },
   task: {
