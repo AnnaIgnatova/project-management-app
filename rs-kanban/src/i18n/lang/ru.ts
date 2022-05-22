@@ -91,5 +91,7 @@ export const ruLang = {
     label: 'Новая доска',
     placeholder: 'Введите название доски',
     btn: 'Создать',
+    descrLabel: 'Описание',
+    descrPlaceholder: 'Введите описание',
   },
 };

@@ -13,16 +13,25 @@ export const StickyHeader: React.FC = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [boardName, setBoardName] = useState<string>('');
+  const [boardDescription, setBoardDescription] = useState<string>('');
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setBoardName('');
+    setBoardDescription('');
+  };
 
   const createBoard = () => {
-    dispatch(createNewBoard({ title: boardName }));
+    dispatch(createNewBoard({ title: boardName, description: boardDescription }));
     handleClose();
   };
 
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setBoardName(e.target.value);
+  };
+
+  const handleChangeDescription = (e: ChangeEvent<HTMLInputElement>) => {
+    setBoardDescription(e.target.value);
   };
 
   const { t } = useTranslation();
@@ -37,6 +46,8 @@ export const StickyHeader: React.FC = () => {
   useEffect(() => {
     getBtnHeader();
   }, []);
+
+  const isCreateBtnDisabled = boardName === '' || boardDescription === '';
 
   const getBtnHeader = () => {
     if (isToken) {
@@ -104,10 +115,24 @@ export const StickyHeader: React.FC = () => {
               label={t('modalNewBoard.label')}
               placeholder={t('modalNewBoard.placeholder')}
               variant="standard"
+              error={boardName === ''}
               onChange={handleChangeName}
             />
+            <TextField
+              label={t('modalNewBoard.descrLabel')}
+              placeholder={t('modalNewBoard.descrPlaceholder')}
+              variant="standard"
+              margin="normal"
+              error={boardDescription === ''}
+              onChange={handleChangeDescription}
+            />
           </div>
-          <Button id="modal-cnb__btn" variant="outlined" onClick={createBoard}>
+          <Button
+            id="modal-cnb__btn"
+            variant="outlined"
+            disabled={isCreateBtnDisabled}
+            onClick={createBoard}
+          >
             {t('modalNewBoard.btn')}
           </Button>
         </Box>

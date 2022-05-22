@@ -91,5 +91,7 @@ export const enLang = {
     label: 'New board',
     placeholder: 'Enter title new board',
     btn: 'Create',
+    descrLabel: 'Description',
+    descrPlaceholder: 'Enter description',
   },
 };

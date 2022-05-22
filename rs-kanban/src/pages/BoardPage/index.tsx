@@ -13,7 +13,12 @@ export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
 
   const { boardId, columns } = useAppSelector((state) => state.boardsReducer);
-  const [boardByIdInfo, setBoardByIdInfo] = useState<BoardById>({ id: '', title: '', columns: [] });
+  const [boardByIdInfo, setBoardByIdInfo] = useState<BoardById>({
+    id: '',
+    title: '',
+    description: '',
+    columns: [],
+  });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
