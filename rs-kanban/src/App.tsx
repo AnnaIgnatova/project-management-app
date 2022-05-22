@@ -14,24 +14,20 @@ import { useAppSelector } from './store';
 const AppRouter = () => {
   const isToken = useAppSelector((state) => state.tokenReduser.isToken);
 
-  if (isToken) {
-    return (
-      <>
-        <RoutesWrapper>
-          <Route path={Routes.welcome} element={<Layout />}>
-            <Route index element={<Welcome />} />
-            <Route path={Routes.main} element={<Main />} />
-            <Route path={Routes.user} element={<User />} />
-            <Route path={Routes.board} element={<BoardPage />} />
-            <Route path={Routes.editProfile} element={<EditProfile />} />
-            <Route path="*" element={<Navigate to={Routes.main} />} />
-          </Route>
-        </RoutesWrapper>
-      </>
-    );
-  }
-
-  return (
+  return isToken ? (
+    <>
+      <RoutesWrapper>
+        <Route path={Routes.welcome} element={<Layout />}>
+          <Route index element={<Welcome />} />
+          <Route path={Routes.main} element={<Main />} />
+          <Route path={Routes.user} element={<User />} />
+          <Route path={Routes.board} element={<BoardPage />} />
+          <Route path={Routes.editProfile} element={<EditProfile />} />
+          <Route path="*" element={<Navigate to={Routes.main} />} />
+        </Route>
+      </RoutesWrapper>
+    </>
+  ) : (
     <>
       <RoutesWrapper>
         <Route path={Routes.welcome} element={<Layout />}>
