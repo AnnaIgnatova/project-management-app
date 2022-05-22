@@ -2,10 +2,13 @@ import { CardTask } from '../components/cardTask/interface/cardTaskProps';
 
 export interface ColumnRequest {
   title: string;
+}
+
+export interface ColumnUpdate extends ColumnRequest {
   order: string;
 }
 
-export interface Column extends ColumnRequest {
+export interface Column extends ColumnUpdate {
   id: string;
 }
 

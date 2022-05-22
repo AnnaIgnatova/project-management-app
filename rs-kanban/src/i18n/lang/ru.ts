@@ -18,6 +18,9 @@ export const ruLang = {
     boardPage: {
       columnBtn: 'Добавить колонку',
       taskBtn: 'Добавить задачу',
+      createNewColumn: 'Добавить новую колонку',
+      newColumn: 'Новая колонка',
+      newColumnTitle: 'Введите название новой колонки',
     },
     login: {
       title: 'Войти',
@@ -69,6 +72,7 @@ export const ruLang = {
     delete: 'Удалить',
     change: 'Изменить',
     saveChanges: 'Сохранить изменения',
+    create: 'Создать',
   },
   column: {
     titleModal: 'Создать новую задачу',

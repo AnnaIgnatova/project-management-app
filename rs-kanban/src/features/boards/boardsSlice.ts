@@ -91,9 +91,13 @@ export const boardsSlice = createSlice({
     addCols: (state, action) => {
       state.columns = action.payload;
     },
+    createColumnReducer: (state, action) => {
+      state.columns.push(action.payload);
+    },
   },
 });
 
-export const { addBoardId, addBoard, addCols, getBoards, deleteBoardById } = boardsSlice.actions;
+export const { addBoardId, addBoard, addCols, getBoards, deleteBoardById, createColumnReducer } =
+  boardsSlice.actions;
 
 export default boardsSlice.reducer;

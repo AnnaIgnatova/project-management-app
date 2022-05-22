@@ -18,6 +18,9 @@ export const enLang = {
     boardPage: {
       columnBtn: 'Create column',
       taskBtn: 'Create task',
+      createNewColumn: 'Create new column',
+      newColumn: 'New column',
+      newColumnTitle: 'Enter title new column',
     },
     login: {
       title: 'Login',
@@ -69,6 +72,7 @@ export const enLang = {
     delete: 'Delete',
     change: 'Change',
     saveChanges: 'Save Changes',
+    create: 'Create',
   },
   column: {
     titleModal: 'Create new task',

@@ -1,7 +1,7 @@
 import { APIService } from '../../services';
-import { Column, ColumnRequest } from '../../models';
+import { Column, ColumnUpdate } from '../../models';
 
-export const updateColumn = (boardId: string, columnId: string, body: ColumnRequest) => {
+export const updateColumn = (boardId: string, columnId: string, body: ColumnUpdate) => {
   const url = `/boards/${boardId}/columns/${columnId}`;
-  return APIService.put<Column, ColumnRequest>(url, body);
+  return APIService.put<Column, ColumnUpdate>(url, body);
 };
