@@ -12,7 +12,7 @@ import { Task } from './../../models/task.type';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const dispatch = useAppDispatch();
-  const { id, title, order } = props;
+  const { id, title, order } = props.value;
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isEditTitle, setEditTitle] = useState<boolean>(false);

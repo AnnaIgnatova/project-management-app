@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { getBoardById } from '../../api/boards';
 import { BoardById } from '../../models/board.type';
 import { getColsData } from '../../features/boards/boardsSlice';
-import { ColumnProps } from './../../components/column/interfaces/columnProps';
+import { ColumnData } from './../../components/column/interfaces/columnProps';
 import './style.scss';
 
 export const BoardPage: React.FC = () => {
@@ -49,8 +49,8 @@ export const BoardPage: React.FC = () => {
             columnGap: '20px',
           }}
         >
-          {columns.map((column: ColumnProps) => (
-            <Column key={column.id} id={column.id} title={column.title} order={column.order} />
+          {columns.map((column: ColumnData) => (
+            <Column key={column.id} value={column} />
           ))}
         </Box>
       </Box>
