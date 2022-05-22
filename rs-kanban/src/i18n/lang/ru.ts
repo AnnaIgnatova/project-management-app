@@ -3,6 +3,9 @@ export const ruLang = {
     btnMain: 'Перейти на главную страницу',
     btnLogin: 'Войти',
     btnSignUp: 'Зарегистрироваться',
+    btnSignOut: 'Выйти',
+    btnNewBoard: 'Создать новую доску',
+    btnEditProfile: 'Редактировать профиль',
   },
   pages: {
     welcome: 'начальная',
@@ -77,6 +80,12 @@ export const ruLang = {
       label: 'Описание',
       placeholder: 'Введите описание задачи',
     },
+    btn: 'Создать',
+  },
+  modalNewBoard: {
+    title: 'Создать новую доску',
+    label: 'Новая доска',
+    placeholder: 'Введите название доски',
     btn: 'Создать',
   },
 };
