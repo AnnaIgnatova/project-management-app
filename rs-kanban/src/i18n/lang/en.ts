@@ -67,4 +67,16 @@ export const enLang = {
     change: 'Change',
     saveChanges: 'Save Changes',
   },
+  column: {
+    titleModal: 'Create new task',
+    title: {
+      label: 'Title',
+      placeholder: 'Enter title new task',
+    },
+    description: {
+      label: 'Description',
+      placeholder: '"Enter description new task',
+    },
+    btn: 'Create',
+  },
 };

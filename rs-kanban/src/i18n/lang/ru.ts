@@ -67,4 +67,16 @@ export const ruLang = {
     change: 'Изменить',
     saveChanges: 'Сохранить изменения',
   },
+  column: {
+    titleModal: 'Создать новую задачу',
+    title: {
+      label: 'Заголовок',
+      placeholder: 'Введите заголовок задачи',
+    },
+    description: {
+      label: 'Описание',
+      placeholder: 'Введите описание задачи',
+    },
+    btn: 'Создать',
+  },
 };
