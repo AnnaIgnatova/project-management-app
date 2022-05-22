@@ -41,12 +41,17 @@ export const ruLang = {
       },
       button: 'Клик',
     },
+    board: {
+      colBtns: {
+        cancel: 'отмена',
+        submit: 'сохранить',
+      },
+    },
     user: {
       user: 'пользователь',
       userProfile: 'Личный кабинет',
       deleteBtn: 'Удалить аккаунт',
     },
-    board: 'доска',
     notFound: 'не найдено',
   },
   task: {

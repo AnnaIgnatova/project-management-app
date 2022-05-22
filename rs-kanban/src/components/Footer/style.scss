@@ -1,9 +1,17 @@
-.container-footer{
-   display: flex;
-   justify-content: space-between;
-   padding: 15px 40px;
-   height: 40px;
-   background-color: #E1E2FF;
+footer{
+   position: relative;
+   min-height: 100%;
+   
+  .container-footer{
+     position: absolute;
+     left: 0;
+     bottom: 0;
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+     padding: 15px 40px;
+     height: 70px;
+     background-color: #E1E2FF;
 
    .rss{
       &-img{
@@ -28,4 +36,6 @@
       font-size: 30px;
       line-height: 40px;
    }
+} 
 }
+
