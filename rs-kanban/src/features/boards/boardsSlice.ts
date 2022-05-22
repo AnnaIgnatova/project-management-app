@@ -1,17 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { UpdateColTitleProps } from 'features/interfaces/updateTitle';
 import { getAllBoards } from './../../api/boards';
-import { getAllColumns } from './../../api/columns';
+import { getAllColumns, updateColumn } from './../../api/columns';
 
 const initialState = {
   boardId: '',
   boards: [],
   columns: [],
 };
-
-export interface Board {
-  id: string;
-  title: string;
-}
 
 export const getBoardsData = createAsyncThunk(
   'boards/getBoardsData',
@@ -31,6 +27,20 @@ export const getColsData = createAsyncThunk(
     try {
       const response = await getAllColumns(payload);
 
+      dispatch(addCols(response));
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const updateColumnTitle = createAsyncThunk(
+  'boards/updateColumnTitle',
+  async (payload: UpdateColTitleProps, { dispatch, rejectWithValue }) => {
+    try {
+      const { boardId, id, title, order } = payload;
+      await updateColumn(boardId, id, { title, order });
+      const response = await getAllColumns(boardId);
       dispatch(addCols(response));
     } catch (err) {
       return rejectWithValue(err);

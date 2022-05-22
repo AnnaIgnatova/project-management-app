@@ -5,25 +5,22 @@ import { Box, Button, Container, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { getBoardById } from '../../api/boards';
 import { BoardById } from '../../models/board.type';
-import { addCols } from '../../features/boards/boardsSlice';
+import { getColsData } from '../../features/boards/boardsSlice';
+import { ColumnData } from './../../components/column/interfaces/columnProps';
 import './style.scss';
 
 export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
-
-  const { boardId } = useAppSelector((state) => state.boardsReducer);
+  const { boardId, columns } = useAppSelector((state) => state.boardsReducer);
   const [boardByIdInfo, setBoardByIdInfo] = useState<BoardById>({ id: '', title: '', columns: [] });
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getBoardById(boardId).then((response) => {
-      setBoardByIdInfo(response);
-      dispatch(addCols(response.columns));
-    });
+    getBoardById(boardId).then(setBoardByIdInfo);
+    dispatch(getColsData(boardId));
   }, []);
 
-  const { title, columns } = boardByIdInfo;
+  const { title } = boardByIdInfo;
 
   return (
     <Container maxWidth="xl">
@@ -52,7 +49,7 @@ export const BoardPage: React.FC = () => {
             columnGap: '20px',
           }}
         >
-          {columns.map((column) => (
+          {columns.map((column: ColumnData) => (
             <Column key={column.id} value={column} />
           ))}
         </Box>
