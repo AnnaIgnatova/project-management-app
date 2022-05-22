@@ -82,4 +82,10 @@ export const enLang = {
     },
     btn: 'Create',
   },
+  modalNewBoard: {
+    title: 'Create new board',
+    label: 'New board',
+    placeholder: 'Enter title new board',
+    btn: 'Create',
+  },
 };

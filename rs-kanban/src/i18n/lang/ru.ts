@@ -82,4 +82,10 @@ export const ruLang = {
     },
     btn: 'Создать',
   },
+  modalNewBoard: {
+    title: 'Создать новую доску',
+    label: 'Новая доска',
+    placeholder: 'Введите название доски',
+    btn: 'Создать',
+  },
 };
