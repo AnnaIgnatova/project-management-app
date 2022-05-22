@@ -7,8 +7,9 @@ export const ruLang = {
   pages: {
     welcome: 'начальная',
     main: {
-      cardBtn: 'перейти к доске',
+      cardBtn: 'удалить доску',
       title: 'Все доски',
+      board: 'доску',
       createBoardBtn: 'создать доску',
     },
     boardPage: {

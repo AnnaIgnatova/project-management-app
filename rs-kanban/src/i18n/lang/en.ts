@@ -7,8 +7,9 @@ export const enLang = {
   pages: {
     welcome: 'welcome',
     main: {
-      cardBtn: 'open board',
+      cardBtn: 'delete board',
       title: 'All boards',
+      board: 'board',
       createBoardBtn: 'create board',
     },
     boardPage: {

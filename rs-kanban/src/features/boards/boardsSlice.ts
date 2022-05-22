@@ -1,11 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createBoard, getAllBoards } from './../../api/boards';
-import { getAllColumns } from './../../api/columns';
-import { BoardsState, NewBoardPayload } from 'features/interfaces/board';
+import { createBoard, getAllBoards, deleteBoard } from './../../api/boards';
+import { BoardsState, NewBoardPayload } from './../interfaces/board';
 import { UpdateColTitleProps } from 'features/interfaces/updateTitle';
-import { getAllBoards } from './../../api/boards';
 import { getAllColumns, updateColumn } from './../../api/columns';
-
 
 const initialState: BoardsState = {
   boardId: '',
@@ -31,6 +28,18 @@ export const createNewBoard = createAsyncThunk(
     try {
       const board = await createBoard(payload);
       dispatch(addBoard(board));
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const deleteBoardCard = createAsyncThunk(
+  'boards/deleteBoardCard',
+  async (payload: string, { dispatch, rejectWithValue }) => {
+    try {
+      await deleteBoard(payload);
+      dispatch(deleteBoardById(payload));
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -76,12 +85,15 @@ export const boardsSlice = createSlice({
     addBoard: (state, action) => {
       state.boards = [...state.boards, action.payload];
     },
+    deleteBoardById: (state, action) => {
+      state.boards = state.boards.filter(({ id }) => id !== action.payload);
+    },
     addCols: (state, action) => {
       state.columns = action.payload;
     },
   },
 });
 
-export const { addBoardId, addBoard, addCols, getBoards } = boardsSlice.actions;
+export const { addBoardId, addBoard, addCols, getBoards, deleteBoardById } = boardsSlice.actions;
 
 export default boardsSlice.reducer;
