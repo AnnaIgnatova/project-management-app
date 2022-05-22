@@ -19,8 +19,7 @@ export const Header: React.FC = () => {
   };
 
   const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.value;
-    setBoardName(name);
+    setBoardName(e.target.value);
   };
 
   return (
