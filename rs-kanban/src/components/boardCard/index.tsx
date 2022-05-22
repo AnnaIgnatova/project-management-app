@@ -1,58 +1,69 @@
 import './style.scss';
 import { Card, CardActions, CardContent, Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../store';
 import { addBoardId } from '../../features/boards/boardsSlice';
 import { BoardCardProps } from './interfaces/boardProps';
-import { getRandomNum } from '../../utils/getRandomNum';
+import { MouseEvent, useEffect, useState } from 'react';
+import { getRandomColor } from './../../utils/getRandomColor';
 
 export const BoardCard: React.FC<BoardCardProps> = (props) => {
   const { id, title } = props.boardData;
+  const { setOpenModal, setBoardId } = props;
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [bgColor, setBgColor] = useState<string>('');
+
+  useEffect(() => {
+    setBgColor(getRandomColor());
+  }, []);
 
   const saveBoardId = () => {
     dispatch(addBoardId(id));
   };
 
-  const getRandomColor = () => {
-    const red = getRandomNum();
-    const green = getRandomNum();
-    const blue = getRandomNum();
-    return `rgba(${red}, ${green}, ${blue}, 0.2)`;
+  const cardHandler = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('board-card-btn')) {
+      setOpenModal(true);
+      setBoardId(id);
+    } else {
+      saveBoardId();
+      navigate('/board');
+    }
   };
 
   return (
-    <Card
-      variant="outlined"
-      sx={{
-        width: 375,
-        mb: 5,
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexDirection: 'column',
-        backgroundColor: getRandomColor(),
-      }}
-    >
-      <CardContent>
-        <AssignmentIcon />
-        <Typography
-          variant="h3"
-          component="div"
-          fontSize={20}
-          textTransform="uppercase"
-          marginTop={2}
-        >
-          {title}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Link to="/board" className="board-card-btn" onClick={saveBoardId}>
-          <Button size="large">{t('pages.main.cardBtn')}</Button>
-        </Link>
-      </CardActions>
-    </Card>
+    <>
+      <Card
+        className="board-card"
+        variant="outlined"
+        sx={{
+          backgroundColor: bgColor,
+        }}
+        onClick={cardHandler}
+      >
+        <CardContent>
+          <AssignmentIcon />
+          <Typography
+            variant="h3"
+            component="div"
+            fontSize={20}
+            textTransform="uppercase"
+            marginTop={2}
+          >
+            {title}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" className="board-card-btn" variant="outlined" color="error">
+            {t('pages.main.cardBtn')}
+          </Button>
+        </CardActions>
+      </Card>
+    </>
   );
 };

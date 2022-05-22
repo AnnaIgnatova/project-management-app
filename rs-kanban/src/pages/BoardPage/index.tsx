@@ -10,10 +10,8 @@ import './style.scss';
 
 export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
-
   const { boardId } = useAppSelector((state) => state.boardsReducer);
   const [boardByIdInfo, setBoardByIdInfo] = useState<BoardById>({ id: '', title: '', columns: [] });
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
