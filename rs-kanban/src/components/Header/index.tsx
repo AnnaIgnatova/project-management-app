@@ -1,13 +1,26 @@
 import { Modal, Box, TextField, Button } from '@mui/material';
-import { useState } from 'react';
+import { createNewBoard } from './../../features/boards/boardsSlice';
+import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Routes } from '../../models/routes';
+import { useAppDispatch } from './../../store';
 import './style.scss';
 
 export const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
+  const [boardName, setBoardName] = useState<string>('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const createBoard = () => {
+    dispatch(createNewBoard({ title: boardName }));
+    handleClose();
+  };
+
+  const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+    setBoardName(e.target.value);
+  };
 
   return (
     <div className="container-header">
@@ -34,9 +47,10 @@ export const Header: React.FC = () => {
               label="New board"
               placeholder="Enter title new board"
               variant="standard"
+              onChange={handleChangeName}
             />
           </div>
-          <Button id="modal-cnb__btn" variant="outlined">
+          <Button id="modal-cnb__btn" variant="outlined" onClick={createBoard}>
             Create
           </Button>
         </Box>

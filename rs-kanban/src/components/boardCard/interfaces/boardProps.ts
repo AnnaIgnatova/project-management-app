@@ -1,7 +1,5 @@
-export interface Board {
-  id: string;
-  title: string;
-}
+import { Board } from './../../../models/board.type';
+
 export interface BoardCardProps {
   boardData: Board;
 }
