@@ -7,8 +7,16 @@ import { ColumnProps } from './interface/columnProps';
 import './style.scss';
 import { useTranslation } from 'react-i18next';
 import { Task, TaskRequest } from '../../models/task.type';
-import { FormEvent } from './interface/FormEvent';
 import { updateColumnTitle } from '../../features/boards/boardsSlice';
+
+export interface FormEvent {
+  target: TargetForm;
+}
+
+interface TargetForm {
+  name: string;
+  value: string;
+}
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
