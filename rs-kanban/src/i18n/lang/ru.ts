@@ -3,6 +3,9 @@ export const ruLang = {
     btnMain: 'Перейти на главную страницу',
     btnLogin: 'Войти',
     btnSignUp: 'Зарегистрироваться',
+    btnSignOut: 'Выйти',
+    btnNewBoard: 'Создать новую доску',
+    btnEditProfile: 'Редактировать профиль',
   },
   pages: {
     welcome: 'начальная',

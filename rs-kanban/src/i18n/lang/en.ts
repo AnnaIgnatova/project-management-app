@@ -3,6 +3,9 @@ export const enLang = {
     btnMain: 'Go to Main Page',
     btnLogin: 'Login',
     btnSignUp: 'Sign up',
+    btnSignOut: 'Sign out',
+    btnNewBoard: 'Create new board',
+    btnEditProfile: 'Edit Profile',
   },
   pages: {
     welcome: 'welcome',

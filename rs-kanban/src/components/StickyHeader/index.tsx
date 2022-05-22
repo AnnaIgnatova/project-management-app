@@ -33,13 +33,13 @@ export const StickyHeader: React.FC = () => {
       return (
         <>
           <LangSwitcher />
-          <Button variant="contained">Create new board</Button>
+          <Button variant="contained">{t('header.btnNewBoard')}</Button>
 
           <Link to={Routes.editProfile}>
-            <Button variant="contained">Edit Profile</Button>
+            <Button variant="contained">{t('header.btnEditProfile')}</Button>
           </Link>
           <Button variant="contained" color="error" onClick={signOut}>
-            Sign Out
+            {t('header.btnSignOut')}
           </Button>
         </>
       );
