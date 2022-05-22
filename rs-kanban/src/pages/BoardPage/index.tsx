@@ -8,6 +8,8 @@ import { BoardById } from '../../models/board.type';
 import { getColsData, createColumnReducer } from '../../features/boards/boardsSlice';
 import './style.scss';
 import { createColumn } from '../../api/columns/create-column.api';
+import { NavLink } from 'react-router-dom';
+import { Routes } from '../../models/routes';
 
 export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
@@ -53,13 +55,19 @@ export const BoardPage: React.FC = () => {
           sx={{
             height: '70px',
             display: 'flex',
-            justifyContent: 'space-around',
+            justifyContent: 'center',
             alignItems: 'center',
+            gap: '50px',
           }}
         >
           <Button variant="contained" sx={{ height: '30px' }} onClick={handleOpen}>
             {t('pages.boardPage.columnBtn')}
           </Button>
+          <NavLink to={Routes.main}>
+            <Button variant="outlined" sx={{ height: '30px' }}>
+              {t('header.btnMain')}
+            </Button>
+          </NavLink>
         </Box>
         <Box sx={{ display: 'flex', flex: '1', overflowX: 'auto', height: 'calc(100vh - 262px)' }}>
           <Box
