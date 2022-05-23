@@ -19,7 +19,6 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
 
   const deteleTask = () => {
     deleteTask(boardId, columnId, id);
-    location.reload();
   };
 
   const dispatch = useAppDispatch();
