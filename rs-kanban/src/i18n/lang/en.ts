@@ -67,6 +67,8 @@ export const enLang = {
     responsible: 'Responsible',
     files: 'Files',
     btnDelete: 'Delete task',
+    newTitle: 'Enter new title',
+    newDescription: 'Enter new Description',
   },
   buttons: {
     cancel: 'Cancel',

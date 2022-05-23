@@ -1,3 +1,6 @@
+import { Dispatch, SetStateAction } from 'react';
+import { Task } from '../../../models/task.type';
+
 export interface ModalWindowProps {
   open: boolean;
   onClose: () => void;

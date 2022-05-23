@@ -67,6 +67,8 @@ export const ruLang = {
     responsible: 'Ответственный',
     files: 'Файлы',
     btnDelete: 'Удалить задачу',
+    newTitle: 'Введите новый заголовок',
+    newDescription: 'Введите новое описание',
   },
   buttons: {
     cancel: 'Отмена',
