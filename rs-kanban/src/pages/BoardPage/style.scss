@@ -1,5 +1,9 @@
-a {
-  text-decoration: none;
+.boardPage {
+  height: calc(100vh - 150px);
+  margin-top: 20px;
+  a {
+    text-decoration: none;
+  }
 }
 
 .modal-cnc {

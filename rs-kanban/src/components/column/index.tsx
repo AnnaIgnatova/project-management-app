@@ -53,14 +53,14 @@ export const Column: React.FC<ColumnProps> = (props) => {
   };
 
   const createNewTask = () => {
-    handleOpen();
+    handleClose();
     createTask(boardId, id, forms);
-    location.reload();
+    // location.reload();
   };
 
   return (
     <div>
-      <Card sx={{ backgroundColor: '#f5f5f5', width: 400, overflowY: 'auto' }}>
+      <Card sx={{ backgroundColor: '#f5f5f5', width: 400 }}>
         <CardContent>
           {isEditTitle ? (
             <Stack spacing={2} direction="row" alignItems="center" marginBottom={5}>
@@ -91,14 +91,14 @@ export const Column: React.FC<ColumnProps> = (props) => {
             </Typography>
           )}
 
+          <Button
+            variant="contained"
+            sx={{ height: '30px', marginLeft: '90px', marginBottom: '30px' }}
+            onClick={handleOpen}
+          >
+            {t('pages.boardPage.taskBtn')}
+          </Button>
           <div className="column-tasks">
-            <Button
-              variant="contained"
-              sx={{ height: '30px', marginLeft: '90px', marginBottom: '10px' }}
-              onClick={createNewTask}
-            >
-              {t('pages.boardPage.taskBtn')}
-            </Button>
             {tasks.map((task: Task) => (
               <CardTask key={task.id} value={task} />
             ))}
@@ -135,7 +135,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               onChange={changeHandler}
             />
           </div>
-          <Button id="modal-ct__btn" variant="outlined">
+          <Button id="modal-ct__btn" variant="outlined" onClick={createNewTask}>
             {t('column.btn')}
           </Button>
         </Box>

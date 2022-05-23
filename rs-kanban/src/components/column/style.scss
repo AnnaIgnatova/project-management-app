@@ -3,29 +3,34 @@
   align-items: center;
   margin-bottom: 50px;
 }
-.modal-ct{
-   position: absolute;
-   top: 30vh;
-   left: 45vw;
-   width: 300px;
-   padding: 30px;
-   background-color: #fff;
-   &__text{
-      text-align: center;
-   }
-   &__input{
-      margin: 20px auto;
-      text-align: center;
-   }
-   #modal-ct__btn{
-      display: block ;
-      margin: 0 auto;
-      border: 3px solid #E1E2FF;
+.modal-ct {
+  position: absolute;
+  top: 30vh;
+  left: 45vw;
+  width: 300px;
+  padding: 30px;
+  background-color: #fff;
+  &__text {
+    text-align: center;
+  }
+  &__input {
+    margin: 20px auto;
+    text-align: center;
+  }
+  #modal-ct__btn {
+    display: block;
+    margin: 0 auto;
+    border: 3px solid #e1e2ff;
 
-      font-size: 22px;
-      transition: all 0.5s ease-in-out;
-      &:hover{
-         border-radius: 50px;
-      }
-   }
+    font-size: 22px;
+    transition: all 0.5s ease-in-out;
+    &:hover {
+      border-radius: 50px;
+    }
+  }
+}
+
+.column-tasks {
+  max-height: calc(100vh - 409px);
+  overflow-y: auto;
 }

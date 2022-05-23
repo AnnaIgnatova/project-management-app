@@ -47,8 +47,8 @@ export const BoardPage: React.FC = () => {
 
   return (
     <>
-      <Container maxWidth="xl">
-        <Typography variant="h4" component="h1" align="center" sx={{ mt: '20px' }}>
+      <Container maxWidth="xl" className="boardPage">
+        <Typography variant="h4" component="h1" align="center" sx={{ height: '40px' }}>
           {title}
         </Typography>
         <Box
@@ -74,6 +74,7 @@ export const BoardPage: React.FC = () => {
             sx={{
               display: 'flex',
               columnGap: '20px',
+              overflowY: 'hidden',
             }}
           >
             {columns.map((column) => (
