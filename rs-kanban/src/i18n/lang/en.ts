@@ -18,6 +18,8 @@ export const enLang = {
     boardPage: {
       columnBtn: 'Create column',
       taskBtn: 'Create task',
+      deleteColumnBtn: 'delete column',
+      column: 'column',
       createNewColumn: 'Create new column',
       newColumn: 'New column',
       newColumnTitle: 'Enter title new column',

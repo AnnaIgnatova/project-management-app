@@ -18,6 +18,8 @@ export const ruLang = {
     boardPage: {
       columnBtn: 'Добавить колонку',
       taskBtn: 'Добавить задачу',
+      deleteColumnBtn: 'удалить колонку',
+      column: 'колонку',
       createNewColumn: 'Добавить новую колонку',
       newColumn: 'Новая колонка',
       newColumnTitle: 'Введите название новой колонки',

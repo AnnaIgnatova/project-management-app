@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createBoard, getAllBoards, deleteBoard } from './../../api/boards';
 import { BoardsState, NewBoardPayload } from './../interfaces/board';
-import { UpdateColTitleProps } from 'features/interfaces/updateTitle';
-import { getAllColumns, updateColumn } from './../../api/columns';
+import { UpdateColTitleProps } from './../interfaces/updateTitle';
+import { deleteColumn, getAllColumns, updateColumn } from './../../api/columns';
+import { deleteColumnProps } from './../interfaces/deleteColumn';
 
 const initialState: BoardsState = {
   boardId: '',
@@ -51,7 +52,7 @@ export const getColsData = createAsyncThunk(
   async (payload: string, { dispatch, rejectWithValue }) => {
     try {
       const response = await getAllColumns(payload);
-      dispatch(addCols(response));
+      dispatch(getColumns(response));
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -65,7 +66,20 @@ export const updateColumnTitle = createAsyncThunk(
       const { boardId, id, title, order } = payload;
       await updateColumn(boardId, id, { title, order });
       const response = await getAllColumns(boardId);
-      dispatch(addCols(response));
+      dispatch(getColumns(response));
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const deleteColumnCard = createAsyncThunk(
+  'boards/deleteColumnCard',
+  async (payload: deleteColumnProps, { dispatch, rejectWithValue }) => {
+    try {
+      const { boardId, id } = payload;
+      await deleteColumn(boardId, id);
+      dispatch(deleteColumnById(id));
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -83,13 +97,16 @@ export const boardsSlice = createSlice({
       state.boardId = action.payload;
     },
     addBoard: (state, action) => {
-      state.boards = [...state.boards, action.payload];
+      state.boards.push(action.payload);
     },
     deleteBoardById: (state, action) => {
       state.boards = state.boards.filter(({ id }) => id !== action.payload);
     },
-    addCols: (state, action) => {
+    getColumns: (state, action) => {
       state.columns = action.payload;
+    },
+    deleteColumnById: (state, action) => {
+      state.columns = state.columns.filter(({ id }) => id !== action.payload);
     },
     createColumnReducer: (state, action) => {
       state.columns.push(action.payload);
@@ -97,7 +114,7 @@ export const boardsSlice = createSlice({
   },
 });
 
-export const { addBoardId, addBoard, addCols, getBoards, deleteBoardById, createColumnReducer } =
+export const { addBoardId, addBoard, addCols, getBoards, deleteBoardById, createColumnReducer, deleteColumnById } =
   boardsSlice.actions;
 
 export default boardsSlice.reducer;
