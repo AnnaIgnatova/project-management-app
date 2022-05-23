@@ -10,6 +10,7 @@ import './style.scss';
 import { createColumn } from '../../api/columns/create-column.api';
 import { NavLink } from 'react-router-dom';
 import { Routes } from '../../models/routes';
+import { getBoard } from '../../features/board/boardSlice';
 
 export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
@@ -25,6 +26,9 @@ export const BoardPage: React.FC = () => {
 
   useEffect(() => {
     getBoardById(boardId).then(setBoardByIdInfo);
+    getBoardById(boardId).then((data) => {
+      dispatch(getBoard(data));
+    });
     dispatch(getColsData(boardId));
   }, []);
 
