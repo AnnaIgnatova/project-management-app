@@ -56,7 +56,6 @@ export const Column: React.FC<ColumnProps> = (props) => {
   const createNewTask = () => {
     handleClose();
     createTask(boardId, id, forms);
-    // location.reload();
   };
 
   return (
@@ -100,7 +99,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
             {t('pages.boardPage.taskBtn')}
           </Button>
           <div className="column-tasks">
-            {tasks.length > 0 ? (
+            {tasks.length ? (
               tasks.map((task: Task) => <CardTask key={task.id} value={task} />)
             ) : (
               <AddCardIcon fontSize="large" color="primary" sx={{ ml: '166px' }} />
