@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Task } from '../../../models/task.type';
 export interface CardTaskProps {
   value: Task;

@@ -16,15 +16,10 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 
   const handleClose = () => setOpenModal(false);
 
-  const closeModal = () => {
-    deleteFn();
-    setOpenModal(false);
-  };
-
   return (
     <Modal
       open={open}
-      onClose={handleClose}
+      onClose={deleteFn}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
