@@ -71,7 +71,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
         setOpenModal={setModalConfirmatioOpen}
         deleteFn={deleteColumn}
       />
-      <Card sx={{ backgroundColor: '#f5f5f5', width: 400, overflowY: 'auto' }}>
+      <Card sx={{ backgroundColor: '#f5f5f5', width: 400 }}>
         <CardContent>
           {isEditTitle ? (
             <Stack spacing={2} direction="row" alignItems="center" marginBottom={2}>

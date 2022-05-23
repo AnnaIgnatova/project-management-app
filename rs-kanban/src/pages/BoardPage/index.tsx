@@ -74,7 +74,6 @@ export const BoardPage: React.FC = () => {
             sx={{
               display: 'flex',
               columnGap: '20px',
-              overflowY: 'hidden',
             }}
           >
             {columns.map((column) => (
