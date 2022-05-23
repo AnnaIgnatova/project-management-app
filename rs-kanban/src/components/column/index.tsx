@@ -100,13 +100,6 @@ export const Column: React.FC<ColumnProps> = (props) => {
             </Typography>
           )}
 
-          <Button
-            variant="contained"
-            sx={{ height: '30px', marginLeft: '118px', marginBottom: '30px' }}
-            onClick={handleOpen}
-          >
-            {t('pages.boardPage.taskBtn')}
-          </Button>
           <div className="column-tasks">
             <Stack
               spacing={2}
@@ -115,7 +108,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               justifyContent="center"
               marginBottom={4}
             >
-              <Button variant="contained" onClick={createNewTask}>
+              <Button variant="contained" onClick={handleOpen}>
                 {t('pages.boardPage.taskBtn')}
               </Button>
               <Button

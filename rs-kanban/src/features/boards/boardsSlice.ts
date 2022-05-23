@@ -114,7 +114,14 @@ export const boardsSlice = createSlice({
   },
 });
 
-export const { addBoardId, addBoard, addCols, getBoards, deleteBoardById, createColumnReducer, deleteColumnById } =
-  boardsSlice.actions;
+export const {
+  addBoardId,
+  addBoard,
+  getBoards,
+  deleteBoardById,
+  createColumnReducer,
+  deleteColumnById,
+  getColumns,
+} = boardsSlice.actions;
 
 export default boardsSlice.reducer;
