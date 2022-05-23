@@ -3,6 +3,7 @@ import { Column } from './../../models';
 
 export interface NewBoardPayload {
   title: string;
+  description: string;
 }
 
 export interface BoardsState {

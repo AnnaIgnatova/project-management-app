@@ -3,6 +3,9 @@ export const ruLang = {
     btnMain: 'Перейти на главную страницу',
     btnLogin: 'Войти',
     btnSignUp: 'Зарегистрироваться',
+    btnSignOut: 'Выйти',
+    btnNewBoard: 'Создать новую доску',
+    btnEditProfile: 'Редактировать профиль',
   },
   pages: {
     welcome: 'начальная',
@@ -17,6 +20,9 @@ export const ruLang = {
       taskBtn: 'Добавить задачу',
       deleteColumnBtn: 'удалить колонку',
       column: 'колонку',
+      createNewColumn: 'Добавить новую колонку',
+      newColumn: 'Новая колонка',
+      newColumnTitle: 'Введите название новой колонки',
     },
     login: {
       title: 'Войти',
@@ -68,6 +74,7 @@ export const ruLang = {
     delete: 'Удалить',
     change: 'Изменить',
     saveChanges: 'Сохранить изменения',
+    create: 'Создать',
   },
   column: {
     titleModal: 'Создать новую задачу',
@@ -80,5 +87,13 @@ export const ruLang = {
       placeholder: 'Введите описание задачи',
     },
     btn: 'Создать',
+  },
+  modalNewBoard: {
+    title: 'Создать новую доску',
+    label: 'Новая доска',
+    placeholder: 'Введите название доски',
+    btn: 'Создать',
+    descrLabel: 'Описание',
+    descrPlaceholder: 'Введите описание',
   },
 };

@@ -108,10 +108,13 @@ export const boardsSlice = createSlice({
     deleteColumnById: (state, action) => {
       state.columns = state.columns.filter(({ id }) => id !== action.payload);
     },
+    createColumnReducer: (state, action) => {
+      state.columns.push(action.payload);
+    },
   },
 });
 
-export const { addBoardId, addBoard, getColumns, getBoards, deleteBoardById, deleteColumnById } =
+export const { addBoardId, addBoard, addCols, getBoards, deleteBoardById, createColumnReducer, deleteColumnById } =
   boardsSlice.actions;
 
 export default boardsSlice.reducer;

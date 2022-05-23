@@ -3,6 +3,9 @@ export const enLang = {
     btnMain: 'Go to Main Page',
     btnLogin: 'Login',
     btnSignUp: 'Sign up',
+    btnSignOut: 'Sign out',
+    btnNewBoard: 'Create new board',
+    btnEditProfile: 'Edit Profile',
   },
   pages: {
     welcome: 'welcome',
@@ -17,6 +20,9 @@ export const enLang = {
       taskBtn: 'Create task',
       deleteColumnBtn: 'delete column',
       column: 'column',
+      createNewColumn: 'Create new column',
+      newColumn: 'New column',
+      newColumnTitle: 'Enter title new column',
     },
     login: {
       title: 'Login',
@@ -68,6 +74,7 @@ export const enLang = {
     delete: 'Delete',
     change: 'Change',
     saveChanges: 'Save Changes',
+    create: 'Create',
   },
   column: {
     titleModal: 'Create new task',
@@ -80,5 +87,13 @@ export const enLang = {
       placeholder: '"Enter description new task',
     },
     btn: 'Create',
+  },
+  modalNewBoard: {
+    title: 'Create new board',
+    label: 'New board',
+    placeholder: 'Enter title new board',
+    btn: 'Create',
+    descrLabel: 'Description',
+    descrPlaceholder: 'Enter description',
   },
 };

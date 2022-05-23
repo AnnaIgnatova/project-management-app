@@ -10,6 +10,7 @@ import { Task, TaskRequest } from '../../models/task.type';
 import { deleteColumnCard, updateColumnTitle } from '../../features/boards/boardsSlice';
 import { FormEvent } from './interface/FormEvent';
 import { ConfirmationModal } from './../ConfirmationModal';
+import AddCardIcon from '@mui/icons-material/AddCard';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
@@ -54,9 +55,8 @@ export const Column: React.FC<ColumnProps> = (props) => {
   };
 
   const createNewTask = () => {
-    handleOpen();
+    handleClose();
     createTask(boardId, id, forms);
-    location.reload();
   };
 
   const deleteColumn = () => {
@@ -100,6 +100,13 @@ export const Column: React.FC<ColumnProps> = (props) => {
             </Typography>
           )}
 
+          <Button
+            variant="contained"
+            sx={{ height: '30px', marginLeft: '118px', marginBottom: '30px' }}
+            onClick={handleOpen}
+          >
+            {t('pages.boardPage.taskBtn')}
+          </Button>
           <div className="column-tasks">
             <Stack
               spacing={2}
@@ -121,10 +128,11 @@ export const Column: React.FC<ColumnProps> = (props) => {
                 {t('pages.boardPage.deleteColumnBtn')}
               </Button>
             </Stack>
-
-            {tasks.map((task: Task) => (
-              <CardTask key={task.id} value={task} />
-            ))}
+            {tasks.length ? (
+              tasks.map((task: Task) => <CardTask key={task.id} value={task} />)
+            ) : (
+              <AddCardIcon fontSize="large" color="primary" sx={{ ml: '166px' }} />
+            )}
           </div>
         </CardContent>
       </Card>
@@ -158,7 +166,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               onChange={changeModalHandler}
             />
           </div>
-          <Button id="modal-ct__btn" variant="outlined">
+          <Button id="modal-ct__btn" variant="outlined" onClick={createNewTask}>
             {t('column.btn')}
           </Button>
         </Box>
