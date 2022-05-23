@@ -34,7 +34,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
 
   useEffect(() => {
     getAllTasks(boardId, id).then((data: Task[]) => setTasks(data));
-  }, [tasks]);
+  }, []);
 
   const submitEditTitle = () => {
     setEditTitle(false);
