@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { Task, TaskRequest } from '../../models/task.type';
 import { updateColumnTitle } from '../../features/boards/boardsSlice';
 import { FormEvent } from './interface/FormEvent';
+import AddCardIcon from '@mui/icons-material/AddCard';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
@@ -93,15 +94,17 @@ export const Column: React.FC<ColumnProps> = (props) => {
 
           <Button
             variant="contained"
-            sx={{ height: '30px', marginLeft: '90px', marginBottom: '30px' }}
+            sx={{ height: '30px', marginLeft: '118px', marginBottom: '30px' }}
             onClick={handleOpen}
           >
             {t('pages.boardPage.taskBtn')}
           </Button>
           <div className="column-tasks">
-            {tasks.map((task: Task) => (
-              <CardTask key={task.id} value={task} />
-            ))}
+            {tasks.length > 0 ? (
+              tasks.map((task: Task) => <CardTask key={task.id} value={task} />)
+            ) : (
+              <AddCardIcon fontSize="large" color="primary" sx={{ ml: '166px' }} />
+            )}
           </div>
         </CardContent>
       </Card>
