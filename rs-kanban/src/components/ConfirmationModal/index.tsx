@@ -20,7 +20,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   return (
     <Modal
       open={open}
-      onClose={deleteFn}
+      onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -45,7 +45,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
               variant="contained"
               color="error"
               disabled={deleteMsgText !== 'delete'}
-              onClick={closeModal}
+              onClick={deleteFn}
             >
               {t('buttons.delete')}
             </Button>
