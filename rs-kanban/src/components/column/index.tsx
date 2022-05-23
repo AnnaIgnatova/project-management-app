@@ -7,8 +7,9 @@ import { ColumnProps } from './interface/columnProps';
 import './style.scss';
 import { useTranslation } from 'react-i18next';
 import { Task, TaskRequest } from '../../models/task.type';
-import { updateColumnTitle } from '../../features/boards/boardsSlice';
+import { deleteColumnCard, updateColumnTitle } from '../../features/boards/boardsSlice';
 import { FormEvent } from './interface/FormEvent';
+import { ConfirmationModal } from './../ConfirmationModal';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
@@ -18,9 +19,9 @@ export const Column: React.FC<ColumnProps> = (props) => {
   const userId = useAppSelector((state) => state.userReducer.user.id);
   const [isEditTitle, setEditTitle] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>(title);
-
   const [tasks, setTasks] = useState<Task[]>([]);
   const [open, setOpen] = useState<boolean>(false);
+  const [isModalConfirmationOpen, setModalConfirmatioOpen] = useState<boolean>(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -43,12 +44,12 @@ export const Column: React.FC<ColumnProps> = (props) => {
     setEditTitle(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
     setNewTitle(title);
   };
 
-  const changeHandler = (event: FormEvent) => {
+  const changeModalHandler = (event: FormEvent) => {
     setForm({ ...forms, [event.target.name]: event.target.value });
   };
 
@@ -58,20 +59,28 @@ export const Column: React.FC<ColumnProps> = (props) => {
     location.reload();
   };
 
+  const deleteColumn = () => {
+    dispatch(deleteColumnCard({ boardId, id }));
+  };
+
   return (
-    <div>
+    <>
+      <ConfirmationModal
+        open={isModalConfirmationOpen}
+        thingToBeRemoved={t('pages.boardPage.column')}
+        setOpenModal={setModalConfirmatioOpen}
+        deleteFn={deleteColumn}
+      />
       <Card sx={{ backgroundColor: '#f5f5f5', width: 400, overflowY: 'auto' }}>
         <CardContent>
           {isEditTitle ? (
-            <Stack spacing={2} direction="row" alignItems="center" marginBottom={5}>
+            <Stack spacing={2} direction="row" alignItems="center" marginBottom={2}>
               <TextField
-                id="outlined-basic"
                 label={title}
-                variant="outlined"
+                variant="standard"
                 sx={{ fontSize: 18, display: 'block', height: 50, textTransform: 'uppercase' }}
-                onChange={handleChange}
+                onChange={changeTitleHandler}
               />
-
               <Button variant="contained" onClick={submitEditTitle}>
                 {t('pages.board.colBtns.submit')}
               </Button>
@@ -81,7 +90,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
             </Stack>
           ) : (
             <Typography
-              sx={{ fontSize: 18, display: 'block', height: 50, marginBottom: 5 }}
+              sx={{ fontSize: 18, display: 'block', height: 50, marginBottom: 2 }}
               variant="overline"
               onClick={() => {
                 setEditTitle(true);
@@ -92,13 +101,27 @@ export const Column: React.FC<ColumnProps> = (props) => {
           )}
 
           <div className="column-tasks">
-            <Button
-              variant="contained"
-              sx={{ height: '30px', marginLeft: '90px', marginBottom: '10px' }}
-              onClick={createNewTask}
+            <Stack
+              spacing={2}
+              direction="row"
+              alignItems="center"
+              justifyContent="center"
+              marginBottom={4}
             >
-              {t('pages.boardPage.taskBtn')}
-            </Button>
+              <Button variant="contained" onClick={createNewTask}>
+                {t('pages.boardPage.taskBtn')}
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => {
+                  setModalConfirmatioOpen(true);
+                }}
+              >
+                {t('pages.boardPage.deleteColumnBtn')}
+              </Button>
+            </Stack>
+
             {tasks.map((task: Task) => (
               <CardTask key={task.id} value={task} />
             ))}
@@ -121,7 +144,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               placeholder={t('column.title.placeholder')}
               variant="standard"
               required
-              onChange={changeHandler}
+              onChange={changeModalHandler}
             />
           </div>
           <div className="modal-ct__input">
@@ -132,7 +155,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               placeholder={t('column.description.placeholder')}
               variant="standard"
               required
-              onChange={changeHandler}
+              onChange={changeModalHandler}
             />
           </div>
           <Button id="modal-ct__btn" variant="outlined">
@@ -140,6 +163,6 @@ export const Column: React.FC<ColumnProps> = (props) => {
           </Button>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 };

@@ -15,6 +15,8 @@ export const ruLang = {
     boardPage: {
       columnBtn: 'Добавить колонку',
       taskBtn: 'Добавить задачу',
+      deleteColumnBtn: 'удалить колонку',
+      column: 'колонку',
     },
     login: {
       title: 'Войти',

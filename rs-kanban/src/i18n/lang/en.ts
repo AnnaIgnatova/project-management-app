@@ -15,6 +15,8 @@ export const enLang = {
     boardPage: {
       columnBtn: 'Create column',
       taskBtn: 'Create task',
+      deleteColumnBtn: 'delete column',
+      column: 'column',
     },
     login: {
       title: 'Login',
