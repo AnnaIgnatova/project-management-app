@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { Task, TaskRequest } from '../../models/task.type';
 import { updateColumnTitle } from '../../features/boards/boardsSlice';
 import { FormEvent } from './interface/FormEvent';
+import AddCardIcon from '@mui/icons-material/AddCard';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
@@ -53,14 +54,13 @@ export const Column: React.FC<ColumnProps> = (props) => {
   };
 
   const createNewTask = () => {
-    handleOpen();
+    handleClose();
     createTask(boardId, id, forms);
-    location.reload();
   };
 
   return (
     <div>
-      <Card sx={{ backgroundColor: '#f5f5f5', width: 400, overflowY: 'auto' }}>
+      <Card sx={{ backgroundColor: '#f5f5f5', width: 400 }}>
         <CardContent>
           {isEditTitle ? (
             <Stack spacing={2} direction="row" alignItems="center" marginBottom={5}>
@@ -91,17 +91,19 @@ export const Column: React.FC<ColumnProps> = (props) => {
             </Typography>
           )}
 
+          <Button
+            variant="contained"
+            sx={{ height: '30px', marginLeft: '118px', marginBottom: '30px' }}
+            onClick={handleOpen}
+          >
+            {t('pages.boardPage.taskBtn')}
+          </Button>
           <div className="column-tasks">
-            <Button
-              variant="contained"
-              sx={{ height: '30px', marginLeft: '90px', marginBottom: '10px' }}
-              onClick={createNewTask}
-            >
-              {t('pages.boardPage.taskBtn')}
-            </Button>
-            {tasks.map((task: Task) => (
-              <CardTask key={task.id} value={task} />
-            ))}
+            {tasks.length ? (
+              tasks.map((task: Task) => <CardTask key={task.id} value={task} />)
+            ) : (
+              <AddCardIcon fontSize="large" color="primary" sx={{ ml: '166px' }} />
+            )}
           </div>
         </CardContent>
       </Card>
@@ -135,7 +137,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               onChange={changeHandler}
             />
           </div>
-          <Button id="modal-ct__btn" variant="outlined">
+          <Button id="modal-ct__btn" variant="outlined" onClick={createNewTask}>
             {t('column.btn')}
           </Button>
         </Box>
