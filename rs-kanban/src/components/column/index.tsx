@@ -32,9 +32,11 @@ export const Column: React.FC<ColumnProps> = (props) => {
     userId,
   });
 
+  const updateTaskIndicator = useAppSelector((state) => state.taskReduser.updateTaskIndicator);
+
   useEffect(() => {
     getAllTasks(boardId, id).then((data: Task[]) => setTasks(data));
-  }, []);
+  }, [updateTaskIndicator]);
 
   const submitEditTitle = () => {
     setEditTitle(false);
