@@ -11,6 +11,7 @@ const initialState = {
     columnId: '',
     files: [],
   },
+  updateTaskIndicator: '',
 };
 
 export const taskSlice = createSlice({
@@ -20,8 +21,14 @@ export const taskSlice = createSlice({
     getTask: (state, action) => {
       state.task = { ...action.payload };
     },
+    updateTaskIndicator: (state, action) => {
+      state.updateTaskIndicator = action.payload;
+    },
+    clearTask: (state) => {
+      state.task = initialState.task;
+    },
   },
 });
 
-export const { getTask } = taskSlice.actions;
+export const { getTask, updateTaskIndicator, clearTask } = taskSlice.actions;
 export default taskSlice.reducer;
