@@ -1,28 +1,42 @@
-import { getAllTasks, createTask } from '../../api/tasks';
 import { Box, Button, Card, CardContent, Modal, TextField, Typography, Stack } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from './../../store';
 import { CardTask } from '../../components/cardTask';
-import { ColumnProps } from './interface/columnProps';
+import { ColumnProps, DropItem } from './interface/columnProps';
 import './style.scss';
 import { useTranslation } from 'react-i18next';
 import { Task, TaskRequest } from '../../models/task.type';
-import { deleteColumnCard, updateColumnTitle } from '../../features/boards/boardsSlice';
 import { FormEvent } from './interface/FormEvent';
 import { ConfirmationModal } from './../ConfirmationModal';
 import AddCardIcon from '@mui/icons-material/AddCard';
+import { useDrop } from 'react-dnd';
+import {
+  createColumnTask,
+  deleteBoardColumn,
+  onDropTask,
+  updateColumnTitle,
+} from '../../features/board/boardSlice';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { id, title, order } = props.value;
+  const { id, title, order, tasks } = props.value;
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
+  const { boardTasks, startColumn } = useAppSelector((state) => state.boardReducer);
   const userId = useAppSelector((state) => state.userReducer.user.id);
   const [isEditTitle, setEditTitle] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>(title);
-  const [tasks, setTasks] = useState<Task[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const [isModalConfirmationOpen, setModalConfirmatioOpen] = useState<boolean>(false);
+
+  const [{ isOver, canDrop }, drop] = useDrop({
+    accept: boardTasks.map(({ id }) => id),
+    drop: (item: DropItem) => handleDrop(item),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  });
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -32,9 +46,8 @@ export const Column: React.FC<ColumnProps> = (props) => {
     userId,
   });
 
-  useEffect(() => {
-    getAllTasks(boardId, id).then((data: Task[]) => setTasks(data));
-  }, []);
+  const isActive = isOver && canDrop;
+  const columnBg = isActive ? '#dfdfdf' : '#f5f5f5';
 
   const submitEditTitle = () => {
     setEditTitle(false);
@@ -56,11 +69,24 @@ export const Column: React.FC<ColumnProps> = (props) => {
 
   const createNewTask = () => {
     handleClose();
-    createTask(boardId, id, forms);
+    dispatch(createColumnTask({ boardId, columnId: id, body: forms }));
   };
 
   const deleteColumn = () => {
-    dispatch(deleteColumnCard({ boardId, id }));
+    dispatch(deleteBoardColumn({ boardId, columnId: id }));
+  };
+
+  const handleDrop = (item: DropItem) => {
+    const task: Task = boardTasks.filter(({ id }) => id === item.id)[0];
+    const taskid = task.id;
+    const body = {
+      title: task.title,
+      description: task.description,
+      userId,
+    };
+    dispatch(
+      onDropTask({ boardId, startColumnId: startColumn, endColumnId: id, taskId: taskid, body })
+    );
   };
 
   return (
@@ -71,7 +97,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
         setOpenModal={setModalConfirmatioOpen}
         deleteFn={deleteColumn}
       />
-      <Card sx={{ backgroundColor: '#f5f5f5', width: 400 }}>
+      <Card sx={{ backgroundColor: columnBg, width: 400, userSelect: 'none' }} ref={drop}>
         <CardContent>
           {isEditTitle ? (
             <Stack spacing={2} direction="row" alignItems="center" marginBottom={2}>
@@ -122,7 +148,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               </Button>
             </Stack>
             {tasks.length ? (
-              tasks.map((task: Task) => <CardTask key={task.id} value={task} />)
+              tasks.map((task) => <CardTask key={task.id} value={task} columnId={id} />)
             ) : (
               <AddCardIcon fontSize="large" color="primary" sx={{ ml: '166px' }} />
             )}
