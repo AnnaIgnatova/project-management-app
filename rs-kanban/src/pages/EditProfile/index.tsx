@@ -70,8 +70,9 @@ export const EditProfile: React.FC = () => {
   };
 
   const updateHandler = () => {
-    updateUserAPI(id, userInfo);
-    dispatch(updateUser({ name: userInfo.name, login: userInfo.login }));
+    updateUserAPI(id, userInfo).then(() =>
+      dispatch(updateUser({ name: userInfo.name, login: userInfo.login }))
+    );
     setUserInfo({ ...userInfo, password: '' });
     setValidPassword(true);
   };
@@ -95,14 +96,12 @@ export const EditProfile: React.FC = () => {
 
   const handleOpen = () => setOpenDeleteModal(true);
 
+  const handleSubmit = (e: React.SyntheticEvent) => e.preventDefault();
+
   return (
     <>
       <div className="edit-profile-container">
-        <Box
-          component="form"
-          className="edit-profile-form"
-          onSubmit={(e: React.SyntheticEvent) => e.preventDefault()}
-        >
+        <Box component="form" className="edit-profile-form" onSubmit={handleSubmit}>
           <Typography variant="h5" component="p">
             {!isDisabledInputs && (
               <IconButton sx={{ mr: '20px' }} color="inherit" onClick={goBackFromEdit}>
@@ -115,32 +114,40 @@ export const EditProfile: React.FC = () => {
             required
             disabled={isDisabledInputs}
             name="name"
-            label={isDisabledInputs ? 'Your name' : 'Change your name'}
+            label={
+              isDisabledInputs
+                ? t('pages.user.nameLabelIsDisable')
+                : t('pages.user.nameLabelNoDisable')
+            }
             error={!isDisabledInputs && validName}
-            value={userInfo.name}
+            defaultValue={name}
             onChange={changeHandler}
-            helperText={!isDisabledInputs && 'Enter min 2 symbols'}
+            helperText={!isDisabledInputs && t('pages.user.nameHelperText')}
           />
           <TextField
             required
             disabled={isDisabledInputs}
             name="login"
-            label={isDisabledInputs ? 'Your login' : 'Change your login'}
+            label={
+              isDisabledInputs
+                ? t('pages.user.loginLabelIsDisable')
+                : t('pages.user.loginLabelNoDisable')
+            }
             error={!isDisabledInputs && validLogin}
-            value={userInfo.login}
+            defaultValue={login}
             onChange={changeHandler}
-            helperText={!isDisabledInputs && 'Enter min 3 symbols'}
+            helperText={!isDisabledInputs && t('pages.user.loginHelperText')}
           />
           {!isDisabledInputs && (
             <TextField
               required
               name="password"
-              label={'Change your password'}
+              label={t('pages.user.passwordLabel')}
               type="password"
               error={validPassword}
               value={userInfo.password}
               onChange={changeHandler}
-              helperText="Enter more than 6 characters"
+              helperText={t('pages.user.passwordHelperText')}
             />
           )}
           <Button
