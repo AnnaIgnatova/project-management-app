@@ -10,11 +10,30 @@ import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { HttpStatus, ToastMessage } from './services/api-service/http-status';
 
 instanceAxios.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    toast.error(error.message);
+    switch (error.response?.status) {
+      case HttpStatus.BAD_REQUEST:
+        toast.error(ToastMessage.BAD_REQUEST);
+        break;
+      case HttpStatus.UNAUTHORIZED:
+        toast.error(ToastMessage.UNAUTHORIZED);
+        break;
+      case HttpStatus.NOT_FOUND:
+        toast.error(ToastMessage.NOT_FOUND);
+        break;
+      case HttpStatus.CONFLICT:
+        toast.error(ToastMessage.CONFLICT);
+        break;
+      case HttpStatus.INTERNAL_SERVER_ERROR:
+        toast.error(ToastMessage.INTERNAL_SERVER_ERROR);
+        break;
+      default:
+        break;
+    }
   }
 );
 
@@ -25,8 +44,8 @@ root.render(
       <BrowserRouter>
         <AppRouter />
         <ToastContainer
-          position="top-right"
-          autoClose={3000}
+          position="top-center"
+          autoClose={5000}
           transition={Flip}
           hideProgressBar
           draggable

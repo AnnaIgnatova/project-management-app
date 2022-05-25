@@ -25,8 +25,8 @@ export const BoardPage: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getBoardById(boardId).then(setBoardByIdInfo);
     getBoardById(boardId).then((data) => {
+      setBoardByIdInfo(data);
       dispatch(getBoard(data));
     });
     dispatch(getColsData(boardId));
