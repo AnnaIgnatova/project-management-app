@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import AppRouter from './App';
-import { AxiosError } from 'axios';
 import { instanceAxios } from './services';
 import './i18n';
 import { ToastContainer, toast, Flip } from 'react-toastify';
@@ -13,8 +12,13 @@ import { store } from './store';
 
 instanceAxios.interceptors.response.use(
   (response) => response,
-  (error: AxiosError) => {
-    toast.error(error.message);
+  (error) => {
+    const toastMessage: string | undefined = error.response?.data?.message;
+    if (toastMessage) {
+      toast.error(toastMessage);
+    } else {
+      toast.error(`Unexpected error (${error.response?.status}). Please try again later.`);
+    }
   }
 );
 
@@ -25,8 +29,8 @@ root.render(
       <BrowserRouter>
         <AppRouter />
         <ToastContainer
-          position="top-right"
-          autoClose={3000}
+          position="top-center"
+          autoClose={5000}
           transition={Flip}
           hideProgressBar
           draggable
