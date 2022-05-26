@@ -9,20 +9,15 @@ import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import axios from 'axios';
 
 instanceAxios.interceptors.response.use(
   (response) => response,
   (error) => {
-    const statusText: string | undefined = error.response?.data?.message;
-    if (axios.isAxiosError(error)) {
-      if (statusText) {
-        toast.error(`Oops... ${statusText}`);
-      } else {
-        toast.error(`Unexpected error (${error.response?.status}). Please try again later.`);
-      }
+    const toastMessage: string | undefined = error.response?.data?.message;
+    if (toastMessage) {
+      toast.error(toastMessage);
     } else {
-      toast.error('Unknown error. We are shocked too...');
+      toast.error(`Unexpected error (${error.response?.status}). Please try again later.`);
     }
   }
 );
