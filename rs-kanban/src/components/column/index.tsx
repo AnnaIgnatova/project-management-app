@@ -1,11 +1,11 @@
 import { Box, Button, Card, CardContent, Modal, TextField, Typography, Stack } from '@mui/material';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from './../../store';
-import { CardTask } from '../../components/cardTask';
+import { CardTask as Task } from '../../components/cardTask';
 import { ColumnProps, DropItem } from './interface/columnProps';
 import './style.scss';
 import { useTranslation } from 'react-i18next';
-import { Task, TaskRequest } from '../../models/task.type';
+import { TaskRequest } from '../../models/task.type';
 import { FormEvent } from './interface/FormEvent';
 import { ConfirmationModal } from './../ConfirmationModal';
 import AddCardIcon from '@mui/icons-material/AddCard';
@@ -16,6 +16,7 @@ import {
   onDropTask,
   updateColumnTitle,
 } from '../../features/board/boardSlice';
+import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
@@ -77,7 +78,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
   };
 
   const handleDrop = (item: DropItem) => {
-    const task: Task = boardTasks.filter(({ id }) => id === item.id)[0];
+    const task: CardTask = boardTasks.filter(({ id }) => id === item.id)[0];
     const taskid = task.id;
     const body = {
       title: task.title,
@@ -148,7 +149,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               </Button>
             </Stack>
             {tasks.length ? (
-              tasks.map((task) => <CardTask key={task.id} value={task} columnId={id} />)
+              tasks.map((task) => <Task key={task.id} value={task} columnId={id} />)
             ) : (
               <AddCardIcon fontSize="large" color="primary" sx={{ ml: '166px' }} />
             )}

@@ -10,6 +10,8 @@ import {
   DeleteTaskProps,
   DroppedTaskData,
 } from '../interfaces/board';
+import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
+import { ColumnById } from './../../models/column.type';
 
 const initialState: BoardState = {
   board: { columns: [], id: '', title: '', description: '' },
@@ -26,6 +28,7 @@ export const onDropTask = createAsyncThunk(
       const task = await createTask(boardId, endColumnId, body);
       dispatch(addTask({ id: endColumnId, task }));
       dispatch(deleteTask({ id: startColumnId, taskId }));
+      dispatch(getTasks());
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -39,6 +42,7 @@ export const createBoardColumn = createAsyncThunk(
       const { boardId, title } = payload;
       const column = await createColumn(boardId, { title });
       dispatch(addColumn(column));
+      dispatch(getTasks());
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -52,6 +56,7 @@ export const deleteBoardColumn = createAsyncThunk(
       const { boardId, columnId } = payload;
       await deleteCol(boardId, columnId);
       dispatch(deleteColumn(columnId));
+      dispatch(getTasks());
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -65,6 +70,7 @@ export const createColumnTask = createAsyncThunk(
       const { boardId, columnId, body } = payload;
       const task = await createTask(boardId, columnId, body);
       dispatch(addTask({ id: columnId, task }));
+      dispatch(getTasks());
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -78,6 +84,7 @@ export const deleteColumnTask = createAsyncThunk(
       const { boardId, columnId, taskId } = payload;
       await delTask(boardId, columnId, taskId);
       dispatch(deleteTask({ id: columnId, taskId }));
+      dispatch(getTasks());
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -104,8 +111,11 @@ export const boardSlice = createSlice({
     getBoard: (state, action) => {
       state.board = action.payload;
     },
-    getTasks: (state, action) => {
-      state.boardTasks = action.payload;
+    getTasks: (state) => {
+      state.boardTasks = state.board.columns.reduce(
+        (acc: CardTask[], col: ColumnById) => [...acc, ...col.tasks],
+        []
+      );
     },
     getStartDragColumn: (state, action) => {
       state.startColumn = action.payload;

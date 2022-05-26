@@ -1,3 +1,4 @@
+import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
 import { Board, Task, Column, BoardById } from './../../models';
 
 export interface NewBoardPayload {
@@ -28,7 +29,7 @@ export interface DroppedTaskData {
 
 export interface BoardState {
   board: BoardById;
-  boardTasks: Task[];
+  boardTasks: CardTask[];
   startColumn: string;
 }
 

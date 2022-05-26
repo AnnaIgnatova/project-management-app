@@ -9,8 +9,6 @@ import './style.scss';
 import { NavLink } from 'react-router-dom';
 import { Routes } from '../../models/routes';
 import { createBoardColumn, getBoard, getTasks } from './../../features/board/boardSlice';
-import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
-import { ColumnById } from './../../models/column.type';
 
 export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
@@ -24,16 +22,12 @@ export const BoardPage: React.FC = () => {
   });
   const [columnTitle, setColumnTitle] = useState<string>('');
   const [open, setOpen] = useState(false);
-  console.log(board);
+
   useEffect(() => {
     getBoardById(boardId).then((data) => {
       setBoardByIdInfo(data);
       dispatch(getBoard(data));
-      const tasks = data.columns.reduce(
-        (acc: CardTask[], col: ColumnById) => [...acc, ...col.tasks],
-        []
-      );
-      dispatch(getTasks(tasks));
+      dispatch(getTasks());
     });
   }, []);
 
