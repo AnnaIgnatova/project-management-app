@@ -43,6 +43,10 @@ export const BoardPage: React.FC = () => {
     handleClose();
   };
 
+  const sortColumns = [...board.columns].sort(
+    (column1, column2) => +column1.order - +column2.order
+  );
+
   return (
     <>
       <Container maxWidth="xl" className="boardPage">
@@ -74,7 +78,7 @@ export const BoardPage: React.FC = () => {
               columnGap: '20px',
             }}
           >
-            {board.columns.map((column) => (
+            {sortColumns.map((column) => (
               <Column key={column.id} value={column} />
             ))}
           </Box>

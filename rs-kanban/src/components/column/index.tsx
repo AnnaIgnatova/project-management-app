@@ -96,6 +96,8 @@ export const Column: React.FC<ColumnProps> = (props) => {
     );
   };
 
+  const sortTasks = [...tasks].sort((task1, task2) => task1.order - task2.order);
+
   return (
     <>
       <ConfirmationModal
@@ -155,7 +157,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
               </Button>
             </Stack>
             {tasks.length ? (
-              tasks.map((task) => <Task key={task.id} value={task} columnId={id} />)
+              sortTasks.map((task) => <Task key={task.id} value={task} columnId={id} />)
             ) : (
               <AddCardIcon fontSize="large" color="primary" sx={{ ml: '166px' }} />
             )}

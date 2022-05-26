@@ -13,6 +13,9 @@ import { getTaskData } from '../../features/task/taskSlice';
 export const CardTask: React.FC<CardTaskData> = (props) => {
   const { columnId } = props;
   const { id, title, userId, description } = props.value;
+  //(
+  const { order } = props.value;
+  //)
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const task = useAppSelector((state) => state.taskReduser.task);
@@ -55,7 +58,7 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
       >
         <CardContent>
           <Typography variant="overline" fontSize={20} component="div">
-            {title}
+            {title} {`order ${order}`}
           </Typography>
           <Typography gutterBottom variant="h6" component="div">
             {description}
