@@ -8,6 +8,7 @@ import boardsReducer from '../features/boards/boardsSlice';
 import boardReducer from '../features/board/boardSlice';
 import tokenReduser from '../features/token/tokenSlice';
 import taskReduser from '../features/task/taskSlice';
+import boardReduсer from '../features/board/boardSlice';
 
 const rootReducer = combineReducers({
   userReducer,

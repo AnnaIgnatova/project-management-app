@@ -164,4 +164,5 @@ export const {
   deleteTask,
   updateColTitle,
 } = boardSlice.actions;
+
 export default boardSlice.reducer;

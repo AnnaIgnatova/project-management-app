@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { CardTaskData } from './interface/cardTaskProps';
 import './style.scss';
+import { clearTask, getTask } from '../../features/task/taskSlice';
 import { ModalWindow } from './ModalWindow';
 import { useTranslation } from 'react-i18next';
 import { useDrag } from 'react-dnd';
@@ -29,7 +30,10 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
   );
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    dispatch(clearTask());
+  };
 
   const getValueTask = (event: React.MouseEvent) => {
     const taskId = event.currentTarget.id;
