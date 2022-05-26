@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { getTaskById } from './../../api/tasks';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { DeleteTaskProps } from '../interfaces/board';
 
 const initialState = {
   task: {
@@ -13,6 +15,19 @@ const initialState = {
   },
   updateTaskIndicator: '',
 };
+
+export const getTaskData = createAsyncThunk(
+  'task/getTaskData',
+  async (payload: DeleteTaskProps, { dispatch, rejectWithValue }) => {
+    try {
+      const { boardId, columnId, taskId } = payload;
+      const task = await getTaskById(boardId, columnId, taskId);
+      dispatch(getTask(task));
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
 
 export const taskSlice = createSlice({
   name: 'task',

@@ -5,16 +5,17 @@ import { useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 import userReducer from '../features/user/userSlice';
 import boardsReducer from '../features/boards/boardsSlice';
+import boardReducer from '../features/board/boardSlice';
 import tokenReduser from '../features/token/tokenSlice';
 import taskReduser from '../features/task/taskSlice';
-import boardReduser from '../features/board/boardSlice';
+import boardReduсer from '../features/board/boardSlice';
 
 const rootReducer = combineReducers({
   userReducer,
   taskReduser,
   tokenReduser,
   boardsReducer,
-  boardReduser,
+  boardReducer,
 });
 
 export const store = () => {

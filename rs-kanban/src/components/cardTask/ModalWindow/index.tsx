@@ -2,13 +2,16 @@ import { Modal, Box, Typography, Button, TextField, Stack } from '@mui/material'
 import { ConfirmationModal } from '../../../components/ConfirmationModal';
 import { useState } from 'react';
 import { ModalWindowProps } from '../interface/ModalWindowProps';
-import { deleteTask, updateTask } from '../../../api/tasks';
+import { updateTask } from '../../../api/tasks';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch } from '../../../store';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { TaskRequestForUpdate } from '../../../models/task.type';
+import { deleteColumnTask } from './../../../features/board/boardSlice';
 import { getTask, updateTaskIndicator } from '../../../features/task/taskSlice';
 
 export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const [openConfirmationModal, setConfirmationModal] = useState<boolean>(false);
   const { open, onClose, value } = props;
   const { id, userId, order, boardId, columnId, files, title, description } = value;
@@ -16,12 +19,10 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
   const handleOpenConfirmationModal = () => setConfirmationModal(true);
 
   const deteleTask = () => {
-    deleteTask(boardId, columnId, id);
+    dispatch(deleteColumnTask({ boardId, columnId, taskId: id }));
     setConfirmationModal(false);
     onClose();
   };
-
-  const dispatch = useAppDispatch();
 
   const [isEditTitle, setEditTitle] = useState<boolean>(false);
   const [titleValue, setTitleValue] = useState<string>('');

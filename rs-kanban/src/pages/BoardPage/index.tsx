@@ -4,38 +4,34 @@ import { Column } from '../../components/column';
 import { Box, Button, Container, Typography, Modal, TextField } from '@mui/material';
 import { useEffect, useState, ChangeEvent } from 'react';
 import { getBoardById } from '../../api/boards';
-import { BoardById } from '../../models/board.type';
-import { getColsData, createColumnReducer } from '../../features/boards/boardsSlice';
+import { Board, BoardById } from '../../models/board.type';
 import './style.scss';
-import { createColumn } from '../../api/columns/create-column.api';
 import { NavLink } from 'react-router-dom';
 import { Routes } from '../../models/routes';
-import { getBoard } from '../../features/board/boardSlice';
+import { createBoardColumn, getBoard, getTasks } from './../../features/board/boardSlice';
 
 export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
-
-  const { boardId, columns } = useAppSelector((state) => state.boardsReducer);
-  const [boardByIdInfo, setBoardByIdInfo] = useState<BoardById>({
+  const dispatch = useAppDispatch();
+  const { boardId } = useAppSelector((state) => state.boardsReducer);
+  const board: BoardById = useAppSelector((state) => state.boardReducer.board);
+  const [boardByIdInfo, setBoardByIdInfo] = useState<Board>({
     id: '',
     title: '',
     description: '',
-    columns: [],
   });
-  const dispatch = useAppDispatch();
+  const [columnTitle, setColumnTitle] = useState<string>('');
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     getBoardById(boardId).then((data) => {
       setBoardByIdInfo(data);
       dispatch(getBoard(data));
+      dispatch(getTasks());
     });
-    dispatch(getColsData(boardId));
   }, []);
 
   const { title } = boardByIdInfo;
-
-  const [columnTitle, setColumnTitle] = useState<string>('');
-  const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -43,9 +39,7 @@ export const BoardPage: React.FC = () => {
     setColumnTitle(e.target.value);
   };
   const handleCreateColumn = () => {
-    createColumn(boardId, { title: columnTitle }).then((response) =>
-      dispatch(createColumnReducer(response))
-    );
+    dispatch(createBoardColumn({ boardId, title: columnTitle }));
     handleClose();
   };
 
@@ -80,7 +74,7 @@ export const BoardPage: React.FC = () => {
               columnGap: '20px',
             }}
           >
-            {columns.map((column) => (
+            {board.columns.map((column) => (
               <Column key={column.id} value={column} />
             ))}
           </Box>
