@@ -1,0 +1,13 @@
+.editIconContainer {
+  position: relative;
+  &:hover .editIcon {
+    opacity: 1;
+  }
+}
+
+.editIcon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}

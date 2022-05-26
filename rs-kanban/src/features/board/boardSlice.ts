@@ -1,4 +1,4 @@
-import { createTask, deleteTask as delTask } from './../../api/tasks';
+import { createTask, deleteTask as delTask, updateTask } from './../../api/tasks';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createColumn, deleteColumn as deleteCol, updateColumn } from './../../api/columns';
 import { UpdateColTitleProps } from './../interfaces/updateTitle';
@@ -9,6 +9,7 @@ import {
   DeleteColumnData,
   DeleteTaskProps,
   DroppedTaskData,
+  TaskUpdatePayload,
 } from '../interfaces/board';
 import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
 import { ColumnById } from './../../models/column.type';
@@ -70,6 +71,21 @@ export const createColumnTask = createAsyncThunk(
       const { boardId, columnId, body } = payload;
       const task = await createTask(boardId, columnId, body);
       dispatch(addTask({ id: columnId, task }));
+      dispatch(getTasks());
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const updateColumnTask = createAsyncThunk(
+  'board/updateColumnTask',
+  async (payload: TaskUpdatePayload, { dispatch, rejectWithValue }) => {
+    try {
+      const { taskId, body } = payload;
+      const { boardId, columnId, title, description } = body;
+      updateTask(boardId, columnId, taskId, body);
+      dispatch(updateTaskInRedux({ columnId, taskId, title, description }));
       dispatch(getTasks());
     } catch (err) {
       return rejectWithValue(err);
@@ -151,6 +167,19 @@ export const boardSlice = createSlice({
         return col;
       });
     },
+    updateTaskInRedux: (state, action) => {
+      const { taskId, columnId, title, description } = action.payload;
+
+      state.board.columns = state.board.columns.map((col) => {
+        if (col.id === columnId) {
+          const newTasks = [...col.tasks];
+          const taskIndex = newTasks.findIndex((item) => item.id === taskId);
+          newTasks[taskIndex] = { ...newTasks[taskIndex], title, description };
+          return { ...col, tasks: [...newTasks] };
+        }
+        return col;
+      });
+    },
   },
 });
 
@@ -163,6 +192,7 @@ export const {
   addTask,
   deleteTask,
   updateColTitle,
+  updateTaskInRedux,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

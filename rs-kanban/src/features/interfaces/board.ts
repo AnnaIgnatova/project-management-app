@@ -1,5 +1,5 @@
 import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
-import { Board, Task, Column, BoardById } from './../../models';
+import { Board, Task, Column, BoardById, TaskRequestForUpdate } from './../../models';
 
 export interface NewBoardPayload {
   title: string;
@@ -49,4 +49,9 @@ export interface ColumnTaskProps extends DeleteColumnData {
 
 export interface DeleteTaskProps extends DeleteColumnData {
   taskId: string;
+}
+
+export interface TaskUpdatePayload {
+  taskId: string;
+  body: TaskRequestForUpdate;
 }

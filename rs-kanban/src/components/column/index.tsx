@@ -50,12 +50,6 @@ export const Column: React.FC<ColumnProps> = (props) => {
   const isActive = isOver && canDrop;
   const columnBg = isActive ? '#dfdfdf' : '#f5f5f5';
 
-  const updateTaskIndicator = useAppSelector((state) => state.taskReduser.updateTaskIndicator);
-
-  // useEffect(() => {
-  //   getAllTasks(boardId, id).then((data: Task[]) => setTasks(data));
-  // }, [updateTaskIndicator]);
-
   const submitEditTitle = () => {
     setEditTitle(false);
     dispatch(updateColumnTitle({ boardId, id, title: newTitle, order }));
