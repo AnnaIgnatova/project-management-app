@@ -1,3 +1,14 @@
+.modal-card-task {
+  background-color: #f5f5f5;
+}
+
+.taskModalTypography {
+  height: 48px;
+  padding: 8px;
+  padding-left: 12px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
 .editIconContainer {
   position: relative;
   &:hover .editIcon {
@@ -7,7 +18,7 @@
 
 .editIcon {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 10px;
   opacity: 0;
 }

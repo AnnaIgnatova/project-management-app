@@ -25,6 +25,7 @@ export interface DroppedTaskData {
   endColumnId: string;
   taskId: string;
   body: DroppedTaskBodyData;
+  taskInfo?: CardTask;
 }
 
 export interface BoardState {

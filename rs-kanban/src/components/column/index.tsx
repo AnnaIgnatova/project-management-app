@@ -86,7 +86,14 @@ export const Column: React.FC<ColumnProps> = (props) => {
       userId,
     };
     dispatch(
-      onDropTask({ boardId, startColumnId: startColumn, endColumnId: id, taskId: taskid, body })
+      onDropTask({
+        boardId,
+        startColumnId: startColumn,
+        endColumnId: id,
+        taskId: taskid,
+        body,
+        taskInfo: task,
+      })
     );
   };
 
@@ -129,27 +136,27 @@ export const Column: React.FC<ColumnProps> = (props) => {
             </Typography>
           )}
 
-          <div className="column-tasks">
-            <Stack
-              spacing={2}
-              direction="row"
-              alignItems="center"
-              justifyContent="center"
-              marginBottom={4}
+          <Stack
+            spacing={2}
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            marginBottom={4}
+          >
+            <Button variant="contained" onClick={handleOpen}>
+              {t('pages.boardPage.taskBtn')}
+            </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => {
+                setModalConfirmatioOpen(true);
+              }}
             >
-              <Button variant="contained" onClick={handleOpen}>
-                {t('pages.boardPage.taskBtn')}
-              </Button>
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={() => {
-                  setModalConfirmatioOpen(true);
-                }}
-              >
-                {t('pages.boardPage.deleteColumnBtn')}
-              </Button>
-            </Stack>
+              {t('pages.boardPage.deleteColumnBtn')}
+            </Button>
+          </Stack>
+          <div className="column-tasks">
             {tasks.length ? (
               sortTasks.map((task) => <Task key={task.id} value={task} columnId={id} />)
             ) : (

@@ -1,5 +1,6 @@
+import { TaskById } from './../../models/task.type';
 import { createTask, deleteTask as delTask, updateTask } from './../../api/tasks';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createColumn, deleteColumn as deleteCol, updateColumn } from './../../api/columns';
 import { UpdateColTitleProps } from './../interfaces/updateTitle';
 import {
@@ -25,11 +26,13 @@ export const onDropTask = createAsyncThunk(
   async (payload: DroppedTaskData, { dispatch, rejectWithValue }) => {
     try {
       const { boardId, startColumnId, endColumnId, taskId, body } = payload;
-      await delTask(boardId, startColumnId, taskId);
-      const task = await createTask(boardId, endColumnId, body);
-      dispatch(addTask({ id: endColumnId, task }));
-      dispatch(deleteTask({ id: startColumnId, taskId }));
-      dispatch(getTasks());
+      if (startColumnId !== endColumnId) {
+        await delTask(boardId, startColumnId, taskId);
+        const task = await createTask(boardId, endColumnId, body);
+        dispatch(addTask({ id: endColumnId, task }));
+        dispatch(deleteTask({ id: startColumnId, taskId }));
+        dispatch(getTasks());
+      }
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -85,7 +88,7 @@ export const updateColumnTask = createAsyncThunk(
       const { taskId, body } = payload;
       const { boardId, columnId, title, description } = body;
       updateTask(boardId, columnId, taskId, body);
-      dispatch(updateTaskInRedux({ columnId, taskId, title, description }));
+      dispatch(updateTaskInRedux({ taskId, body }));
       dispatch(getTasks());
     } catch (err) {
       return rejectWithValue(err);
@@ -168,13 +171,32 @@ export const boardSlice = createSlice({
       });
     },
     updateTaskInRedux: (state, action) => {
-      const { taskId, columnId, title, description } = action.payload;
+      const { taskId } = action.payload;
+      const { columnId, title, description, order } = action.payload.body;
 
       state.board.columns = state.board.columns.map((col) => {
         if (col.id === columnId) {
           const newTasks = [...col.tasks];
           const taskIndex = newTasks.findIndex((item) => item.id === taskId);
-          newTasks[taskIndex] = { ...newTasks[taskIndex], title, description };
+          newTasks[taskIndex] = { ...newTasks[taskIndex], title, description, order };
+          return { ...col, tasks: [...newTasks] };
+        }
+        return col;
+      });
+    },
+
+    updateTasksInColumnInRedux: (state, action: PayloadAction<TaskById[]>) => {
+      const tasks = action.payload;
+      const columnId = tasks[0].columnId;
+
+      state.board.columns = state.board.columns.map((col) => {
+        if (col.id === columnId) {
+          const newTasks = tasks.map((task) => {
+            const { id, title, description, order = 0, userId, files } = task;
+            const newTask = { id, title, order, description, userId, files };
+            return newTask;
+          });
+
           return { ...col, tasks: [...newTasks] };
         }
         return col;
@@ -193,6 +215,7 @@ export const {
   deleteTask,
   updateColTitle,
   updateTaskInRedux,
+  updateTasksInColumnInRedux,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

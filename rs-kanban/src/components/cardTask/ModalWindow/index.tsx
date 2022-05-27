@@ -2,13 +2,10 @@ import { Modal, Box, Typography, Button, TextField, Stack } from '@mui/material'
 import { ConfirmationModal } from '../../../components/ConfirmationModal';
 import { useState } from 'react';
 import { ModalWindowProps } from '../interface/ModalWindowProps';
-import { updateTask } from '../../../api/tasks';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from '../../../store';
-import { TaskRequestForUpdate } from '../../../models/task.type';
-import { deleteColumnTask } from './../../../features/board/boardSlice';
+import { useAppDispatch } from '../../../store';
+import { deleteColumnTask, updateColumnTask } from './../../../features/board/boardSlice';
 import { getTask } from '../../../features/task/taskSlice';
-import { updateColumnTask } from './../../../features/board/boardSlice';
 import EditIcon from '@mui/icons-material/Edit';
 import './style.scss';
 
@@ -92,7 +89,7 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
                 variant="h5"
                 component="div"
                 mb={2}
-                height={48}
+                className="taskModalTypography"
                 onClick={handleEditTitle}
               >
                 {title}
@@ -105,13 +102,19 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
                 variant="standard"
                 label={t('task.newTitle')}
                 defaultValue={title}
+                error={titleValue === ''}
                 onChange={handleChangeTitle}
               />
 
               <Button variant="outlined" sx={{ height: '30px' }} onClick={handleCloseEditTitle}>
                 {t('buttons.cancel')}
               </Button>
-              <Button variant="contained" sx={{ height: '30px' }} onClick={handleUpdateTitle}>
+              <Button
+                variant="contained"
+                sx={{ height: '30px' }}
+                disabled={titleValue === ''}
+                onClick={handleUpdateTitle}
+              >
                 {t('buttons.submit')}
               </Button>
             </Stack>
@@ -123,7 +126,7 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
                 variant="body2"
                 color="text.secondary"
                 mb={3}
-                height={48}
+                className="taskModalTypography"
                 onClick={handleEditDescription}
               >
                 {description}
@@ -136,6 +139,7 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
                 variant="standard"
                 label={t('task.newDescription')}
                 defaultValue={description}
+                error={descriptionValue === ''}
                 onChange={handleChangeDescription}
               />
               <Button
@@ -145,7 +149,12 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
               >
                 {t('buttons.cancel')}
               </Button>
-              <Button variant="contained" sx={{ height: '30px' }} onClick={handleUpdateDescription}>
+              <Button
+                variant="contained"
+                sx={{ height: '30px' }}
+                disabled={descriptionValue === ''}
+                onClick={handleUpdateDescription}
+              >
                 {t('buttons.submit')}
               </Button>
             </Stack>
