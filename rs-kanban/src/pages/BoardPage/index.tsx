@@ -29,7 +29,7 @@ export const BoardPage: React.FC = () => {
       dispatch(getBoard(data));
       dispatch(getTasks());
     });
-  }, []);
+  }, [boardId, dispatch]);
 
   const { title } = boardByIdInfo;
 
@@ -42,6 +42,10 @@ export const BoardPage: React.FC = () => {
     dispatch(createBoardColumn({ boardId, title: columnTitle }));
     handleClose();
   };
+
+  const sortColumns = [...board.columns].sort(
+    (column1, column2) => +column1.order - +column2.order
+  );
 
   return (
     <>
@@ -74,7 +78,7 @@ export const BoardPage: React.FC = () => {
               columnGap: '20px',
             }}
           >
-            {board.columns.map((column) => (
+            {sortColumns.map((column) => (
               <Column key={column.id} value={column} />
             ))}
           </Box>

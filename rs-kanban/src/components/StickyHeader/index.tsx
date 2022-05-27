@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { Routes } from '../../models/routes';
 import { Box, Button, Modal, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { GetValueToken } from '../../utils/getValueToken';
+import { GetValueToken } from '../../services';
 import { useTranslation } from 'react-i18next';
 import { LangSwitcher } from '../langSwitcher';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -35,7 +35,7 @@ export const StickyHeader: React.FC = () => {
   };
 
   const { t } = useTranslation();
-  const { isToken, token } = useAppSelector((state) => state.tokenReduser);
+  const { isToken, token } = useAppSelector((state) => state.tokenReducer);
   GetValueToken();
 
   const signOut = () => {

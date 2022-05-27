@@ -1,5 +1,6 @@
-import { createTask, deleteTask as delTask } from './../../api/tasks';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { TaskById } from './../../models/task.type';
+import { createTask, deleteTask as delTask, updateTask } from './../../api/tasks';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createColumn, deleteColumn as deleteCol, updateColumn } from './../../api/columns';
 import { UpdateColTitleProps } from './../interfaces/updateTitle';
 import {
@@ -9,6 +10,7 @@ import {
   DeleteColumnData,
   DeleteTaskProps,
   DroppedTaskData,
+  TaskUpdatePayload,
 } from '../interfaces/board';
 import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
 import { ColumnById } from './../../models/column.type';
@@ -24,11 +26,13 @@ export const onDropTask = createAsyncThunk(
   async (payload: DroppedTaskData, { dispatch, rejectWithValue }) => {
     try {
       const { boardId, startColumnId, endColumnId, taskId, body } = payload;
-      await delTask(boardId, startColumnId, taskId);
-      const task = await createTask(boardId, endColumnId, body);
-      dispatch(addTask({ id: endColumnId, task }));
-      dispatch(deleteTask({ id: startColumnId, taskId }));
-      dispatch(getTasks());
+      if (startColumnId !== endColumnId) {
+        await delTask(boardId, startColumnId, taskId);
+        const task = await createTask(boardId, endColumnId, body);
+        dispatch(addTask({ id: endColumnId, task }));
+        dispatch(deleteTask({ id: startColumnId, taskId }));
+        dispatch(getTasks());
+      }
     } catch (err) {
       return rejectWithValue(err);
     }
@@ -70,6 +74,21 @@ export const createColumnTask = createAsyncThunk(
       const { boardId, columnId, body } = payload;
       const task = await createTask(boardId, columnId, body);
       dispatch(addTask({ id: columnId, task }));
+      dispatch(getTasks());
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const updateColumnTask = createAsyncThunk(
+  'board/updateColumnTask',
+  async (payload: TaskUpdatePayload, { dispatch, rejectWithValue }) => {
+    try {
+      const { taskId, body } = payload;
+      const { boardId, columnId } = body;
+      updateTask(boardId, columnId, taskId, body);
+      dispatch(updateTaskInRedux({ taskId, body }));
       dispatch(getTasks());
     } catch (err) {
       return rejectWithValue(err);
@@ -151,6 +170,38 @@ export const boardSlice = createSlice({
         return col;
       });
     },
+    updateTaskInRedux: (state, action) => {
+      const { taskId } = action.payload;
+      const { columnId, title, description, order } = action.payload.body;
+
+      state.board.columns = state.board.columns.map((col) => {
+        if (col.id === columnId) {
+          const newTasks = [...col.tasks];
+          const taskIndex = newTasks.findIndex((item) => item.id === taskId);
+          newTasks[taskIndex] = { ...newTasks[taskIndex], title, description, order };
+          return { ...col, tasks: [...newTasks] };
+        }
+        return col;
+      });
+    },
+
+    updateTasksInColumnInRedux: (state, action: PayloadAction<TaskById[]>) => {
+      const tasks = action.payload;
+      const columnId = tasks[0].columnId;
+
+      state.board.columns = state.board.columns.map((col) => {
+        if (col.id === columnId) {
+          const newTasks = tasks.map((task) => {
+            const { id, title, description, order = 0, userId, files } = task;
+            const newTask = { id, title, order, description, userId, files };
+            return newTask;
+          });
+
+          return { ...col, tasks: [...newTasks] };
+        }
+        return col;
+      });
+    },
   },
 });
 
@@ -163,6 +214,8 @@ export const {
   addTask,
   deleteTask,
   updateColTitle,
+  updateTaskInRedux,
+  updateTasksInColumnInRedux,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

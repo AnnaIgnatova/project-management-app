@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../store';
 import { addBoardId } from '../../features/boards/boardsSlice';
 import { BoardCardProps } from './interfaces/boardProps';
 import { MouseEvent, useEffect, useState } from 'react';
-import { getRandomColor } from './../../utils/getRandomColor';
+import { getRandomColor } from '../../services/utils/getRandomColor';
 
 export const BoardCard: React.FC<BoardCardProps> = (props) => {
   const { id, title } = props.boardData;

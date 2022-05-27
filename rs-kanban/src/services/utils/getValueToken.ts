@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { getToken, saveToken } from '../features/token/tokenSlice';
+import { getToken, saveToken } from '../../features/token/tokenSlice';
 
 import jwtDecode from 'jwt-decode';
-import { createUser } from '../features/user/userSlice';
+import { createUser } from '../../features/user/userSlice';
 
 interface decodeToken {
   iat: number;

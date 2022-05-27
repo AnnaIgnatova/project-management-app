@@ -1,19 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { TypedUseSelectorHook } from 'react-redux';
+import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
 import userReducer from '../features/user/userSlice';
 import boardsReducer from '../features/boards/boardsSlice';
 import boardReducer from '../features/board/boardSlice';
-import tokenReduser from '../features/token/tokenSlice';
-import taskReduser from '../features/task/taskSlice';
-import boardReduсer from '../features/board/boardSlice';
+import tokenReducer from '../features/token/tokenSlice';
+import taskReducer from '../features/task/taskSlice';
 
 const rootReducer = combineReducers({
   userReducer,
-  taskReduser,
-  tokenReduser,
+  taskReducer,
+  tokenReducer,
   boardsReducer,
   boardReducer,
 });
