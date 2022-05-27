@@ -28,6 +28,7 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
   interface DropResult {
     order: number;
     columnId: string;
+    id: string;
   }
 
   const bodyForUpdate = {
@@ -49,14 +50,16 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
       end: (item, monitor) => {
         const dropResult = monitor.getDropResult<DropResult>();
 
-        if (columnId === dropResult?.columnId) {
-          const newBodyForUpdate = { ...bodyForUpdate, order: dropResult?.order };
-          updateTask(boardId, columnId, id, newBodyForUpdate).then(() => {
-            getAllTasks(boardId, columnId).then((response) => {
-              dispatch(updateTasksInColumnInRedux(response));
-              dispatch(getTasks());
+        if (id !== dropResult?.id) {
+          if (columnId === dropResult?.columnId) {
+            const newBodyForUpdate = { ...bodyForUpdate, order: dropResult?.order };
+            updateTask(boardId, columnId, id, newBodyForUpdate).then(() => {
+              getAllTasks(boardId, columnId).then((response) => {
+                dispatch(updateTasksInColumnInRedux(response));
+                dispatch(getTasks());
+              });
             });
-          });
+          }
         }
       },
     }),
@@ -68,9 +71,7 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: boardTasks.map(({ id }) => id),
-      drop: () => {
-        return { order, columnId };
-      },
+      drop: () => ({ order, columnId, id }),
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
       }),
