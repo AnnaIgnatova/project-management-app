@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardContent, Modal, TextField, Typography, Stack } from '@mui/material';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from './../../store';
 import { CardTask as Task } from '../../components/cardTask';
 import { ColumnProps, DropItem } from './interface/columnProps';
@@ -9,7 +9,7 @@ import { TaskRequest } from '../../models/task.type';
 import { FormEvent } from './interface/FormEvent';
 import { ConfirmationModal } from './../ConfirmationModal';
 import AddCardIcon from '@mui/icons-material/AddCard';
-import { useDrop } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 import {
   createColumnTask,
   deleteBoardColumn,
@@ -17,6 +17,13 @@ import {
   updateColumnTitle,
 } from '../../features/board/boardSlice';
 import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
+
+interface DropResultType {
+  dropItem: {
+    id: string;
+    order: number;
+  };
+}
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
@@ -97,10 +104,27 @@ export const Column: React.FC<ColumnProps> = (props) => {
     );
   };
 
+  const [{ opacity }, drag] = useDrag(
+    () => ({
+      type: id,
+      item: { id, order },
+      collect: (monitor) => ({
+        opacity: monitor.isDragging() ? 0.5 : 1,
+      }),
+      end: (item, monitor) => {
+        const dropResultColumn = monitor.getDropResult<DropResultType>();
+        console.log(dropResultColumn);
+        console.log(id);
+        console.log(item);
+      },
+    }),
+    [id]
+  );
+
   const sortTasks = [...tasks].sort((task1, task2) => task1.order - task2.order);
 
   return (
-    <>
+    <div>
       <ConfirmationModal
         open={isModalConfirmationOpen}
         thingToBeRemoved={t('pages.boardPage.column')}
@@ -108,7 +132,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
         deleteFn={deleteColumn}
       />
       <Card sx={{ backgroundColor: columnBg, width: 400, userSelect: 'none' }} ref={drop}>
-        <CardContent>
+        <CardContent ref={drag} style={{ opacity }} id={id}>
           {isEditTitle ? (
             <Stack spacing={2} direction="row" alignItems="center" marginBottom={2}>
               <TextField
@@ -200,6 +224,6 @@ export const Column: React.FC<ColumnProps> = (props) => {
           </Button>
         </Box>
       </Modal>
-    </>
+    </div>
   );
 };

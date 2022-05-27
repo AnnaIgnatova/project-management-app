@@ -49,7 +49,6 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
       }),
       end: (item, monitor) => {
         const dropResult = monitor.getDropResult<DropResult>();
-
         if (id !== dropResult?.id) {
           if (columnId === dropResult?.columnId) {
             const newBodyForUpdate = { ...bodyForUpdate, order: dropResult?.order };

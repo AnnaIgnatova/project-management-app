@@ -7,6 +7,7 @@ export interface BoardRequest {
 
 export interface Board extends BoardRequest {
   id: string;
+  order: number;
 }
 
 export interface BoardById extends Board {

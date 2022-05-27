@@ -5,7 +5,7 @@ export interface ColumnProps {
   value: {
     id: string;
     title: string;
-    order: string;
+    order: number;
     tasks: CardTask[];
   };
 }
