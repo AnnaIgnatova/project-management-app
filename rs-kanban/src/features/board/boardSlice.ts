@@ -86,7 +86,7 @@ export const updateColumnTask = createAsyncThunk(
   async (payload: TaskUpdatePayload, { dispatch, rejectWithValue }) => {
     try {
       const { taskId, body } = payload;
-      const { boardId, columnId, title, description } = body;
+      const { boardId, columnId } = body;
       updateTask(boardId, columnId, taskId, body);
       dispatch(updateTaskInRedux({ taskId, body }));
       dispatch(getTasks());

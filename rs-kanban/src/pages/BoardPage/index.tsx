@@ -29,7 +29,7 @@ export const BoardPage: React.FC = () => {
       dispatch(getBoard(data));
       dispatch(getTasks());
     });
-  }, []);
+  }, [boardId, dispatch]);
 
   const { title } = boardByIdInfo;
 

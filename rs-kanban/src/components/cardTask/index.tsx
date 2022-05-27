@@ -19,7 +19,7 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
   const { id, title, userId, description, order } = props.value;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const task = useAppSelector((state) => state.taskReduser.task);
+  const task = useAppSelector((state) => state.taskReducer.task);
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
   const [open, setOpen] = useState(false);
 

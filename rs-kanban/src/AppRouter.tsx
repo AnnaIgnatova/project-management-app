@@ -15,7 +15,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const AppRouter = () => {
-  const isToken = useAppSelector((state) => state.tokenReduser.isToken);
+  const isToken = useAppSelector((state) => state.tokenReducer.isToken);
   return (
     <>
       <DndProvider backend={HTML5Backend}>

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import AppRouter from './App';
+import AppRouter from './AppRouter';
 import { instanceAxios } from './services';
 import './i18n';
 import { ToastContainer, toast, Flip } from 'react-toastify';
