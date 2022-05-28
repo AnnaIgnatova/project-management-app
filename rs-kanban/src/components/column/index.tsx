@@ -18,15 +18,7 @@ import {
   updateColumnTitle,
 } from '../../features/board/boardSlice';
 import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
-import { updateColumn } from '../../api/columns';
-import { getBoardById } from '../../api/boards/get-board-by-id.api';
-
-// interface ColumnsType {
-//   order: number;
-//   id: string;
-//   title: string;
-//   tasks: CardTask[];
-// }
+import { updateColumn, getBoardById } from '../../api';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
