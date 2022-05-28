@@ -9,23 +9,12 @@ import './style.scss';
 import { NavLink } from 'react-router-dom';
 import { Routes } from '../../models/routes';
 import { createBoardColumn, getBoard, getTasks } from './../../features/board/boardSlice';
-import { useDrag, useDrop } from 'react-dnd';
-import { CardTask } from '../../components/cardTask/interface/cardTaskProps';
-import { iteratorSymbol } from 'immer/dist/internal';
-
-interface ColumnsType {
-  order: number;
-  id: string;
-  title: string;
-  tasks: CardTask[];
-}
 
 export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { boardId } = useAppSelector((state) => state.boardsReducer);
   const board = useAppSelector((state) => state.boardReducer.board);
-  const columns: ColumnsType[] = useAppSelector((state) => state.boardReducer.board.columns);
   const [boardByIdInfo, setBoardByIdInfo] = useState<Board>({
     id: '',
     title: '',
@@ -54,24 +43,6 @@ export const BoardPage: React.FC = () => {
     dispatch(createBoardColumn({ boardId, title: columnTitle }));
     handleClose();
   };
-
-  const [{ isOver, canDrop }, drop] = useDrop(() => ({
-    accept: columns.map(({ id }) => id),
-    drop: (item: ColumnsType) => ({ item }),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  }));
-
-  const isActive = isOver && canDrop;
-
-  // const handleDropColumn = (item: ColumnsType) => {
-  //   console.log(item);
-  //   const column = columns.filter(({ id }) => id === item.id)[0];
-  //   const columnId = column.id;
-  //   console.log(columnId);
-  // };
 
   const sortColumns = [...board.columns].sort(
     (column1, column2) => +column1.order - +column2.order
@@ -107,7 +78,6 @@ export const BoardPage: React.FC = () => {
               display: 'flex',
               columnGap: '20px',
             }}
-            ref={drop}
           >
             {sortColumns.map((column) => (
               <Column key={column.id} value={column} />

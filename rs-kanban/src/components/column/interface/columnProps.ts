@@ -21,3 +21,10 @@ export interface BoardData {
 export interface DropItem {
   id: string;
 }
+
+export interface ColumnDropType {
+  order: number;
+  id: string;
+  title: string;
+  tasks: CardTask[];
+}

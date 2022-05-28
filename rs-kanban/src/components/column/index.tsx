@@ -2,7 +2,7 @@ import { Box, Button, Card, CardContent, Modal, TextField, Typography, Stack } f
 import { useState, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from './../../store';
 import { CardTask as Task } from '../../components/cardTask';
-import { ColumnProps, DropItem } from './interface/columnProps';
+import { ColumnDropType, ColumnProps, DropItem } from './interface/columnProps';
 import './style.scss';
 import { useTranslation } from 'react-i18next';
 import { TaskRequest } from '../../models/task.type';
@@ -13,17 +13,20 @@ import { useDrag, useDrop } from 'react-dnd';
 import {
   createColumnTask,
   deleteBoardColumn,
+  getBoard,
   onDropTask,
   updateColumnTitle,
 } from '../../features/board/boardSlice';
 import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
+import { updateColumn } from '../../api/columns';
+import { getBoardById } from '../../api/boards/get-board-by-id.api';
 
-interface DropResultType {
-  dropItem: {
-    id: string;
-    order: number;
-  };
-}
+// interface ColumnsType {
+//   order: number;
+//   id: string;
+//   title: string;
+//   tasks: CardTask[];
+// }
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
@@ -107,19 +110,35 @@ export const Column: React.FC<ColumnProps> = (props) => {
   const [{ opacity }, drag] = useDrag(
     () => ({
       type: id,
-      item: { id, order },
       collect: (monitor) => ({
         opacity: monitor.isDragging() ? 0.5 : 1,
       }),
       end: (item, monitor) => {
-        const dropResultColumn = monitor.getDropResult<DropResultType>();
-        console.log(dropResultColumn);
-        console.log(id);
-        console.log(item);
+        const dropResultColumn = monitor.getDropResult<ColumnDropType>();
+        if (id !== dropResultColumn?.id) {
+          const newOrder = { title, order: dropResultColumn!.order };
+          updateColumn(boardId, id, newOrder);
+          getBoardById(boardId).then((data) => {
+            dispatch(getBoard(data));
+          });
+        }
       },
     }),
     [id]
   );
+  const columns: ColumnDropType[] = useAppSelector((state) => state.boardReducer.board.columns);
+
+  const [{ isOverColumn, canDropColumn }, dropColumn] = useDrop({
+    accept: columns.map(({ id }) => id),
+    drop: () => ({ order, id, title, tasks }),
+    collect: (monitor) => ({
+      isOverColumn: !!monitor.isOver(),
+      canDropColumn: monitor.canDrop(),
+    }),
+  });
+
+  const ref = useRef<HTMLDivElement>(null);
+  drag(dropColumn(ref));
 
   const sortTasks = [...tasks].sort((task1, task2) => task1.order - task2.order);
 
@@ -132,7 +151,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
         deleteFn={deleteColumn}
       />
       <Card sx={{ backgroundColor: columnBg, width: 400, userSelect: 'none' }} ref={drop}>
-        <CardContent ref={drag} style={{ opacity }} id={id}>
+        <CardContent ref={ref} style={{ opacity }} id={id}>
           {isEditTitle ? (
             <Stack spacing={2} direction="row" alignItems="center" marginBottom={2}>
               <TextField
