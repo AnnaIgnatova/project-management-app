@@ -16,7 +16,7 @@ import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
 import { ColumnById } from './../../models/column.type';
 
 const initialState: BoardState = {
-  board: { columns: [], id: '', title: '', description: '' },
+  board: { columns: [], id: '', title: '', description: '', order: 1 },
   boardTasks: [],
   startColumn: '',
 };

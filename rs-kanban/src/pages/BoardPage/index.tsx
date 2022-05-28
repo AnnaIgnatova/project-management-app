@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector, useAppDispatch } from '../../store';
 import { Column } from '../../components/column';
 import { Box, Button, Container, Typography, Modal, TextField } from '@mui/material';
-import { useEffect, useState, ChangeEvent } from 'react';
+import { useEffect, useState, ChangeEvent, useRef } from 'react';
 import { getBoardById } from '../../api/boards';
 import { Board, BoardById } from '../../models/board.type';
 import './style.scss';
@@ -14,11 +14,12 @@ export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { boardId } = useAppSelector((state) => state.boardsReducer);
-  const board: BoardById = useAppSelector((state) => state.boardReducer.board);
+  const board = useAppSelector((state) => state.boardReducer.board);
   const [boardByIdInfo, setBoardByIdInfo] = useState<Board>({
     id: '',
     title: '',
     description: '',
+    order: 1,
   });
   const [columnTitle, setColumnTitle] = useState<string>('');
   const [open, setOpen] = useState(false);

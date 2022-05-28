@@ -5,7 +5,7 @@ export interface ColumnRequest {
 }
 
 export interface ColumnUpdate extends ColumnRequest {
-  order: string;
+  order: number;
 }
 
 export interface Column extends ColumnUpdate {

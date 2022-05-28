@@ -5,7 +5,7 @@ export interface ColumnProps {
   value: {
     id: string;
     title: string;
-    order: string;
+    order: number;
     tasks: CardTask[];
   };
 }
@@ -20,4 +20,11 @@ export interface BoardData {
 
 export interface DropItem {
   id: string;
+}
+
+export interface ColumnDropType {
+  order: number;
+  id: string;
+  title: string;
+  tasks: CardTask[];
 }
