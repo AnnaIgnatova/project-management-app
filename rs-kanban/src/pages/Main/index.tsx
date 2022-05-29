@@ -1,4 +1,5 @@
 import './style.scss';
+import searchLogo from '../../assets/image/search_icon.png';
 import { useTranslation } from 'react-i18next';
 import { BoardCard } from './../../components/boardCard';
 import { useAppDispatch, useAppSelector } from './../../store';
@@ -34,6 +35,23 @@ export const Main: React.FC = () => {
       <div className="main">
         <h2 className="main-title">{t('pages.main.title')}</h2>
         <hr />
+        <div className="main-search">
+          <input
+            type="search"
+            name="search"
+            id="main-search"
+            placeholder="Enter name task..."
+            autoComplete="off"
+          />
+          <select name="select" id="main-select-search">
+            <option value="all">All</option>
+            <option value="title">Title</option>
+            <option value="order">Order</option>
+            <option value="description">Description</option>
+            <option value="user.name">User name</option>
+          </select>
+        </div>
+
         <div className="main-boards">
           {boards.map((board) => (
             <BoardCard

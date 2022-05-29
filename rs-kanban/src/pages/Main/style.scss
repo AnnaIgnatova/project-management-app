@@ -13,4 +13,39 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
+  .main-search{
+    margin-top: 20px;
+    margin-left: 30vw;
+  }
+  #main-search{
+    outline:none;
+    display: inline-block;
+    height: 50px;
+    width: 400px;
+    padding-left: 44px;
+    padding-right: 20px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border: 1px solid #9b9b9b;
+    font-size: 22px;
+    &:focus{
+      border: 2px solid #000000;
+      border-right-style: none;
+    }
+    &:focus ~ #main-select-search{
+      border: 2px solid #000000;
+      border-left-style: none;
+    }
+ }
+ #main-select-search{
+  outline:none;
+  display: inline-block;
+  height: 50px;
+  width: 150px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border: 1px solid #9b9b9b;
+  border-left-style: none;
+  font-size: 20px;
+ }
 }
