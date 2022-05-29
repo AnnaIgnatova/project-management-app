@@ -106,4 +106,15 @@ export const enLang = {
     descrLabel: 'Description',
     descrPlaceholder: 'Enter description',
   },
+  confirmationModal: {
+    question: 'Are you sure you want to delete',
+    enter: 'Enter the word',
+    delete: ' delete ',
+    where: 'in the input',
+    task: 'task',
+    column: 'column',
+    board: 'board',
+    account: 'account',
+    placeholder: 'Enter delete',
+  },
 };

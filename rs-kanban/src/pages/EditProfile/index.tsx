@@ -101,7 +101,7 @@ export const EditProfile: React.FC = () => {
   return (
     <>
       <div className="edit-profile-container">
-        <Box component="form" className="edit-profile-form" onSubmit={handleSubmit}>
+        <Box component="form" className="edit-profile-form" onSubmit={handleSubmit} width={'30%'}>
           <Typography variant="h5" component="p">
             {!isDisabledInputs && (
               <IconButton sx={{ mr: '20px' }} color="inherit" onClick={goBackFromEdit}>
@@ -111,6 +111,7 @@ export const EditProfile: React.FC = () => {
             {t('pages.user.userProfile')}
           </Typography>
           <TextField
+            sx={{ width: '80%' }}
             required
             disabled={isDisabledInputs}
             name="name"
@@ -125,6 +126,7 @@ export const EditProfile: React.FC = () => {
             helperText={!isDisabledInputs && t('pages.user.nameHelperText')}
           />
           <TextField
+            sx={{ width: '80%' }}
             required
             disabled={isDisabledInputs}
             name="login"
@@ -140,6 +142,7 @@ export const EditProfile: React.FC = () => {
           />
           {!isDisabledInputs && (
             <TextField
+              sx={{ width: '80%' }}
               required
               name="password"
               label={t('pages.user.passwordLabel')}
@@ -153,20 +156,15 @@ export const EditProfile: React.FC = () => {
           <Button
             variant="contained"
             disabled={!isDisabledInputs && validButton}
-            sx={{ width: '175px' }}
             onClick={changeBtnFn}
+            sx={{ width: '50%' }}
           >
             {isDisabledInputs
               ? `
             ${t('buttons.change')}`
               : `${t('buttons.saveChanges')}`}
           </Button>
-          <Button
-            variant="contained"
-            color="error"
-            sx={{ width: '125px', fontSize: '0.5rem' }}
-            onClick={handleOpen}
-          >
+          <Button variant="contained" color="error" onClick={handleOpen} sx={{ width: '50%' }}>
             {t('pages.user.deleteBtn')}
           </Button>
         </Box>

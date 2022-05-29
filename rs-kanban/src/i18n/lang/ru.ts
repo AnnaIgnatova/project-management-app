@@ -106,4 +106,15 @@ export const ruLang = {
     descrLabel: 'Описание',
     descrPlaceholder: 'Введите описание',
   },
+  confirmationModal: {
+    question: 'Вы действительно хотите удалить',
+    enter: 'Введите слово',
+    delete: ' удалить ',
+    where: 'в поле ниже',
+    task: 'задачу',
+    column: 'колонку',
+    board: 'доску',
+    account: 'профиль',
+    placeholder: 'Введите удалить',
+  },
 };

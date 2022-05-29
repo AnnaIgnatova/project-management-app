@@ -27,7 +27,7 @@ export const Main: React.FC = () => {
     <>
       <ConfirmationModal
         open={isModalOpen}
-        thingToBeRemoved={t('pages.main.board')}
+        thingToBeRemoved="board"
         setOpenModal={setModalOpen}
         deleteFn={deleteBoardById}
       />

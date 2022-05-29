@@ -26,17 +26,22 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     >
       <div className="confirmation-modal">
         <Typography sx={{ fontWeight: 'bold' }}>
-          {`Are you sure you want to delete ${thingToBeRemoved}?`}
+          {`${t('confirmationModal.question')} ${t(`confirmationModal.${thingToBeRemoved}`)}?`}
         </Typography>
         <Box component="form" onSubmit={(e: React.SyntheticEvent) => e.preventDefault()}>
           <Typography sx={{ mb: '20px', mt: '10px', fontWeight: 'normal' }}>
-            Enter the word
+            {t('confirmationModal.enter')}
             <Typography sx={{ fontWeight: 'bold' }} component="span">
-              {' delete '}
+              {t('confirmationModal.delete')}
             </Typography>
-            in the input
+            {t('confirmationModal.where')}
           </Typography>
-          <TextField placeholder="delete" label="Enter delete" required onChange={handleChange} />
+          <TextField
+            placeholder="delete"
+            label={t('confirmationModal.placeholder')}
+            required
+            onChange={handleChange}
+          />
           <ButtonGroup className="confirmation-modal__btns">
             <Button variant="contained" onClick={handleClose}>
               {t('buttons.cancel')}

@@ -138,7 +138,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
     <div>
       <ConfirmationModal
         open={isModalConfirmationOpen}
-        thingToBeRemoved={t('pages.boardPage.column')}
+        thingToBeRemoved="column"
         setOpenModal={setModalConfirmatioOpen}
         deleteFn={deleteColumn}
       />
