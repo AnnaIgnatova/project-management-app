@@ -56,7 +56,7 @@ export const Login: React.FC = () => {
           />
         </div>
         <Button className="login__form-btn" variant="contained" onClick={reqisterHandler}>
-          Click
+          {t('pages.registration.button')}
         </Button>
       </Box>
     </div>

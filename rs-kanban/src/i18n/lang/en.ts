@@ -8,7 +8,20 @@ export const enLang = {
     btnEditProfile: 'Edit Profile',
   },
   pages: {
-    welcome: 'welcome',
+    welcome: {
+      title_1: 'Course & Creators',
+      title_2: 'Project Info',
+      task_1: {
+        title_1: 'Course',
+        title_2: 'App created by:',
+      },
+      task_2: {
+        title_1: 'Project',
+        title_2: 'Technologies:',
+      },
+      completed: 'Completed',
+      file: 'file',
+    },
     main: {
       cardBtn: 'delete board',
       title: 'All boards',
