@@ -4,7 +4,7 @@ import { Column } from '../../components/column';
 import { Box, Button, Container, Typography, Modal, TextField } from '@mui/material';
 import { useEffect, useState, ChangeEvent, useRef } from 'react';
 import { getBoardById } from '../../api/boards';
-import { Board, BoardById } from '../../models/board.type';
+import { Board } from '../../models/board.type';
 import './style.scss';
 import { NavLink } from 'react-router-dom';
 import { Routes } from '../../models/routes';
@@ -51,18 +51,10 @@ export const BoardPage: React.FC = () => {
   return (
     <>
       <Container maxWidth="xl" className="boardPage">
-        <Typography variant="h4" component="h1" align="center" sx={{ height: '40px' }}>
+        <Typography variant="h4" component="h1" align="center" id="board-title">
           {title}
         </Typography>
-        <Box
-          sx={{
-            height: '70px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '50px',
-          }}
-        >
+        <Box className="board-header-buttons">
           <Button variant="contained" sx={{ height: '30px' }} onClick={handleOpen}>
             {t('pages.boardPage.columnBtn')}
           </Button>
@@ -72,7 +64,15 @@ export const BoardPage: React.FC = () => {
             </Button>
           </NavLink>
         </Box>
-        <Box sx={{ display: 'flex', flex: '1', overflowX: 'auto', height: 'calc(100vh - 262px)' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flex: '1',
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            height: 'calc(100vh - 262px)',
+          }}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -103,7 +103,12 @@ export const BoardPage: React.FC = () => {
             />
           </div>
 
-          <Button id="modal-cnc__btn" variant="outlined" onClick={handleCreateColumn}>
+          <Button
+            id="modal-cnc__btn"
+            variant="contained"
+            disabled={columnTitle === ''}
+            onClick={handleCreateColumn}
+          >
             {t('buttons.create')}
           </Button>
         </Box>

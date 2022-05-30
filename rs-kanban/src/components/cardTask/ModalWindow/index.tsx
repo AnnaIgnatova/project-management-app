@@ -6,7 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../../store';
 import { deleteColumnTask, updateColumnTask } from './../../../features/board/boardSlice';
 import { getTask } from '../../../features/task/taskSlice';
-import EditIcon from '@mui/icons-material/Edit';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import './style.scss';
 import { FormEvent } from 'components/column/interface/FormEvent';
 import { uploadFile } from '../../../api/files';
@@ -97,15 +99,20 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
               >
                 {title}
               </Typography>
-              <EditIcon className="editIcon" />
+              <EditOutlinedIcon className="editIcon" />
             </div>
           ) : (
-            <Stack direction="row" spacing={2} mb={2} alignItems="center">
+            <Stack
+              direction="row"
+              spacing={2}
+              mb={2}
+              alignItems="center"
+              className="edit-task-btns"
+            >
               <TextField
                 variant="standard"
                 label={t('task.newTitle')}
                 defaultValue={title}
-                error={titleValue === ''}
                 onChange={handleChangeTitle}
               />
 
@@ -120,6 +127,11 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
               >
                 {t('buttons.submit')}
               </Button>
+
+              <div className="edit-task-icons">
+                <CloseIcon onClick={handleCloseEditTitle} />
+                <CheckCircleIcon onClick={handleUpdateTitle} />
+              </div>
             </Stack>
           )}
 
@@ -129,22 +141,29 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
                 variant="body2"
                 color="text.secondary"
                 mb={3}
+                height={48}
                 className="taskModalTypography"
                 onClick={handleEditDescription}
               >
                 {description}
               </Typography>
-              <EditIcon className="editIcon" />
+              <EditOutlinedIcon className="editIcon" />
             </div>
           ) : (
-            <Stack direction="row" spacing={2} mb={3} alignItems="center">
+            <Stack
+              direction="row"
+              spacing={2}
+              mb={3}
+              alignItems="center"
+              className="edit-task-btns"
+            >
               <TextField
                 variant="standard"
                 label={t('task.newDescription')}
                 defaultValue={description}
-                error={descriptionValue === ''}
                 onChange={handleChangeDescription}
               />
+
               <Button
                 variant="outlined"
                 sx={{ height: '30px' }}
@@ -160,6 +179,11 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
               >
                 {t('buttons.submit')}
               </Button>
+
+              <div className="edit-task-icons">
+                <CloseIcon onClick={handleCloseEditDescription} />
+                <CheckCircleIcon onClick={handleUpdateDescription} />
+              </div>
             </Stack>
           )}
           <Typography variant="body2" component="div" color="text.secondary">

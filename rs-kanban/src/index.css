@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-body{
-   font-family: 'Inter', sans-serif;
+html,
+body {
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(25, 118, 210, 1);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
 }

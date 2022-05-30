@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../store';
 import { Routes } from '../../models/routes';
 import { GetValueToken } from '../../services/utils/getValueToken';
+import { PinkButton, PeachButton } from './customMUI';
 
 interface BtnHeaderProps {
   open: () => void;
@@ -60,14 +61,14 @@ export const BtnHeader: React.FC<BtnHeaderProps> = (props) => {
     <>
       <LangSwitcher />
       <Link to={Routes.login}>
-        <Button className="login-btn" variant="contained">
+        <PinkButton className="login-btn" variant="contained">
           {t('header.btnLogin')}
-        </Button>
+        </PinkButton>
       </Link>
       <Link to={Routes.registration}>
-        <Button className="singup-btn" variant="contained">
+        <PeachButton className="singup-btn" variant="contained">
           {t('header.btnSignUp')}
-        </Button>
+        </PeachButton>
       </Link>
     </>
   );

@@ -1,40 +1,60 @@
-footer{
-   position: relative;
-   height: 70px;
-  .container-footer{
-     position: absolute;
-     left: 0;
-     bottom: 0;
-     width: 100%;
-     display: flex;
-     justify-content: space-between;
-     padding: 15px 40px;
-     
-     background-color: #E1E2FF;
-
-   .rss{
-      &-img{
-         width: 70px;
-         height: 40px;
+footer {
+  position: relative;
+  height: 70px;
+  background-color: #e1e2ff;
+  .container-footer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1170px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px 0;
+    .rss {
+      &-img {
+        width: 70px;
+        height: 40px;
       }
-   }
+    }
 
-   .github{
-      width: 50%;
+    .github {
+      width: 60%;
       display: flex;
-      justify-content:space-evenly;
-      font-size: 30px;
-      &-account{
-         font-weight: 600;
-         color:#33286D;
-         text-decoration: none;
+      justify-content: space-evenly;
+      font-size: 28px;
+      padding-top: 5px;
+      @media (max-width: 950px) {
+        font-size: 22px;
+        padding-top: 9px;
       }
-   }
+      @media (max-width: 600px) {
+        font-size: 16px;
+      }
+      @media (max-width: 470px) {
+        font-size: 14px;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0;
+        margin-top: -10px;
+      }
+      &-account {
+        font-weight: 600;
+        color: #33286d;
+        text-decoration: none;
+      }
+    }
 
-   .year{
+    .year {
       font-size: 30px;
       line-height: 40px;
-   }
-} 
+      @media (max-width: 950px) {
+        font-size: 26px;
+      }
+      @media (max-width: 470px) {
+        font-size: 24px;
+      }
+    }
+  }
 }
-

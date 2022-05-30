@@ -125,7 +125,7 @@ export const Main: React.FC = () => {
         setOpenModal={setModalOpen}
         deleteFn={deleteBoardById}
       />
-      <div className="main">
+      <div className="main main-container">
         <h2 className="main-title">{t('pages.main.title')}</h2>
         <hr />
         <div className="main-search">

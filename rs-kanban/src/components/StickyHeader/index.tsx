@@ -11,7 +11,10 @@ export const StickyHeader: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [boardName, setBoardName] = useState<string>('');
   const [boardDescription, setBoardDescription] = useState<string>('');
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    burgerClose();
+  };
   const handleClose = () => {
     setOpen(false);
     setBoardName('');
@@ -35,12 +38,22 @@ export const StickyHeader: React.FC = () => {
 
   const isCreateBtnDisabled = boardName === '' || boardDescription === '';
 
+  const [isBurgerMenu, setBurgerMenu] = useState(false);
+  const burgerToggle = () => setBurgerMenu(!isBurgerMenu);
+
+  const burgerClose = () => setBurgerMenu(false);
+
   return (
     <>
+      <div className={`burger ${isBurgerMenu && 'active'}`} onClick={burgerToggle}>
+        <span></span>
+      </div>
       <div className="container-header">
         <div className="sticky-header">
-          <div className="container-btn">
-            <BtnHeader open={handleOpen} />
+          <div className="container-btn main-container">
+            <div className={`main-buttons ${isBurgerMenu && 'active'}`}>
+              <BtnHeader open={handleOpen} />
+            </div>
           </div>
         </div>
       </div>
@@ -58,7 +71,6 @@ export const StickyHeader: React.FC = () => {
               label={t('modalNewBoard.label')}
               placeholder={t('modalNewBoard.placeholder')}
               variant="standard"
-              error={boardName === ''}
               onChange={handleChangeName}
             />
             <TextField
@@ -66,13 +78,12 @@ export const StickyHeader: React.FC = () => {
               placeholder={t('modalNewBoard.descrPlaceholder')}
               variant="standard"
               margin="normal"
-              error={boardDescription === ''}
               onChange={handleChangeDescription}
             />
           </div>
           <Button
             id="modal-cnb__btn"
-            variant="outlined"
+            variant="contained"
             disabled={isCreateBtnDisabled}
             onClick={createBoard}
           >
