@@ -8,9 +8,10 @@ import { addBoardId } from '../../features/boards/boardsSlice';
 import { BoardCardProps } from './interfaces/boardProps';
 import { MouseEvent, useEffect, useState } from 'react';
 import { getRandomColor } from '../../services/utils/getRandomColor';
+import { Box } from '@mui/system';
 
 export const BoardCard: React.FC<BoardCardProps> = (props) => {
-  const { id, title } = props.boardData;
+  const { id, title, description } = props.boardData;
   const { setOpenModal, setBoardId } = props;
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -47,15 +48,22 @@ export const BoardCard: React.FC<BoardCardProps> = (props) => {
         onClick={cardHandler}
       >
         <CardContent>
-          <AssignmentIcon />
-          <Typography
-            variant="h3"
-            component="div"
-            fontSize={20}
-            textTransform="uppercase"
-            marginTop={2}
-          >
-            {title}
+          <Box display="flex">
+            <AssignmentIcon />
+            <Typography
+              variant="h3"
+              component="div"
+              fontSize={26}
+              fontWeight={500}
+              textTransform="uppercase"
+              marginLeft={2}
+            >
+              {title}
+            </Typography>
+          </Box>
+
+          <Typography variant="h3" component="div" fontSize={20} marginTop={2}>
+            {description}
           </Typography>
         </CardContent>
         <CardActions>

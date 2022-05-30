@@ -146,6 +146,10 @@ export const ruLang = {
       description: 'Введите описание задачи...',
       user: 'Введите имя пользователя...',
     },
+    modalWindow: {
+      user: 'Пользователь',
+      order: 'Номер задачи',
+    },
     searchBtn: 'Поиск',
     notFound: 'По вашему запросу ничего не найдено',
     btnModal: 'Перейти к доске',

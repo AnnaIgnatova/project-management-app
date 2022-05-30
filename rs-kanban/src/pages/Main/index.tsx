@@ -3,7 +3,7 @@ import imgNotFound from '../../assets/image/not_found.png';
 import { useTranslation } from 'react-i18next';
 import { BoardCard } from './../../components/boardCard';
 import { useAppDispatch, useAppSelector } from './../../store';
-import React, { useEffect, useState, KeyboardEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { addBoardId, deleteBoardCard, getBoardsData } from '../../features/boards/boardsSlice';
 import { Board, SearchTaskType } from '../../models';
 import { ConfirmationModal } from './../../components/ConfirmationModal';
@@ -178,13 +178,13 @@ export const Main: React.FC = () => {
                 <Card key={task.id} sx={{ width: 275, minHeight: 200 }}>
                   <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                      User: {task.user.name}
+                      {t('search.modalWindow.user')}: {task.user.name}
                     </Typography>
                     <Typography variant="h5" component="div">
                       {task.title}
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      order: {task.order}
+                      {t('search.modalWindow.order')}: {task.order}
                     </Typography>
                     <Typography variant="body2" component="div" gutterBottom>
                       {task.description}

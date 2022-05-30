@@ -5,7 +5,6 @@ import { CardTaskData } from './interface/cardTaskProps';
 import './style.scss';
 import { clearTask, getTaskData } from '../../features/task/taskSlice';
 import { ModalWindow } from './ModalWindow';
-import { useTranslation } from 'react-i18next';
 import { useDrag, useDrop } from 'react-dnd';
 import {
   getStartDragColumn,
@@ -14,15 +13,16 @@ import {
 } from '../../features/board/boardSlice';
 import { getAllTasks, updateTask } from '../../api/tasks';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import { getUserById } from '../../api/users';
 
 export const CardTask: React.FC<CardTaskData> = (props) => {
   const { columnId } = props;
   const { id, title, userId, description, order } = props.value;
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const task = useAppSelector((state) => state.taskReducer.task);
   const boardId = useAppSelector((state) => state.boardsReducer.boardId);
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState<string>('loading...');
 
   const { boardTasks } = useAppSelector((state) => state.boardReducer);
 
@@ -79,7 +79,10 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
     [order]
   );
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    getUserName();
+  };
   const handleClose = () => {
     setOpen(false);
     dispatch(clearTask());
@@ -89,6 +92,12 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
     const taskId = event.currentTarget.id;
     handleOpen();
     dispatch(getTaskData({ boardId, columnId, taskId }));
+  };
+
+  const getUserName = () => {
+    getUserById(userId).then((user) => {
+      setName(user.name);
+    });
   };
 
   drag(drop(ref));
@@ -116,13 +125,10 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
           <Typography variant="overline" fontSize={20} component="div">
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {t('task.responsible')}: {userId}
-          </Typography>
           <EditOutlinedIcon className="editIcon" />
         </CardContent>
       </Card>
-      <ModalWindow open={open} onClose={handleClose} value={task} />
+      <ModalWindow open={open} onClose={handleClose} value={task} name={name} />
     </div>
   );
 };

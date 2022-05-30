@@ -10,16 +10,13 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import './style.scss';
-import { FormEvent } from 'components/column/interface/FormEvent';
-import { uploadFile } from '../../../api/files';
 
 export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [openConfirmationModal, setConfirmationModal] = useState<boolean>(false);
-  const { open, onClose, value } = props;
+  const { open, onClose, value, name } = props;
   const { id, userId, order, boardId, columnId, files, title, description } = value;
-  const [file, setFile] = useState<string>('');
 
   const handleOpenConfirmationModal = () => setConfirmationModal(true);
 
@@ -186,15 +183,14 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
               </div>
             </Stack>
           )}
+
+          <Typography variant="body2" color="text.secondary">
+            {t('task.responsible')}: {name}
+          </Typography>
+
           <Typography variant="body2" component="div" color="text.secondary">
             <div className="modal-card-task__file">
               {t('task.files')}: {files.length}
-            </div>
-
-            <div className="modal-card-task__file">
-              {files.map((file) => {
-                return <Button key={id}>{file.file}</Button>;
-              })}
             </div>
           </Typography>
           <Button
