@@ -146,6 +146,10 @@ export const enLang = {
       description: 'Enter description task...',
       user: 'Enter user name...',
     },
+    modalWindow: {
+      user: 'User',
+      order: 'Order',
+    },
     searchBtn: 'Search',
     notFound: 'Nothing found for your request',
     btnModal: 'Go to board',
