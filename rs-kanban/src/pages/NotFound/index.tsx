@@ -8,7 +8,8 @@ export const NotFound = () => {
   return (
     <Container maxWidth="xl" className="boardPage">
       <BackLink />
-      {t('pages.notFound')}
+      <h2 className="not-found-title">{t('pages.notFound')}</h2>
+      <img src="./assets/gif/404.gif" alt="404" className="not-found-img" />
     </Container>
   );
 };

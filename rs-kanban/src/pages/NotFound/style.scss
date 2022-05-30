@@ -1,0 +1,11 @@
+.not-found {
+  &-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 32px;
+  }
+  &-img {
+    margin: auto;
+    display: block;
+  }
+}
