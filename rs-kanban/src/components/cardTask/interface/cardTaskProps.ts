@@ -16,7 +16,7 @@ export interface FilesCardTask {
 
 export interface CardTask {
   description: string;
-  files: FilesCardTask[];
+  files?: FilesCardTask[];
   id: string;
   order: number;
   title: string;

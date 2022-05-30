@@ -1,4 +1,4 @@
-import { Modal, Box, Typography, Button, TextField, Stack } from '@mui/material';
+import { Modal, Box, Typography, Button, TextField, Stack, Input } from '@mui/material';
 import { ConfirmationModal } from '../../../components/ConfirmationModal';
 import { useState } from 'react';
 import { ModalWindowProps } from '../interface/ModalWindowProps';
@@ -8,6 +8,8 @@ import { deleteColumnTask, updateColumnTask } from './../../../features/board/bo
 import { getTask } from '../../../features/task/taskSlice';
 import EditIcon from '@mui/icons-material/Edit';
 import './style.scss';
+import { FormEvent } from 'components/column/interface/FormEvent';
+import { uploadFile } from '../../../api/files';
 
 export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
   const { t } = useTranslation();
@@ -15,6 +17,7 @@ export const ModalWindow: React.FC<ModalWindowProps> = (props) => {
   const [openConfirmationModal, setConfirmationModal] = useState<boolean>(false);
   const { open, onClose, value } = props;
   const { id, userId, order, boardId, columnId, files, title, description } = value;
+  const [file, setFile] = useState<string>('');
 
   const handleOpenConfirmationModal = () => setConfirmationModal(true);
 

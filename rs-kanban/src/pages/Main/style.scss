@@ -49,3 +49,29 @@
   font-size: 20px;
  }
 }
+
+.modal-window-search{
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 1000px;
+  height: 500px;
+  gap: 20px;
+  top: 20vh;
+  left: 25vw;
+  padding: 30px;
+  background-color: #e6e6e6;
+  overflow-x: auto;
+  &__not-found{
+    margin: 30px auto;
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  &__img-not-found{
+    width: 300px;
+    height: 300px;
+
+  }
+}
