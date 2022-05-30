@@ -83,6 +83,7 @@ export const enLang = {
       loginHelperText: 'Enter min 3 symbols',
     },
     notFound: 'not found',
+    back: 'back',
   },
   task: {
     responsible: 'Responsible',

@@ -1,5 +1,5 @@
 import './style.scss';
-import { Button, TextField, Box } from '@mui/material';
+import { Button, TextField, Box, Container } from '@mui/material';
 import { useState } from 'react';
 import { createToken } from '../../api/authorization/create-token.api';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { Routes } from '../../models/routes';
 import { ONE_DAY } from './constant';
 import { LoginFormEvent } from './interface/LoginForm';
 import { useTranslation } from 'react-i18next';
+import { BackLink } from './../../components/backLink';
 
 export const Login: React.FC = () => {
   const { t } = useTranslation();
@@ -31,6 +32,8 @@ export const Login: React.FC = () => {
   };
 
   return (
+   <Container maxWidth="xl" className="boardPage">
+    <BackLink />
     <div className="container-login">
       <div className="login__title">{t('pages.login.title')}</div>
       <Box component="form" className="login__form">
@@ -60,5 +63,6 @@ export const Login: React.FC = () => {
         </Button>
       </Box>
     </div>
+    </Container>
   );
 };

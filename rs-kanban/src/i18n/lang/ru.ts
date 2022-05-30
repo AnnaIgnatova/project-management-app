@@ -83,6 +83,7 @@ export const ruLang = {
       loginHelperText: 'Введите минимум 3 символа',
     },
     notFound: 'не найдено',
+    back: 'назад',
   },
   task: {
     responsible: 'Ответственный',

@@ -1,7 +1,7 @@
 import './style.scss';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, TextField, Button, Typography, IconButton } from '@mui/material';
+import { Box, TextField, Button, Typography, IconButton, Container } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { updateUserAPI, deleteUserAPI } from '../../api/users';
 import { SignUp } from '../../models/signup.type';
@@ -10,6 +10,7 @@ import { updateUser, deleteUser } from '../../features/user/userSlice';
 import { Routes } from '../../models/routes';
 import { ConfirmationModal } from '../../components/ConfirmationModal';
 import { useTranslation } from 'react-i18next';
+import { BackLink } from '../../components/backLink';
 
 export const EditProfile: React.FC = () => {
   const { t } = useTranslation();
@@ -99,7 +100,8 @@ export const EditProfile: React.FC = () => {
   const handleSubmit = (e: React.SyntheticEvent) => e.preventDefault();
 
   return (
-    <>
+    <Container maxWidth="xl" className="boardPage">
+      <BackLink />
       <div className="edit-profile-container">
         <Box component="form" className="edit-profile-form" onSubmit={handleSubmit} width={'30%'}>
           <Typography variant="h5" component="p">
@@ -175,6 +177,6 @@ export const EditProfile: React.FC = () => {
         deleteFn={deleteUserFn}
         thingToBeRemoved="account"
       />
-    </>
+    </Container>
   );
 };
