@@ -6,7 +6,7 @@ import { useEffect, useState, ChangeEvent, useRef } from 'react';
 import { getBoardById } from '../../api/boards';
 import { Board } from '../../models/board.type';
 import './style.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Routes } from '../../models/routes';
 import { createBoardColumn, getBoard, getTasks } from './../../features/board/boardSlice';
 
@@ -23,6 +23,7 @@ export const BoardPage: React.FC = () => {
   });
   const [columnTitle, setColumnTitle] = useState<string>('');
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getBoardById(boardId).then((data) => {
@@ -47,6 +48,10 @@ export const BoardPage: React.FC = () => {
   const sortColumns = [...board.columns].sort(
     (column1, column2) => +column1.order - +column2.order
   );
+
+  if (!boardId) {
+    navigate('/main');
+  }
 
   return (
     <>
