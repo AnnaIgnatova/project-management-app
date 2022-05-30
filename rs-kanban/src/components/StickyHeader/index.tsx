@@ -1,13 +1,10 @@
 import './style.scss';
-import { Link, NavLink } from 'react-router-dom';
-import { Routes } from '../../models/routes';
 import { Box, Button, Modal, TextField } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { GetValueToken } from '../../services';
+import { useAppDispatch } from '../../store';
 import { useTranslation } from 'react-i18next';
-import { LangSwitcher } from '../langSwitcher';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { createNewBoard } from '../../features/boards/boardsSlice';
+import { BtnHeader } from './BtnHeader';
 
 export const StickyHeader: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -35,74 +32,16 @@ export const StickyHeader: React.FC = () => {
   };
 
   const { t } = useTranslation();
-  const { isToken, token } = useAppSelector((state) => state.tokenReducer);
-  GetValueToken();
-
-  const signOut = () => {
-    document.cookie = `Token=${token}; expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
-    location.reload();
-  };
-
-  useEffect(() => {
-    getBtnHeader();
-  }, []);
 
   const isCreateBtnDisabled = boardName === '' || boardDescription === '';
-
-  const getBtnHeader = () => {
-    if (isToken) {
-      if (location.pathname === '/') {
-        return (
-          <>
-            <LangSwitcher />
-            <NavLink to={Routes.main}>
-              <Button className="main-btn" variant="contained">
-                {t('header.btnMain')}
-              </Button>
-            </NavLink>
-          </>
-        );
-      }
-
-      return (
-        <>
-          <LangSwitcher />
-          <Button variant="contained" onClick={handleOpen}>
-            {t('header.btnNewBoard')}
-          </Button>
-
-          <Link to={Routes.editProfile}>
-            <Button variant="contained">{t('header.btnEditProfile')}</Button>
-          </Link>
-          <Button variant="contained" color="error" onClick={signOut}>
-            {t('header.btnSignOut')}
-          </Button>
-        </>
-      );
-    }
-
-    return (
-      <>
-        <LangSwitcher />
-        <Link to={Routes.login}>
-          <Button className="login-btn" variant="contained">
-            {t('header.btnLogin')}
-          </Button>
-        </Link>
-        <Link to={Routes.registration}>
-          <Button className="singup-btn" variant="contained">
-            {t('header.btnSignUp')}
-          </Button>
-        </Link>
-      </>
-    );
-  };
 
   return (
     <>
       <div className="container-header">
         <div className="sticky-header">
-          <div className="container-btn">{getBtnHeader()}</div>
+          <div className="container-btn">
+            <BtnHeader open={handleOpen} />
+          </div>
         </div>
       </div>
       <Modal

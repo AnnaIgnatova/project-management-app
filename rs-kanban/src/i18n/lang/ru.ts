@@ -1,8 +1,8 @@
 export const ruLang = {
   header: {
     btnMain: 'Перейти на главную страницу',
-    btnLogin: 'Войти',
-    btnSignUp: 'Зарегистрироваться',
+    btnLogin: 'Вход',
+    btnSignUp: 'Регистрация',
     btnSignOut: 'Выйти',
     btnNewBoard: 'Создать новую доску',
     btnEditProfile: 'Редактировать профиль',
@@ -146,6 +146,7 @@ export const ruLang = {
       description: 'Введите описание задачи...',
       user: 'Введите имя пользователя...',
     },
+    searchBtn: 'Поиск',
     notFound: 'По вашему запросу ничего не найдено',
     btnModal: 'Перейти к доске',
   },
