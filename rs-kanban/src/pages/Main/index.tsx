@@ -34,6 +34,7 @@ export const Main: React.FC = () => {
   const [placeholderSearch, setPlaceholderSearch] = useState<string>(
     t('search.placeholderSearch.all')
   );
+  const [searchValue, setSearchValue] = useState<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,15 +68,20 @@ export const Main: React.FC = () => {
     }
   };
 
-  const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    const searchValue = (e.target as HTMLInputElement).value;
-    if (e.key === 'Enter') {
-      sortTasks(searchValue);
-      handleOpen();
-    }
+  const onKeyDownHandler = (e: React.ChangeEvent) => {
+    const value = (e.target as HTMLInputElement).value;
+    console.log(value);
+    setSearchValue(value);
   };
 
-  const sortTasks = (sort: string) => {
+  const startSearch = () => {
+    sortTasks();
+    handleOpen();
+  };
+
+  const sortTasks = () => {
+    const sort = searchValue;
+    console.log(sort);
     const valuesTasks = Object.values(tasks);
     const select = selectData;
     const sortingTask = valuesTasks.filter((task) => {
@@ -131,7 +137,7 @@ export const Main: React.FC = () => {
             id="main-search"
             placeholder={placeholderSearch}
             autoComplete="off"
-            onKeyDown={onKeyDownHandler}
+            onChange={onKeyDownHandler}
           />
           <select name="select" id="main-select-search" onChange={getFilterData}>
             <option value={SearchFilter.All}>{t('search.select.all')}</option>
@@ -140,6 +146,9 @@ export const Main: React.FC = () => {
             <option value={SearchFilter.Description}>{t('search.select.description')}</option>
             <option value={SearchFilter.User}>{t('search.select.user')}</option>
           </select>
+          <Button variant="contained" color="success" sx={{ marginLeft: 2 }} onClick={startSearch}>
+            Search
+          </Button>
         </div>
 
         <div className="main-boards">
