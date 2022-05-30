@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { BoardCard } from './../../components/boardCard';
 import { useAppDispatch, useAppSelector } from './../../store';
 import React, { useEffect, useState, KeyboardEvent } from 'react';
-import { deleteBoardCard, getBoardsData } from '../../features/boards/boardsSlice';
+import { addBoardId, deleteBoardCard, getBoardsData } from '../../features/boards/boardsSlice';
 import { Board, SearchTaskType } from '../../models';
 import { ConfirmationModal } from './../../components/ConfirmationModal';
 import { getAllTasksForSearch, sortTask } from '../../features/searchTasks/searchSlice';
 import { Modal, Box, Typography, Button, Card, CardActions, CardContent } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export const Main: React.FC = () => {
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ export const Main: React.FC = () => {
   const handleClose = () => setModalOpenSearch(false);
   const [boardId, setBoardId] = useState<string>('');
   const [selectData, setSelectData] = useState<string>('all');
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getBoardsData());
@@ -78,6 +80,11 @@ export const Main: React.FC = () => {
     dispatch(sortTask(sortingTask));
   };
 
+  const goToBoard = (boardId: string) => {
+    dispatch(addBoardId(boardId));
+    navigate('/board');
+  };
+
   return (
     <>
       <ConfirmationModal
@@ -128,7 +135,7 @@ export const Main: React.FC = () => {
           {Object.keys(searchTasks).length ? (
             Object.values(searchTasks).map((task) => {
               return (
-                <Card key={task.id} sx={{ minWidth: 275 }}>
+                <Card key={task.id} sx={{ width: 275, minHeight: 200 }}>
                   <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                       User: {task.user.name}
@@ -139,10 +146,14 @@ export const Main: React.FC = () => {
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
                       order: {task.order}
                     </Typography>
-                    <Typography variant="body2">{task.description}</Typography>
+                    <Typography variant="body2" component="div" gutterBottom>
+                      {task.description}
+                    </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Go to board</Button>
+                    <Button size="small" onClick={() => goToBoard(task.boardId)}>
+                      Go to board
+                    </Button>
                   </CardActions>
                 </Card>
               );
