@@ -1,0 +1,67 @@
+.modal-card-task {
+  background-color: #e1e2ff;
+}
+
+.taskModalTypography {
+  height: 48px;
+  padding: 8px;
+  padding-left: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.editIconContainer {
+  position: relative;
+  &:hover .editIcon {
+    opacity: 1;
+  }
+}
+
+.editIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.edit-task-btns {
+  button {
+    text-transform: lowercase;
+    @media (max-width: 400px) {
+      display: none;
+    }
+  }
+  @media (max-width: 400px) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.edit-task-icons {
+  display: none;
+  @media (max-width: 400px) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+  }
+  @media (max-width: 360px) {
+    gap: 10px;
+  }
+  & svg {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
+    &:last-child {
+      color: #1976d2;
+    }
+    &:last-child:hover {
+      color: #1565c0;
+    }
+    &:first-child:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}

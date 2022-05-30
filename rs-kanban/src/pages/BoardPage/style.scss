@@ -1,0 +1,60 @@
+.boardPage {
+  height: calc(100vh - 150px);
+  margin-top: 20px;
+  @media (max-width: 450px) {
+    margin-top: 10px;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+.modal-cnc {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 300px;
+  padding: 30px;
+  background-color: #fff;
+  &__text {
+    text-align: center;
+  }
+  &__input {
+    margin: 30px auto;
+    text-align: center;
+  }
+  #modal-cnc__btn {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.board-header-buttons {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  @media (max-width: 490px) {
+    gap: 20px;
+  }
+  @media (max-width: 450px) {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+  button {
+    @media (max-width: 450px) {
+      text-transform: lowercase;
+    }
+  }
+}
+
+#board-title {
+  height: 40px;
+  @media (max-width: 450px) {
+    font-size: 24px;
+    margin-bottom: -5px;
+  }
+}

@@ -1,0 +1,15 @@
+.modal-card-task {
+  position: relative;
+  top: 30vh;
+  margin: 0 auto;
+  max-width: 400px;
+  min-width: 300px;
+  padding: 30px;
+  background-color: #fff;
+  &__file {
+    float: right;
+  }
+  &__delete {
+    margin: 20px auto;
+  }
+}

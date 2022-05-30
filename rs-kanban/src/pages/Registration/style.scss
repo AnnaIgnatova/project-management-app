@@ -1,0 +1,29 @@
+.container-registration{
+   height: calc(100vh - 271px);
+  .registration__title{
+     margin: 15vh auto 30px;
+     font-size: 30px;
+     font-weight: 700;
+     text-align: center;
+  }
+  .registration__form{
+     &-input{
+        margin-top: 20px;
+        text-align: center;
+     }
+     &-link{
+        text-decoration: none;
+     }
+     &-btn{
+        width: 223px;
+        display: block;
+        margin: 40px auto 190px;
+        background-color: #E1E2FF;
+        color: #33286D;
+        &:hover{
+           background-color: #33286D;
+           color:#E1E2FF;
+        }
+     }
+  }
+}
