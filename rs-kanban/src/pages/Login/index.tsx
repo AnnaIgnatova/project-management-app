@@ -32,37 +32,37 @@ export const Login: React.FC = () => {
   };
 
   return (
-   <Container maxWidth="xl" className="boardPage">
-    <BackLink />
-    <div className="container-login">
-      <div className="login__title">{t('pages.login.title')}</div>
-      <Box component="form" className="login__form">
-        <div className="login__form-input">
-          <TextField
-            required
-            name="login"
-            id="outlined-required"
-            label={t('pages.login.loginLabel')}
-            placeholder={t('pages.login.loginPlaceholder')}
-            onChange={changeHandler}
-          />
-        </div>
-        <div className="login__form-input">
-          <TextField
-            required
-            name="password"
-            id="outlined-required"
-            label={t('pages.login.passwordLabel')}
-            placeholder={t('pages.login.passwordPlaceholder')}
-            type="password"
-            onChange={changeHandler}
-          />
-        </div>
-        <Button className="login__form-btn" variant="contained" onClick={reqisterHandler}>
-          {t('pages.registration.button')}
-        </Button>
-      </Box>
-    </div>
+    <Container maxWidth="xl" className="boardPage">
+      <BackLink />
+      <div className="container-login">
+        <div className="login__title">{t('pages.login.title')}</div>
+        <Box component="form" className="login__form">
+          <div className="login__form-input">
+            <TextField
+              required
+              name="login"
+              id="outlined-required"
+              label={t('pages.login.loginLabel')}
+              placeholder={t('pages.login.loginPlaceholder')}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="login__form-input">
+            <TextField
+              required
+              name="password"
+              id="outlined-required"
+              label={t('pages.login.passwordLabel')}
+              placeholder={t('pages.login.passwordPlaceholder')}
+              type="password"
+              onChange={changeHandler}
+            />
+          </div>
+          <Button className="login__form-btn" variant="contained" onClick={reqisterHandler}>
+            {t('pages.registration.button')}
+          </Button>
+        </Box>
+      </div>
     </Container>
   );
 };
