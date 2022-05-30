@@ -1,5 +1,5 @@
 import { TaskById } from './../../models/task.type';
-import { createTask, deleteTask as delTask, updateTask } from './../../api/tasks';
+import { createTask, deleteTask as delTask, updateTask, getBoardById } from './../../api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createColumn, deleteColumn as deleteCol, updateColumn } from './../../api/columns';
 import { UpdateColTitleProps } from './../interfaces/updateTitle';
@@ -19,6 +19,7 @@ const initialState: BoardState = {
   board: { columns: [], id: '', title: '', description: '', order: 1 },
   boardTasks: [],
   startColumn: '',
+  isFetching: false,
 };
 
 export const onDropTask = createAsyncThunk(
@@ -58,7 +59,7 @@ export const deleteBoardColumn = createAsyncThunk(
   async (payload: DeleteColumnData, { dispatch, rejectWithValue }) => {
     try {
       const { boardId, columnId } = payload;
-      await deleteCol(boardId, columnId);
+      deleteCol(boardId, columnId);
       dispatch(deleteColumn(columnId));
       dispatch(getTasks());
     } catch (err) {
@@ -101,7 +102,7 @@ export const deleteColumnTask = createAsyncThunk(
   async (payload: DeleteTaskProps, { dispatch, rejectWithValue }) => {
     try {
       const { boardId, columnId, taskId } = payload;
-      await delTask(boardId, columnId, taskId);
+      delTask(boardId, columnId, taskId);
       dispatch(deleteTask({ id: columnId, taskId }));
       dispatch(getTasks());
     } catch (err) {
@@ -115,7 +116,7 @@ export const updateColumnTitle = createAsyncThunk(
   async (payload: UpdateColTitleProps, { dispatch, rejectWithValue }) => {
     try {
       const { boardId, id, title, order } = payload;
-      await updateColumn(boardId, id, { title, order });
+      updateColumn(boardId, id, { title, order });
       dispatch(updateColTitle({ id, title }));
     } catch (err) {
       return rejectWithValue(err);
@@ -202,6 +203,26 @@ export const boardSlice = createSlice({
         return col;
       });
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(onDropTask.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(onDropTask.fulfilled, (state) => {
+      state.isFetching = false;
+    });
+    builder.addCase(createBoardColumn.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(createBoardColumn.fulfilled, (state) => {
+      state.isFetching = false;
+    });
+    builder.addCase(createColumnTask.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(createColumnTask.fulfilled, (state) => {
+      state.isFetching = false;
+    });
   },
 });
 

@@ -32,6 +32,7 @@ export interface BoardState {
   board: BoardById;
   boardTasks: CardTask[];
   startColumn: string;
+  isFetching?: boolean;
 }
 
 export interface CreateColumnData {
