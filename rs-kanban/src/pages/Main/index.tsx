@@ -70,7 +70,6 @@ export const Main: React.FC = () => {
 
   const onKeyDownHandler = (e: React.ChangeEvent) => {
     const value = (e.target as HTMLInputElement).value;
-    console.log(value);
     setSearchValue(value);
   };
 
@@ -81,7 +80,6 @@ export const Main: React.FC = () => {
 
   const sortTasks = () => {
     const sort = searchValue;
-    console.log(sort);
     const valuesTasks = Object.values(tasks);
     const select = selectData;
     const sortingTask = valuesTasks.filter((task) => {
