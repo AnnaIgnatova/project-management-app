@@ -1,17 +1,20 @@
+import { useTranslation } from 'react-i18next';
 import { Task } from '../task';
-import { TaskData } from '../task/interfaces/taskProps';
+import { WelcomePageTask } from '../task/interfaces/taskProps';
 import './style.scss';
 
 export interface BoardData {
+  i: number;
   title: string;
-  tasks: TaskData[];
+  tasks: WelcomePageTask[];
 }
 export interface BoardProps {
   data: BoardData;
 }
 
 export const Board: React.FC<BoardProps> = (props) => {
-  const { title, tasks } = props.data;
+  const { title, tasks, i } = props.data;
+  const { t } = useTranslation();
   return (
     <div className="board">
       <div className="board-title-wrapper">
@@ -20,8 +23,11 @@ export const Board: React.FC<BoardProps> = (props) => {
         <div className="board-tasks-count">{tasks.length}</div>
       </div>
       <div className="tasks">
-        {tasks.map((task) => (
-          <Task key={task.title} taskData={task} />
+        {tasks.map((task, index) => (
+          <Task
+            key={t(`pages.welcome.task_${i}.title_${index + 1}`)}
+            taskData={{ ...task, title: t(`pages.welcome.task_${i}.title_${index + 1}`) }}
+          />
         ))}
       </div>
     </div>

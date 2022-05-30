@@ -19,8 +19,11 @@ export const Welcome: React.FC = () => {
           ))}
         </div>
         <div className="welcome-info">
-          {welcomeBoards.map((board) => (
-            <Board data={board} key={board.title} />
+          {welcomeBoards.map((board, index) => (
+            <Board
+              data={{ ...board, title: t(`pages.welcome.title_${index + 1}`), i: index + 1 }}
+              key={t(`pages.welcome.title_${index + 1}`)}
+            />
           ))}
         </div>
       </div>

@@ -8,7 +8,20 @@ export const ruLang = {
     btnEditProfile: 'Редактировать профиль',
   },
   pages: {
-    welcome: 'начальная',
+    welcome: {
+      title_1: 'Курс & Разработчики',
+      title_2: 'Информация о проекте',
+      task_1: {
+        title_1: 'Курс',
+        title_2: 'Разработчики приложения:',
+      },
+      task_2: {
+        title_1: 'Название проекта',
+        title_2: 'Используемые технологии:',
+      },
+      completed: 'Завершено',
+      file: 'файл',
+    },
     main: {
       cardBtn: 'удалить доску',
       title: 'Все доски',
@@ -106,5 +119,16 @@ export const ruLang = {
     btn: 'Создать',
     descrLabel: 'Описание',
     descrPlaceholder: 'Введите описание',
+  },
+  confirmationModal: {
+    question: 'Вы действительно хотите удалить',
+    enter: 'Введите слово',
+    delete: ' удалить ',
+    where: 'в поле ниже',
+    task: 'задачу',
+    column: 'колонку',
+    board: 'доску',
+    account: 'профиль',
+    placeholder: 'Введите удалить',
   },
 };

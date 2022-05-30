@@ -53,11 +53,14 @@ export const StickyHeader: React.FC = () => {
     if (isToken) {
       if (location.pathname === '/') {
         return (
-          <NavLink to={Routes.main}>
-            <Button className="main-btn" variant="contained">
-              {t('header.btnMain')}
-            </Button>
-          </NavLink>
+          <>
+            <LangSwitcher />
+            <NavLink to={Routes.main}>
+              <Button className="main-btn" variant="contained">
+                {t('header.btnMain')}
+              </Button>
+            </NavLink>
+          </>
         );
       }
 
@@ -80,6 +83,7 @@ export const StickyHeader: React.FC = () => {
 
     return (
       <>
+        <LangSwitcher />
         <Link to={Routes.login}>
           <Button className="login-btn" variant="contained">
             {t('header.btnLogin')}
