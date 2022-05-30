@@ -1,6 +1,6 @@
 export const ruLang = {
   header: {
-    btnMain: 'Перейти на главную страницу',
+    btnMain: 'На главную страницу',
     btnLogin: 'Вход',
     btnSignUp: 'Регистрация',
     btnSignOut: 'Выйти',
@@ -30,7 +30,7 @@ export const ruLang = {
     },
     boardPage: {
       columnBtn: 'Добавить колонку',
-      taskBtn: 'Добавить задачу',
+      taskBtn: '+ задачу',
       deleteColumnBtn: 'удалить колонку',
       column: 'колонку',
       createNewColumn: 'Добавить новую колонку',

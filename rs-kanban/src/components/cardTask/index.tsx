@@ -13,6 +13,7 @@ import {
   getTasks,
 } from '../../features/board/boardSlice';
 import { getAllTasks, updateTask } from '../../api/tasks';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 export const CardTask: React.FC<CardTaskData> = (props) => {
   const { columnId } = props;
@@ -95,7 +96,14 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
   return (
     <div>
       <Card
-        sx={{ maxWidth: 345, marginBottom: 2, backgroundColor: isOver ? 'white' : 'inherit' }}
+        sx={{
+          maxWidth: 345,
+          marginBottom: 2,
+          backgroundColor: isOver ? 'rgba(0, 0, 0, 0.05)' : 'white',
+          cursor: 'grab',
+          boxShadow: '0px 2px 5px 1px rgb(34 60 80 / 20%);',
+          mr: '6px',
+        }}
         id={id}
         onClick={getValueTask}
         ref={ref}
@@ -104,16 +112,14 @@ export const CardTask: React.FC<CardTaskData> = (props) => {
           dispatch(getStartDragColumn(columnId));
         }}
       >
-        <CardContent>
+        <CardContent className="editIconContainer">
           <Typography variant="overline" fontSize={20} component="div">
             {title}
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            {description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {t('task.responsible')}: {userId}
           </Typography>
+          <EditOutlinedIcon className="editIcon" />
         </CardContent>
       </Card>
       <ModalWindow open={open} onClose={handleClose} value={task} />

@@ -5,8 +5,9 @@
 }
 .modal-ct {
   position: absolute;
-  top: 30vh;
-  left: 45vw;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 300px;
   padding: 30px;
   background-color: #fff;
@@ -14,23 +15,101 @@
     text-align: center;
   }
   &__input {
-    margin: 20px auto;
+    margin: 30px auto;
     text-align: center;
   }
   #modal-ct__btn {
     display: block;
     margin: 0 auto;
-    border: 3px solid #e1e2ff;
-
-    font-size: 22px;
-    transition: all 0.5s ease-in-out;
-    &:hover {
-      border-radius: 50px;
-    }
   }
 }
 
 .column-tasks {
   max-height: calc(100vh - 409px);
   overflow-y: auto;
+}
+
+.column-container {
+  width: 400px;
+  @media (max-width: 1290px) {
+    width: 375px;
+  }
+  @media (max-width: 1215px) {
+    width: 350px;
+  }
+  @media (max-width: 1140px) {
+    width: 330px;
+  }
+  @media (max-width: 1080px) {
+    width: 300px;
+  }
+  @media (max-width: 985px) {
+    width: 290px;
+  }
+}
+
+.column-header {
+  position: relative;
+  button {
+    @media (max-width: 920px) {
+      text-transform: lowercase;
+    }
+  }
+  & button:nth-child(2) {
+    @media (max-width: 1150px) {
+      display: none;
+    }
+  }
+  & svg {
+    display: none;
+    @media (max-width: 1150px) {
+      display: block;
+      position: absolute;
+      right: 0;
+      cursor: pointer;
+      font-size: xx-large;
+      color: rgba(0, 0, 0, 0.6);
+      &:hover {
+        color: #d32f2f;
+      }
+    }
+  }
+}
+
+.edit-column-btns {
+  button {
+    text-transform: lowercase;
+    height: 30px;
+    @media (max-width: 1150px) {
+      display: none;
+    }
+  }
+}
+
+.edit-column-title-icons {
+  display: none;
+  @media (max-width: 1150px) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+  }
+  @media (max-width: 360px) {
+    gap: 10px;
+  }
+  & svg {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
+    &:last-child {
+      color: #1976d2;
+    }
+    &:last-child:hover {
+      color: #1565c0;
+    }
+    &:first-child:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
 }

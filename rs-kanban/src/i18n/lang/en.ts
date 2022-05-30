@@ -108,7 +108,7 @@ export const enLang = {
     },
     description: {
       label: 'Description',
-      placeholder: '"Enter description new task',
+      placeholder: 'Enter description new task',
     },
     btn: 'Create',
   },

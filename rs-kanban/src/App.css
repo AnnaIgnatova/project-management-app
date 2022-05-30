@@ -2,3 +2,9 @@
   box-sizing: border-box;
   margin: 0;
 }
+
+.main-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 15px;
+}

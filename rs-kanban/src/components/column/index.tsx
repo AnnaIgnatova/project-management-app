@@ -19,6 +19,10 @@ import {
 } from '../../features/board/boardSlice';
 import { CardTask } from './../../components/cardTask/interface/cardTaskProps';
 import { updateColumn, getBoardById } from '../../api';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export const Column: React.FC<ColumnProps> = (props) => {
   const { t } = useTranslation();
@@ -30,7 +34,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
   const [isEditTitle, setEditTitle] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>(title);
   const [open, setOpen] = useState<boolean>(false);
-  const [isModalConfirmationOpen, setModalConfirmatioOpen] = useState<boolean>(false);
+  const [isModalConfirmationOpen, setModalConfirmationOpen] = useState<boolean>(false);
 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: boardTasks.map(({ id }) => id),
@@ -50,7 +54,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
   });
 
   const isActive = isOver && canDrop;
-  const columnBg = isActive ? '#dfdfdf' : '#f5f5f5';
+  const columnBg = isActive ? '#dfdfdf' : '#e1e2ff';
 
   const submitEditTitle = () => {
     setEditTitle(false);
@@ -134,41 +138,65 @@ export const Column: React.FC<ColumnProps> = (props) => {
 
   const sortTasks = [...tasks].sort((task1, task2) => task1.order - task2.order);
 
+  const isCreateBtnDisabled = forms.title === '' || forms.description === '';
+
+  const handleOpenConfirmation = () => {
+    setModalConfirmationOpen(true);
+  };
+
   return (
     <div>
       <ConfirmationModal
         open={isModalConfirmationOpen}
         thingToBeRemoved="column"
-        setOpenModal={setModalConfirmatioOpen}
+        setOpenModal={setModalConfirmationOpen}
         deleteFn={deleteColumn}
       />
-      <Card sx={{ backgroundColor: columnBg, width: 400, userSelect: 'none' }} ref={drop}>
+      <Card
+        sx={{ backgroundColor: columnBg, userSelect: 'none' }}
+        className="column-container"
+        ref={drop}
+      >
         <CardContent ref={ref} style={{ opacity }} id={id}>
           {isEditTitle ? (
-            <Stack spacing={2} direction="row" alignItems="center" marginBottom={2}>
+            <Stack
+              spacing={2}
+              direction="row"
+              alignItems="center"
+              marginBottom={2}
+              className="edit-column-btns"
+            >
               <TextField
                 label={title}
                 variant="standard"
                 sx={{ fontSize: 18, display: 'block', height: 50, textTransform: 'uppercase' }}
                 onChange={changeTitleHandler}
               />
-              <Button variant="contained" onClick={submitEditTitle}>
-                {t('pages.board.colBtns.submit')}
-              </Button>
               <Button variant="outlined" onClick={cancelEditTitle}>
                 {t('pages.board.colBtns.cancel')}
               </Button>
+              <Button variant="contained" onClick={submitEditTitle}>
+                {t('pages.board.colBtns.submit')}
+              </Button>
+
+              <div className="edit-column-title-icons">
+                <CloseIcon onClick={cancelEditTitle} />
+                <CheckCircleIcon onClick={submitEditTitle} />
+              </div>
             </Stack>
           ) : (
-            <Typography
-              sx={{ fontSize: 18, display: 'block', height: 50, marginBottom: 2 }}
-              variant="overline"
-              onClick={() => {
-                setEditTitle(true);
-              }}
-            >
-              {title}
-            </Typography>
+            <div className="editIconContainer">
+              <Typography
+                sx={{ fontSize: 18, display: 'block', height: 50, marginBottom: 2 }}
+                variant="overline"
+                onClick={() => {
+                  setEditTitle(true);
+                }}
+              >
+                {title}
+              </Typography>
+              <EditOutlinedIcon className="editIcon" />
+            </div>
           )}
 
           <Stack
@@ -176,7 +204,8 @@ export const Column: React.FC<ColumnProps> = (props) => {
             direction="row"
             alignItems="center"
             justifyContent="center"
-            marginBottom={4}
+            marginBottom={3}
+            className="column-header"
           >
             <Button variant="contained" onClick={handleOpen}>
               {t('pages.boardPage.taskBtn')}
@@ -184,12 +213,15 @@ export const Column: React.FC<ColumnProps> = (props) => {
             <Button
               variant="outlined"
               color="error"
-              onClick={() => {
-                setModalConfirmatioOpen(true);
-              }}
+              className="column-header__deleteBtn"
+              onClick={handleOpenConfirmation}
             >
               {t('pages.boardPage.deleteColumnBtn')}
             </Button>
+            <DeleteForeverOutlinedIcon
+              className="column-header__deleteIcon"
+              onClick={handleOpenConfirmation}
+            />
           </Stack>
           <div className="column-tasks">
             {tasks.length ? (
@@ -230,7 +262,12 @@ export const Column: React.FC<ColumnProps> = (props) => {
               onChange={changeModalHandler}
             />
           </div>
-          <Button id="modal-ct__btn" variant="outlined" onClick={createNewTask}>
+          <Button
+            id="modal-ct__btn"
+            variant="contained"
+            disabled={isCreateBtnDisabled}
+            onClick={createNewTask}
+          >
             {t('column.btn')}
           </Button>
         </Box>
