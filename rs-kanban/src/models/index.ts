@@ -6,3 +6,4 @@ export * from './board.type';
 export * from './column.type';
 export * from './task.type';
 export * from './file.type';
+export * from './search.type';

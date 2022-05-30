@@ -6,6 +6,7 @@ import boardsReducer from '../features/boards/boardsSlice';
 import boardReducer from '../features/board/boardSlice';
 import tokenReducer from '../features/token/tokenSlice';
 import taskReducer from '../features/task/taskSlice';
+import searchReducer from '../features/searchTasks/searchSlice';
 
 const rootReducer = combineReducers({
   userReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   tokenReducer,
   boardsReducer,
   boardReducer,
+  searchReducer,
 });
 
 export const store = () => {

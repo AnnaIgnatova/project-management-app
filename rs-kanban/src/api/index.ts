@@ -4,3 +4,4 @@ export * from './boards';
 export * from './columns';
 export * from './tasks';
 export * from './files';
+export * from './search';
