@@ -11,6 +11,14 @@ import { getAllTasksForSearch, sortTask } from '../../features/searchTasks/searc
 import { Modal, Box, Typography, Button, Card, CardActions, CardContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+enum SearchFilter {
+  All = 'all',
+  Title = 'title',
+  Order = 'order',
+  Description = 'description',
+  User = 'user.name',
+}
+
 export const Main: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -23,6 +31,9 @@ export const Main: React.FC = () => {
   const handleClose = () => setModalOpenSearch(false);
   const [boardId, setBoardId] = useState<string>('');
   const [selectData, setSelectData] = useState<string>('all');
+  const [placeholderSearch, setPlaceholderSearch] = useState<string>(
+    t('search.placeholderSearch.all')
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +48,23 @@ export const Main: React.FC = () => {
 
   const getFilterData = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectData(e.target.value);
+    switch (e.target.value) {
+      case SearchFilter.All:
+        setPlaceholderSearch(t('search.placeholderSearch.all'));
+        break;
+      case SearchFilter.Description:
+        setPlaceholderSearch(t('search.placeholderSearch.description'));
+        break;
+      case SearchFilter.Order:
+        setPlaceholderSearch(t('search.placeholderSearch.order'));
+        break;
+      case SearchFilter.Title:
+        setPlaceholderSearch(t('search.placeholderSearch.title'));
+        break;
+      case SearchFilter.User:
+        setPlaceholderSearch(t('search.placeholderSearch.user'));
+        break;
+    }
   };
 
   const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -52,19 +80,19 @@ export const Main: React.FC = () => {
     const select = selectData;
     const sortingTask = valuesTasks.filter((task) => {
       switch (select) {
-        case 'title':
+        case SearchFilter.Title:
           return task.title.toLowerCase().includes(sort);
           break;
-        case 'user.name':
+        case SearchFilter.User:
           return task.user.name.toLowerCase().includes(sort);
           break;
-        case 'order':
+        case SearchFilter.Order:
           return task.order === Number(sort);
           break;
-        case 'description':
+        case SearchFilter.Description:
           return task.description.toLowerCase().includes(sort);
           break;
-        case 'all':
+        case SearchFilter.All:
           return (
             task.title.toLowerCase().includes(sort) ||
             task.user.name.toLowerCase().includes(sort) ||
@@ -101,16 +129,16 @@ export const Main: React.FC = () => {
             type="search"
             name="search"
             id="main-search"
-            placeholder="Enter name task..."
+            placeholder={placeholderSearch}
             autoComplete="off"
             onKeyDown={onKeyDownHandler}
           />
           <select name="select" id="main-select-search" onChange={getFilterData}>
-            <option value="all">All</option>
-            <option value="title">Title</option>
-            <option value="order">Order</option>
-            <option value="description">Description</option>
-            <option value="user.name">User name</option>
+            <option value={SearchFilter.All}>{t('search.select.all')}</option>
+            <option value={SearchFilter.Title}>{t('search.select.title')}</option>
+            <option value={SearchFilter.Order}>{t('search.select.order')}</option>
+            <option value={SearchFilter.Description}>{t('search.select.description')}</option>
+            <option value={SearchFilter.User}>{t('search.select.user')}</option>
           </select>
         </div>
 
@@ -152,7 +180,7 @@ export const Main: React.FC = () => {
                   </CardContent>
                   <CardActions>
                     <Button size="small" onClick={() => goToBoard(task.boardId)}>
-                      Go to board
+                      {t('search.btnModal')}
                     </Button>
                   </CardActions>
                 </Card>

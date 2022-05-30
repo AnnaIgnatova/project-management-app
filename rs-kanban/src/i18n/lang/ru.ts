@@ -131,4 +131,21 @@ export const ruLang = {
     account: 'профиль',
     placeholder: 'Введите удалить',
   },
+  search: {
+    select: {
+      all: 'Все',
+      title: 'Заголовок',
+      order: 'Номер задачи',
+      description: 'Описание',
+      user: 'Имя пользователя',
+    },
+    placeholderSearch: {
+      all: 'Введите что-нибудь... ',
+      title: 'Введите заголовок задачи...',
+      order: 'Введите номер задачи',
+      description: 'Введите описание задачи...',
+      user: 'Введите имя пользователя...',
+    },
+    btnModal: 'Перейти к доске',
+  },
 };

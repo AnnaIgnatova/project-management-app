@@ -131,4 +131,21 @@ export const enLang = {
     account: 'account',
     placeholder: 'Enter delete',
   },
+  search: {
+    select: {
+      all: 'All',
+      title: 'Title',
+      order: 'Order',
+      description: 'Description',
+      user: 'User name',
+    },
+    placeholderSearch: {
+      all: 'Enter something... ',
+      title: 'Enter name task...',
+      order: 'Enter number order',
+      description: 'Enter description task...',
+      user: 'Enter user name...',
+    },
+    btnModal: 'Go to board',
+  },
 };
