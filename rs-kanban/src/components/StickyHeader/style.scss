@@ -23,6 +23,18 @@
           .login-btn, .singup-btn, .main-btn {
             height: 30px;
           }
+          .main-btn{
+            width: 284px;
+          }
+          .login-btn, .singup-btn {
+            width: 140px;
+          }
+          .new-board-btn, .edit-profile-btn{
+            width: 240px;
+          }
+          .signout-btn{
+            width: 104px;
+          }
       }
     }
 }

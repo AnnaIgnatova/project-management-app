@@ -67,14 +67,16 @@ export const StickyHeader: React.FC = () => {
       return (
         <>
           <LangSwitcher />
-          <Button variant="contained" onClick={handleOpen}>
+          <Button className="new-board-btn" variant="contained" onClick={handleOpen}>
             {t('header.btnNewBoard')}
           </Button>
 
           <Link to={Routes.editProfile}>
-            <Button variant="contained">{t('header.btnEditProfile')}</Button>
+            <Button className="edit-profile-btn" variant="contained">
+              {t('header.btnEditProfile')}
+            </Button>
           </Link>
-          <Button variant="contained" color="error" onClick={signOut}>
+          <Button className="signout-btn" variant="contained" color="error" onClick={signOut}>
             {t('header.btnSignOut')}
           </Button>
         </>

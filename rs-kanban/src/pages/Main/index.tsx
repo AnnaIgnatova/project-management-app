@@ -144,8 +144,13 @@ export const Main: React.FC = () => {
             <option value={SearchFilter.Description}>{t('search.select.description')}</option>
             <option value={SearchFilter.User}>{t('search.select.user')}</option>
           </select>
-          <Button variant="contained" color="success" sx={{ marginLeft: 2 }} onClick={startSearch}>
-            Search
+          <Button
+            variant="contained"
+            color="success"
+            sx={{ marginLeft: 2, width: 93 }}
+            onClick={startSearch}
+          >
+            {t('search.searchBtn')}
           </Button>
         </div>
 
