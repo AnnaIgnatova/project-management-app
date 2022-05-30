@@ -2,6 +2,7 @@ export interface ModalWindowProps {
   open: boolean;
   onClose: () => void;
   value: TaskType;
+  name: string;
 }
 
 export interface TaskType {
