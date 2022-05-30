@@ -1,7 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { useAppSelector, useAppDispatch } from '../../store';
 import { Column } from '../../components/column';
-import { Box, Button, Container, Typography, Modal, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Typography,
+  Modal,
+  TextField,
+  CircularProgress,
+} from '@mui/material';
 import { useEffect, useState, ChangeEvent, useRef } from 'react';
 import { getBoardById } from '../../api/boards';
 import { Board } from '../../models/board.type';
@@ -14,7 +22,7 @@ export const BoardPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { boardId } = useAppSelector((state) => state.boardsReducer);
-  const board = useAppSelector((state) => state.boardReducer.board);
+  const { board, isFetching } = useAppSelector((state) => state.boardReducer);
   const [boardByIdInfo, setBoardByIdInfo] = useState<Board>({
     id: '',
     title: '',
@@ -53,71 +61,86 @@ export const BoardPage: React.FC = () => {
     navigate('/main');
   }
 
-  return (
-    <>
-      <Container maxWidth="xl" className="boardPage">
-        <Typography variant="h4" component="h1" align="center" id="board-title">
-          {title}
-        </Typography>
-        <Box className="board-header-buttons">
-          <Button variant="contained" sx={{ height: '30px' }} onClick={handleOpen}>
-            {t('pages.boardPage.columnBtn')}
-          </Button>
-          <NavLink to={Routes.main}>
-            <Button variant="outlined" sx={{ height: '30px' }}>
-              {t('header.btnMain')}
+  if (isFetching) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        className="boardPage"
+      >
+        <CircularProgress size={75} />
+      </div>
+    );
+  } else {
+    return (
+      <>
+        <Container maxWidth="xl" className="boardPage">
+          <Typography variant="h4" component="h1" align="center" id="board-title">
+            {title}
+          </Typography>
+          <Box className="board-header-buttons">
+            <Button variant="contained" sx={{ height: '30px' }} onClick={handleOpen}>
+              {t('pages.boardPage.columnBtn')}
             </Button>
-          </NavLink>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flex: '1',
-            overflowX: 'auto',
-            overflowY: 'hidden',
-            height: 'calc(100vh - 262px)',
-          }}
-        >
+            <NavLink to={Routes.main}>
+              <Button variant="outlined" sx={{ height: '30px' }}>
+                {t('header.btnMain')}
+              </Button>
+            </NavLink>
+          </Box>
           <Box
             sx={{
               display: 'flex',
-              columnGap: '20px',
+              flex: '1',
+              overflowX: 'auto',
+              overflowY: 'hidden',
+              height: 'calc(100vh - 262px)',
             }}
           >
-            {sortColumns.map((column) => (
-              <Column key={column.id} value={column} />
-            ))}
+            <Box
+              sx={{
+                display: 'flex',
+                columnGap: '20px',
+              }}
+            >
+              {sortColumns.map((column) => (
+                <Column key={column.id} value={column} />
+              ))}
+            </Box>
           </Box>
-        </Box>
-      </Container>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="modal-cnc">
-          <h2 className="modal-cnc__text">{t('pages.boardPage.createNewColumn')}</h2>
-          <div className="modal-cnc__input">
-            <TextField
-              label={t('pages.boardPage.newColumn')}
-              placeholder={t('pages.boardPage.newColumnTitle')}
-              variant="standard"
-              fullWidth
-              onChange={changeColumnTitle}
-            />
-          </div>
+        </Container>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className="modal-cnc">
+            <h2 className="modal-cnc__text">{t('pages.boardPage.createNewColumn')}</h2>
+            <div className="modal-cnc__input">
+              <TextField
+                label={t('pages.boardPage.newColumn')}
+                placeholder={t('pages.boardPage.newColumnTitle')}
+                variant="standard"
+                fullWidth
+                onChange={changeColumnTitle}
+              />
+            </div>
 
-          <Button
-            id="modal-cnc__btn"
-            variant="contained"
-            disabled={columnTitle === ''}
-            onClick={handleCreateColumn}
-          >
-            {t('buttons.create')}
-          </Button>
-        </Box>
-      </Modal>
-    </>
-  );
+            <Button
+              id="modal-cnc__btn"
+              variant="contained"
+              disabled={columnTitle === ''}
+              onClick={handleCreateColumn}
+            >
+              {t('buttons.create')}
+            </Button>
+          </Box>
+        </Modal>
+      </>
+    );
+  }
 };
