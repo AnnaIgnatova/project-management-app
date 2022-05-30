@@ -1,6 +1,6 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-export default function (app) {
+module.exports = function (app) {
   app.use(
     ['/users', '/signin', '/signup', '/boards', '/file', '/search'],
     createProxyMiddleware({
@@ -9,4 +9,4 @@ export default function (app) {
       secure: false,
     })
   );
-}
+};
