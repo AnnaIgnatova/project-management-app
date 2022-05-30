@@ -146,6 +146,7 @@ export const enLang = {
       description: 'Enter description task...',
       user: 'Enter user name...',
     },
+    notFound: 'Nothing found for your request',
     btnModal: 'Go to board',
   },
 };

@@ -197,7 +197,7 @@ export const Main: React.FC = () => {
             })
           ) : (
             <div className="modal-window-search__not-found">
-              Nothing found for your request <br />
+              {t('search.notFound')} <br />
               <img className="modal-window-search__img-not-found" src={imgNotFound} />
             </div>
           )}
